@@ -50,14 +50,14 @@ describe('config', () => {
     assert.equal(getApiKey({ GEMINI_API_KEY: 'AIzaSyReal-key_123' }), 'AIzaSyReal-key_123');
   });
 
-  it('defaults to gemini-2.5-flash-lite and honours GEMINI_MODEL', () => {
+  it('defaults to gemini-3.5-flash-lite and honours GEMINI_MODEL', () => {
     saveEnv();
     try {
       clearEnv();
-      assert.equal(DEFAULT_MODEL, 'gemini-2.5-flash-lite');
-      assert.equal(getConfig().ai.model, 'gemini-2.5-flash-lite');
+      assert.equal(DEFAULT_MODEL, 'gemini-3.5-flash-lite');
+      assert.equal(getConfig().ai.model, 'gemini-3.5-flash-lite');
       process.env.gemini_model = ''; // exactly what the user's .env has
-      assert.equal(getConfig().ai.model, 'gemini-2.5-flash-lite');
+      assert.equal(getConfig().ai.model, 'gemini-3.5-flash-lite');
       process.env.gemini_model = 'gemini-2.5-flash';
       assert.equal(getConfig().ai.model, 'gemini-2.5-flash');
     } finally {
@@ -111,7 +111,7 @@ describe('Gemini transport', () => {
     assert.deepEqual(await completeJson('PROMPT', 2500), { ok: true });
 
     const [req] = gemini.calls;
-    assert.equal(req.model, 'gemini-2.5-flash-lite');
+    assert.equal(req.model, 'gemini-3.5-flash-lite');
     assert.deepEqual(req.contents, [{ role: 'user', parts: [{ text: 'PROMPT' }] }]);
     assert.match(req.config.systemInstruction, /analysis engine of a career intelligence platform/);
     assert.equal(req.config.responseMimeType, 'application/json');
@@ -197,7 +197,7 @@ describe('Gemini error mapping', () => {
     [apiError(400, 'API key not valid. Please pass a valid API key.', 'INVALID_ARGUMENT'), 503, false, /rejected this server's API key/],
     [apiError(403, 'Permission denied', 'PERMISSION_DENIED'), 503, false, /API key/],
     [apiError(401, 'Unauthenticated', 'UNAUTHENTICATED'), 503, false, /API key/],
-    [apiError(404, 'models/x is not found', 'NOT_FOUND'), 503, false, /gemini-2\.5-flash-lite.*GEMINI_MODEL/],
+    [apiError(404, 'models/x is not found', 'NOT_FOUND'), 503, false, /gemini-3.5-flash-lite.*GEMINI_MODEL/],
     [apiError(400, 'User location is not supported for the API use.', 'FAILED_PRECONDITION'), 503, false, /region/],
     [apiError(503, 'The model is overloaded.', 'UNAVAILABLE'), 502, true, /busy/],
     [apiError(500, 'Internal', 'INTERNAL'), 502, true, /busy/],
@@ -244,7 +244,7 @@ describe('API with the real Gemini transport', () => {
 
   it('health reports the provider, model and whether a key is configured', async () => {
     let h = (await s.get('/api/health')).body;
-    assert.deepEqual([h.provider, h.model, h.aiKeyConfigured], ['gemini', 'gemini-2.5-flash-lite', false]);
+    assert.deepEqual([h.provider, h.model, h.aiKeyConfigured], ['gemini', 'gemini-3.5-flash-lite', false]);
     process.env.gemini_api_key = 'AIzaSyReal-key_123';
     h = (await s.get('/api/health')).body;
     assert.equal(h.aiKeyConfigured, true);

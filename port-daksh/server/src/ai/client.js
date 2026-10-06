@@ -15,7 +15,7 @@ import { HttpError } from '../errors.js';
 export const SYSTEM_PROMPT =
   'You are the analysis engine of a career intelligence platform. Rules: Use only facts present in the provided resume, profile and job text. Never invent experience, employers, titles, technologies, certifications, achievements or metrics. Distinguish facts from suggestions. Scores are calibrated estimates, not generous. Never accuse anyone of lying, and never declare a job definitely a scam. Respond with ONE JSON object only, no prose, no markdown fences.';
 
-const MAX_OUTPUT_TOKENS = 65_000; // gemini-2.5-flash-lite allows 65,536
+const MAX_OUTPUT_TOKENS = 65_000; // gemini-3.5-flash-lite allows 65,536
 const JSON_TEMPERATURE = 0.3; // analysis should be consistent run to run
 const CHAT_TEMPERATURE = 0.7;
 // Transient failures are retried by the SDK with backoff. 429 is deliberately not retried: the user should wait.
@@ -113,7 +113,7 @@ export function toHttpError(err, fallbackMessage = 'The AI service returned an e
   return new HttpError(502, fallbackMessage);
 }
 
-async function geminiTransport({ system, messages, maxTokens, json = false, temperature, errorMessage, model: override }) {
+async function geminiTransport({ system, messages, maxTokens, json = false, temperature, errorMessage, model: override, search = false }) {
   const model = override || getConfig().ai.model;
   try {
     const res = await getClient().models.generateContent({
@@ -125,6 +125,9 @@ async function geminiTransport({ system, messages, maxTokens, json = false, temp
         temperature: temperature ?? (json ? JSON_TEMPERATURE : CHAT_TEMPERATURE),
         // JSON mode makes the model emit a single valid JSON document (no prose, no fences).
         ...(json ? { responseMimeType: 'application/json' } : null),
+        // Grounding with Google Search: the model decides when to search and cites its sources. Only for free-text
+        // calls; the JSON analysis tasks must stay grounded in the user's own documents.
+        ...(search && getConfig().ai.googleSearch ? { tools: [{ googleSearch: {} }] } : null),
       },
     });
     return extractText(res);
@@ -168,10 +171,10 @@ export async function completeJson(prompt, maxTokens = 2500, { model } = {}) {
 }
 
 /** Free-text reply for the assistant chat. */
-export async function completeText({ system, messages, maxTokens = 900 }) {
+export async function completeText({ system, messages, maxTokens = 900, search = false }) {
   const errorMessage = "The assistant couldn't respond. Try again.";
   try {
-    const text = String(await transport({ system, messages, maxTokens, json: false, errorMessage })).trim();
+    const text = String(await transport({ system, messages, maxTokens, json: false, errorMessage, search })).trim();
     if (!text) throw new HttpError(502, errorMessage);
     return text;
   } catch (err) {

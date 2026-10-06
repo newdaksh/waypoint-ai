@@ -178,7 +178,8 @@ describe('transcript helpers', () => {
   });
 
   it('reads live settings with sensible limits', () => {
-    assert.deepEqual(liveSettings({}), { model: 'gemini-3.8-live', voice: 'Kore', targetMinutes: 20, maxMinutes: 30, maxSessions: 100 });
+    assert.deepEqual(liveSettings({}), { model: 'gemini-3.8-live', voice: 'Kore', targetMinutes: 20, maxMinutes: 30, maxSessions: 100, googleSearch: true });
+    assert.equal(liveSettings({ GEMINI_GOOGLE_SEARCH: 'false' }).googleSearch, false);
     const s = liveSettings({ gemini_live_model: 'm', LIVE_INTERVIEW_TARGET_MINUTES: '40', LIVE_INTERVIEW_MAX_MINUTES: '10' });
     assert.equal(s.model, 'm');
     assert.ok(s.maxMinutes >= s.targetMinutes, 'the hard limit is never shorter than the target');
@@ -409,6 +410,7 @@ describe('live interviews', () => {
       assert.match(up.config.systemInstruction, /Kitebyte Solutions/, 'resume text');
       assert.match(up.config.systemInstruction, /Ledgerline/, 'job');
       assert.deepEqual(up.config.tools[0].functionDeclarations.map((f) => f.name), ['log_question', 'end_interview']);
+      assert.deepEqual(up.config.tools[1], { googleSearch: {} }, 'Google Search grounding is enabled for the live model');
       assert.equal(up.config.speechConfig.voiceConfig.prebuiltVoiceConfig.voiceName, 'Kore');
       assert.deepEqual(up.texts(), [CUE.open], 'the interviewer is told to begin');
       const doc = await stored((await a.get('/api/interviews')).body.interviews[0].id);

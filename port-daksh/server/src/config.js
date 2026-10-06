@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
-export const DEFAULT_MODEL = 'gemini-2.5-flash-lite';
+export const DEFAULT_MODEL = 'gemini-3.5-flash-lite';
 export const DEFAULT_LIVE_MODEL = 'gemini-3.8-live';
 export const DEFAULT_LIVE_VOICE = 'Kore';
 export const DEFAULT_DB = 'waypoint_ai';
@@ -43,6 +43,8 @@ export function mongoHost(uri) {
 }
 
 const truthy = (v) => /^(1|true|yes|on)$/i.test(v || '');
+/** Grounding with Google Search (assistant chat + live interview). On unless GEMINI_GOOGLE_SEARCH is set to a falsy value. */
+const searchEnabled = (env) => !/^(0|false|no|off)$/i.test(readEnv('GEMINI_GOOGLE_SEARCH', env) || '');
 /** A positive number from a string (fractions allowed, so tests can use seconds), or undefined. */
 const positive = (v) => (Number(v) > 0 ? Number(v) : undefined);
 
@@ -70,6 +72,7 @@ export function liveSettings(env = process.env) {
   const maxMinutes = Math.max(positive(readEnv('LIVE_INTERVIEW_MAX_MINUTES', env)) || 30, targetMinutes * 1.25);
   return {
     model: readEnv('GEMINI_LIVE_MODEL', env) || DEFAULT_LIVE_MODEL,
+    googleSearch: searchEnabled(env),
     voice: readEnv('GEMINI_LIVE_VOICE', env) || DEFAULT_LIVE_VOICE,
     targetMinutes,
     maxMinutes,
@@ -105,6 +108,7 @@ export function getConfig() {
       apiKey: getApiKey(env),
       model: readEnv('GEMINI_MODEL', env) || DEFAULT_MODEL,
       timeoutMs: Number(readEnv('GEMINI_TIMEOUT_MS', env)) || 120_000,
+      googleSearch: searchEnabled(env),
       // The post-interview report is the one place a stronger model pays off; defaults to the model above.
       reportModel: readEnv('GEMINI_REPORT_MODEL', env) || readEnv('GEMINI_MODEL', env) || DEFAULT_MODEL,
     },

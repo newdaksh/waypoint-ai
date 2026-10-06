@@ -357,10 +357,10 @@ async function insights(ws) {
 export const CHAT_HISTORY_WINDOW = 12;
 
 export async function chatReply(ws) {
-  const system = `You are Waypoint's career assistant. ${tone(ws.prefs?.aiTone)}\nUse only the context below and the conversation. Never invent experience, metrics or certifications; if you suggest resume wording, use only facts present. Scores are estimates, never guarantees. Be concise: under 180 words, short paragraphs or brief lists, plain text without markdown headings.\n\nCONTEXT\n${chatContext(ws)}`;
+  const system = `You are Waypoint's career assistant. ${tone(ws.prefs?.aiTone)}\nUse the context below and the conversation for everything about the user. You may search the web for current facts (companies, salaries, market trends, interview norms) and should say so briefly when you rely on it. Never invent experience, metrics or certifications; if you suggest resume wording, use only facts present. Scores are estimates, never guarantees. Be concise: under 180 words, short paragraphs or brief lists, plain text without markdown headings.\n\nCONTEXT\n${chatContext(ws)}`;
   const messages = ws.chat.slice(-CHAT_HISTORY_WINDOW).map((m) => ({ role: m.role, content: m.content }));
   while (messages.length && messages[0].role !== 'user') messages.shift(); // the API requires the first turn to be the user's
-  return completeText({ system, messages, maxTokens: 900 });
+  return completeText({ system, messages, maxTokens: 900, search: true });
 }
 
 export const tasks = {

@@ -7,7 +7,7 @@ gap, roadmap, interview predictor, consistency check, application tracker, analy
 **Live Interview**: a real-time voice interview with an AI interviewer (Gemini Live API), followed by a scored report.
 
 Every account has its own private workspace in **MongoDB**, starting **empty** (no sample data). Every AI call is
-made by the **server** with the Google Gemini API (`gemini-2.5-flash-lite`), so the API key never reaches the
+made by the **server** with the Google Gemini API (`gemini-3.5-flash-lite`), so the API key never reaches the
 browser and each task is sent only the data it needs.
 
 ## Quick start
@@ -36,8 +36,9 @@ clear "isn't configured" message.
 | `MONGODB_URI` | — | **Required.** MongoDB connection string. The server refuses to start without it. |
 | `MONGODB_DB` | `waypoint_ai` | Database name. Waypoint uses only its own collections (below). |
 | `GEMINI_API_KEY` | — | Required for AI features. Get one at <https://aistudio.google.com/apikey>. A leftover `your_api_key_here` counts as unset. |
-| `GEMINI_MODEL` | `gemini-2.5-flash-lite` | Blank means the default. |
+| `GEMINI_MODEL` | `gemini-3.5-flash-lite` | Blank means the default. |
 | `GEMINI_TIMEOUT_MS` | `120000` | Per request. |
+| `GEMINI_GOOGLE_SEARCH` | `true` | Grounding with Google Search for the assistant chat and the live interview (billed per search query on Gemini 3 models). Set `false` to disable. The JSON analysis tasks never search. |
 | `GEMINI_LIVE_MODEL` | `gemini-3.8-live` | Model for the live interview's voice session. It must support `bidiGenerateContent` (see *Live interview*). |
 | `GEMINI_LIVE_VOICE` | `Kore` | The interviewer's voice. Kore / Aoede / Leda / Zephyr introduce themselves as "Maya"; Puck / Charon / Orus / Fenrir as "Sam". |
 | `GEMINI_REPORT_MODEL` | `GEMINI_MODEL` | Model that writes the interview report. A stronger one pays off here. |
@@ -223,7 +224,7 @@ browser ── WebSocket /api/live/:id ──▶ LiveSession ── Gemini Live 
   error shown in the app says why (invalid key, unknown model, quota, region).
 - There is **no email verification at sign-up**: anyone can register any address. Password reset emails go only to
   the account's own address. Rate limits are kept in memory per server process.
-- `gemini-2.5-flash-lite` is a small, fast model. If results look thin, set `GEMINI_MODEL=gemini-2.5-flash`. The
+- `gemini-3.5-flash-lite` is a small, fast model. If results look thin, set `GEMINI_MODEL=gemini-3.5-flash`. The
   free tier allows roughly 15 requests/minute; hitting it shows "Rate limit reached" with a Retry button.
 - `pdf-parse@1.1.1` bundles an old pdf.js (image-only/scanned PDFs yield no text — the user is told to paste).
   `npm audit` reports a moderate advisory in `sprintf-js` (via `mammoth` → `argparse`); it is only reachable

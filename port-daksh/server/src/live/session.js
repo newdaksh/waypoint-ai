@@ -1,5 +1,6 @@
 import { LIVE_DIFFICULTIES, LIVE_ROUNDS } from '@waypoint/shared';
 import { connectLive } from '../ai/client.js';
+import { getConfig } from '../config.js';
 import { HttpError } from '../errors.js';
 import { buildSystemInstruction, CUE, interviewerName, LIVE_TOOLS, MIME_AUDIO_IN } from './prompt.js';
 
@@ -276,7 +277,8 @@ export class LiveSession {
       },
       sessionResumption: this.handle ? { handle: this.handle } : {},
       contextWindowCompression: { slidingWindow: {} }, // lets the session outlive the default audio length limit
-      tools: LIVE_TOOLS,
+      // Google Search grounding lets the interviewer check current facts about the company or technology.
+      tools: getConfig().live.googleSearch ? [...LIVE_TOOLS, { googleSearch: {} }] : LIVE_TOOLS,
     };
   }
 

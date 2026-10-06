@@ -8,8 +8,11 @@ import { createAuthRepo } from './auth/repo.js';
 import { csrfGuard, requireAuth } from './auth/session.js';
 import { getConfig } from './config.js';
 import { HttpError } from './errors.js';
+import { createInterviewRepo } from './live/repo.js';
+import { createLiveService } from './live/service.js';
 import { aiRoutes } from './routes/ai.js';
 import { authRoutes } from './routes/auth.js';
+import { interviewRoutes } from './routes/interviews.js';
 import { resumeRoutes } from './routes/resume.js';
 import { workspaceRoutes } from './routes/workspace.js';
 
@@ -27,15 +30,30 @@ const CSP = [
   "object-src 'none'",
 ].join('; ');
 
+// A plain host[:port], as the Host header is when it is safe to repeat in a response header.
+const SAFE_HOST = /^[A-Za-z0-9.-]+(:\d{1,5})?$|^\[[0-9a-fA-F:]+\](:\d{1,5})?$/;
+
+/**
+ * The live interview's voice channel is a WebSocket to this same host. `'self'` should cover it, but browsers
+ * disagree about `ws:` under `'self'`, so name it explicitly.
+ */
+export function cspFor(req) {
+  const host = req.headers.host;
+  if (!host || !SAFE_HOST.test(host)) return CSP;
+  const ws = req.secure ? `wss://${host}` : `ws://${host}`;
+  return CSP.replace("connect-src 'self'", `connect-src 'self' ${ws}`);
+}
+
 function securityHeaders(withCsp) {
-  return (_req, res, next) => {
+  return (req, res, next) => {
     res.set({
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'DENY',
       // Reset links carry a one-time token; never leak page URLs to other sites.
       'Referrer-Policy': 'no-referrer',
-      'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
-      ...(withCsp ? { 'Content-Security-Policy': CSP } : null),
+      // The live interview needs the microphone, and only from this app's own pages.
+      'Permissions-Policy': 'camera=(), microphone=(self), geolocation=()',
+      ...(withCsp ? { 'Content-Security-Policy': cspFor(req) } : null),
     });
     next();
   };
@@ -45,6 +63,8 @@ function securityHeaders(withCsp) {
 export async function createApp({ store, limits = {} }) {
   const config = getConfig();
   const repo = await createAuthRepo(store.db);
+  const interviews = await createInterviewRepo(store.db);
+  const live = createLiveService({ repo: interviews, authRepo: repo });
   const app = express();
 
   app.disable('x-powered-by');
@@ -62,7 +82,7 @@ export async function createApp({ store, limits = {} }) {
 
   app.get('/api/health', (_req, res) => {
     const { ai } = getConfig();
-    res.json({ ok: true, provider: 'gemini', model: ai.model, aiKeyConfigured: Boolean(ai.apiKey) });
+    res.json({ ok: true, provider: 'gemini', model: ai.model, liveModel: getConfig().live.model, aiKeyConfigured: Boolean(ai.apiKey) });
   });
 
   app.use('/api/auth', authRoutes({ repo, store, limits }));
@@ -80,6 +100,7 @@ export async function createApp({ store, limits = {} }) {
   app.use('/api/workspace', guard, workspaceRoutes());
   app.use('/api/ai', guard, aiLimiter, aiRoutes());
   app.use('/api/resume', guard, resumeRoutes());
+  app.use('/api/interviews', guard, interviewRoutes({ repo: interviews, service: live, limits }));
   app.use('/api', (_req, _res, next) => next(new HttpError(404, 'Not found.')));
 
   // Production: serve the built React app and fall back to index.html for client-side routes.
@@ -110,6 +131,16 @@ export async function createApp({ store, limits = {} }) {
     console.error('[server] unhandled error:', err);
     res.status(500).json({ error: { message: 'Something went wrong on the server.', canRetry: true } });
   });
+
+  // The live interview's voice channel is a WebSocket on the same HTTP server: wire it up wherever this app listens.
+  const listen = app.listen.bind(app);
+  app.listen = (...args) => {
+    const server = listen(...args);
+    live.attach(server);
+    return server;
+  };
+  /** Disconnect every live interview, keeping their transcripts (call before shutting the server down). */
+  app.closeLive = () => live.closeAll();
 
   return app;
 }

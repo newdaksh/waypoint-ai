@@ -1,12 +1,12 @@
-import { analytics } from '@waypoint/shared';
+import { activeResumeOf, analytics } from '@waypoint/shared';
 import { HttpError } from '../errors.js';
 import { completeJson, completeText } from './client.js';
 import { chatContext, ctxProfile, tone } from './context.js';
 import { arr, list, n, one, str } from './sanitize.js';
 
 /**
- * One handler per AI task. Each receives the stored workspace plus the (validated) request body and
- * returns a workspace patch — it never mutates anything itself. The route persists the patch and
+ * One handler per AI task. Each receives the stored workspace (as the active resume sees it, see
+ * shared/src/resumes.js) plus the (validated) request body and returns a workspace patch — it never mutates anything itself. The route persists the patch and
  * sends it back so the client applies exactly what the server stored.
  *
  * Inputs are never silently truncated: text over the limits below is rejected with a clear message.
@@ -18,10 +18,11 @@ const within = (text, max, what) => {
   if (text.length > max) throw new HttpError(400, `${what} is longer than ${max.toLocaleString('en-US')} characters. Shorten it and try again.`);
   return text;
 };
-/** The master resume, which every analysis needs. */
+/** The text of the active resume, which every analysis needs. */
 const resumeOf = (ws) => {
-  if (ws.resumeText.trim().length < 100) throw new HttpError(400, 'Add your resume first: paste it under Profile & resume.');
-  return within(ws.resumeText, LIMITS.resume, 'Your resume text');
+  const { text } = activeResumeOf(ws);
+  if (text.trim().length < 100) throw new HttpError(400, 'Add your resume first: paste it under Resumes.');
+  return within(text, LIMITS.resume, 'Your resume text');
 };
 const incomplete = (what) => new HttpError(502, `The ${what} came back incomplete. Retry usually fixes this.`, { canRetry: true });
 const live = (...keys) => Object.fromEntries(keys.map((k) => [k, 'live']));
@@ -51,7 +52,8 @@ const ai = (ws, prompt, max) => completeJson(`${tone(ws.prefs?.aiTone)}\n\n${pro
 // ───────────────────────────────────────────────── resume
 
 async function resumeAnalysis(ws) {
-  const text = ws.resumeText.trim();
+  const resume = activeResumeOf(ws);
+  const text = resume.text.trim();
   if (text.length < 200) throw new HttpError(400, 'Resume text looks too short to analyze (under 200 characters).');
   within(text, LIMITS.resume, 'Your resume text');
 
@@ -79,7 +81,7 @@ async function resumeAnalysis(ws) {
   };
   if (!analysis.summary || !analysis.redFlags.length) throw incomplete('analysis');
   // A new analysis invalidates any previously tested resume claims.
-  return { set: { analysis, claimTests: {} }, merge: { src: live('analysis') } };
+  return { set: { claimTests: {} }, merge: { analysisBy: { [resume.id]: analysis }, src: live('analysis') } };
 }
 
 async function ats(ws, { jobId }) {
@@ -313,7 +315,11 @@ async function claimQuestion(ws, body) {
     500,
   );
   if (!r.question) throw new HttpError(502, 'No question came back. Retry usually fixes this.', { canRetry: true });
-  return { merge: { claimTests: { [i]: { question: str(r.question), testing: str(r.testing), answer: '' } } } };
+  const test = { question: str(r.question), testing: str(r.testing), answer: '' };
+  // Claim tests left over from another resume's analysis don't apply to this one: start afresh.
+  const resumeId = activeResumeOf(ws).id;
+  const stale = (ws.madeFrom?.claimTests ?? resumeId) !== resumeId;
+  return stale ? { set: { claimTests: { [i]: test } } } : { merge: { claimTests: { [i]: test } } };
 }
 
 async function claimEvaluation(ws, body) {
@@ -329,7 +335,7 @@ async function claimEvaluation(ws, body) {
 // ───────────────────────────────────────────────── analytics + assistant
 
 async function insights(ws) {
-  const st = analytics(ws.apps, ws.versions);
+  const st = analytics(ws.apps, ws.resumes);
   if (!st.sent) throw new HttpError(400, 'Log a few applications in the tracker first.');
   const agg = {
     sent: st.sent, interviews: st.interviews, offers: st.offers, rejections: st.rejections,

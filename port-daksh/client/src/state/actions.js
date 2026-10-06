@@ -9,7 +9,7 @@ import { useWorkspace } from './WorkspaceContext.jsx';
  * Each returns a promise resolving to true when the task succeeded.
  */
 export function useResumeActions() {
-  const { ws, set } = useWorkspace();
+  const { ws } = useWorkspace();
   const tasks = useTasks();
 
   const analyzeResume = useCallback(
@@ -33,22 +33,23 @@ export function useResumeActions() {
     [tasks, ws],
   );
 
-  /** Load a chosen resume file into the master resume. .txt/.md are read in the browser; PDF/DOCX on the server. */
-  const loadResumeFile = useCallback(
+  /** The text of a chosen resume file, or null if it couldn't be read. .txt/.md are read in the browser; PDF/DOCX on the server. */
+  const readResumeFile = useCallback(
     async (file) => {
-      if (!file) return;
-      if (file.size > 5 * 1024 * 1024) return tasks.fail('File is larger than 5 MB.');
-      if (/\.(txt|md)$/i.test(file.name)) {
-        set({ resumeText: await file.text() });
-        return;
+      if (!file) return null;
+      if (file.size > 5 * 1024 * 1024) {
+        tasks.fail('File is larger than 5 MB.');
+        return null;
       }
+      if (/\.(txt|md)$/i.test(file.name)) return file.text();
+      let text = null;
       await tasks.run('Reading file…', ['Extracting text'], async () => {
-        const { text } = await api.extractResume(file);
-        set({ resumeText: text });
+        ({ text } = await api.extractResume(file));
       });
+      return text;
     },
-    [tasks, set],
+    [tasks],
   );
 
-  return { analyzeResume, runAts, loadResumeFile };
+  return { analyzeResume, runAts, readResumeFile };
 }

@@ -15,13 +15,12 @@ describe('workspace API', () => {
     const { status, body } = await u.get('/api/workspace');
     assert.equal(status, 200);
     assert.equal(body.profile.name, 'Workspace Tester');
-    assert.equal(body.resumeText, '');
     assert.deepEqual([body.jobs, body.apps, body.questions, body.chat], [[], [], [], []]);
-    assert.deepEqual([body.analysis, body.roadmap, body.bullets, body.safety, body.insights], [null, null, null, null, null]);
-    assert.deepEqual([body.atsBy, body.decoderBy, body.gapBy, body.proofBy, body.tailorBy, body.priorityBy, body.answers, body.evals, body.claimTests, body.src], [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
+    assert.deepEqual([body.roadmap, body.bullets, body.safety, body.insights], [null, null, null, null]);
+    assert.deepEqual([body.analysisBy, body.atsBy, body.decoderBy, body.gapBy, body.proofBy, body.tailorBy, body.priorityBy, body.answers, body.evals, body.claimTests, body.src, body.madeFrom], [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
     assert.deepEqual(body.prefs, { accent: 'Indigo', sidebar: 'Ink', aiTone: 'Analyst' });
-    assert.equal(body.versions.length, 1);
-    assert.equal(body.versions[0].id, 'master');
+    assert.deepEqual(body.resumes.map((r) => [r.id, r.text]), [['master', '']], 'one empty resume to start from');
+    assert.equal(body.activeResumeId, 'master');
     assert.equal('_id' in body, false);
   });
 
@@ -53,10 +52,33 @@ describe('workspace API', () => {
   });
 
   it('rejects keys the client may not write (AI-derived data, ids)', async () => {
-    for (const patch of [{ set: { analysis: {} } }, { merge: { atsBy: { j1: {} } } }, { set: { evals: {} } }, { set: { _id: 'x' } }]) {
+    for (const patch of [
+      { set: { analysisBy: {} } }, { merge: { analysisBy: { master: {} } } }, { merge: { atsBy: { j1: {} } } },
+      { merge: { madeFrom: { 'atsBy:j1': 'master' } } }, { set: { evals: {} } }, { set: { _id: 'x' } },
+    ]) {
       const r = await u.patch('/api/workspace', patch);
       assert.equal(r.status, 400, JSON.stringify(patch));
       assert.equal(r.body.error.canRetry, false);
+    }
+  });
+
+  it('lets the client remove results (for a deleted job or resume) but never write them', async () => {
+    await u.workspace.patch({ merge: { atsBy: { j1: { score: 70 }, j2: { score: 50 } }, madeFrom: { 'atsBy:j1': 'master' } } });
+    const r = await u.patch('/api/workspace', { merge: { atsBy: { j1: null }, madeFrom: { 'atsBy:j1': null } } });
+    assert.equal(r.status, 200, JSON.stringify(r.body));
+    const ws = await u.ws();
+    assert.deepEqual(ws.atsBy, { j2: { score: 50 } });
+    assert.deepEqual(ws.madeFrom, {});
+  });
+
+  it('keeps several resumes, and always at least one', async () => {
+    const resumes = [{ id: 'master', name: 'Master resume', text: 'first' }, { id: 'r2', name: 'Data roles', text: 'second' }];
+    assert.equal((await u.patch('/api/workspace', { set: { resumes, activeResumeId: 'r2' } })).status, 200);
+    const ws = await u.ws();
+    assert.deepEqual(ws.resumes.map((r) => r.name), ['Master resume', 'Data roles']);
+    assert.equal(ws.activeResumeId, 'r2');
+    for (const bad of [[], [{ id: 'a.b', name: 'x', text: '' }], [{ id: 'r3', name: 'no text' }]]) {
+      assert.equal((await u.patch('/api/workspace', { set: { resumes: bad } })).status, 400, JSON.stringify(bad));
     }
   });
 
@@ -70,7 +92,8 @@ describe('workspace API', () => {
 
   it('rejects malformed values', async () => {
     const cases = [
-      { set: { resumeText: 42 } },
+      { set: { resumes: 'my resume' } },
+      { set: { activeResumeId: 42 } },
       { set: { jobs: [{ id: 'x' }] } },
       { set: { chat: [{ role: 'system', content: 'hi' }] } },
       { merge: { prefs: { accent: 'Hotpink' } } },

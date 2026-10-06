@@ -1,10 +1,11 @@
 import { ENTRY_ID } from '@waypoint/shared';
 import { MongoClient } from 'mongodb';
-import { emptyWorkspace } from './domain/workspace.js';
+import { emptyWorkspace, upgradeOf } from './domain/workspace.js';
 
 const COLLECTION = 'workspaces';
 const CHAT_LIMIT = 200; // most recent messages kept
 const TOP_LEVEL_KEY = /^[A-Za-z][A-Za-z0-9]*$/;
+const CURRENT_SHAPE = { resumes: { $exists: true } }; // false for workspaces stored by an older version of the app
 
 const now = () => new Date().toISOString();
 const stripId = ({ _id, ...workspace }) => workspace;
@@ -74,11 +75,20 @@ export function createStore({ uri, dbName, appName = 'waypoint' }) {
     return workspaces;
   };
 
-  /** Create the user's empty workspace if needed (atomically) and add any keys newer app versions need. */
+  /**
+   * Create the user's empty workspace if needed (atomically), bring one stored by an older version of the
+   * app to the current shape, and add any keys newer versions need.
+   */
   async function ensureWorkspace(userId, name) {
     const defaults = emptyWorkspace({ name });
     await col().updateOne({ _id: userId }, { $setOnInsert: { ...defaults, updatedAt: now() } }, { upsert: true });
-    const stored = await col().findOne({ _id: userId });
+    let stored = await col().findOne({ _id: userId });
+    const upgrade = upgradeOf(stored);
+    if (upgrade) {
+      // Only while still un-upgraded, so two requests arriving together can't apply it twice.
+      await col().updateOne({ _id: userId, resumes: { $exists: false } }, upgrade);
+      stored = await col().findOne({ _id: userId });
+    }
     const missing = Object.keys(defaults).filter((k) => !(k in stored));
     if (missing.length) await col().updateOne({ _id: userId }, { $set: Object.fromEntries(missing.map((k) => [k, defaults[k]])) });
   }
@@ -99,13 +109,14 @@ export function createStore({ uri, dbName, appName = 'waypoint' }) {
     forUser(userId, { name = '' } = {}) {
       const id = String(userId);
 
-      /** Run an update; if the document is missing, create it first and try once more. */
+      /** Run an update; if the document is missing or in an older shape, create / upgrade it first and try once more. */
       async function update(operation) {
+        const filter = { _id: id, ...CURRENT_SHAPE };
         const options = { returnDocument: 'after' };
-        let doc = await col().findOneAndUpdate({ _id: id }, operation, options);
+        let doc = await col().findOneAndUpdate(filter, operation, options);
         if (!doc) {
           await ensureWorkspace(id, name);
-          doc = await col().findOneAndUpdate({ _id: id }, operation, options);
+          doc = await col().findOneAndUpdate(filter, operation, options);
         }
         return stripId(doc);
       }
@@ -116,7 +127,7 @@ export function createStore({ uri, dbName, appName = 'waypoint' }) {
         /** The current workspace (created empty on first use). */
         async read() {
           let doc = await col().findOne({ _id: id });
-          if (!doc) {
+          if (!doc || upgradeOf(doc)) {
             await ensureWorkspace(id, name);
             doc = await col().findOne({ _id: id });
           }

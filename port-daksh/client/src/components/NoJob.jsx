@@ -10,7 +10,7 @@ export default function NoJob({ tool = 'This tool' }) {
       <div style={{ fontSize: 14, color: 'var(--ink-3)', maxWidth: 520, lineHeight: 1.55 }}>
         {tool} compares your resume with a specific job. Paste a job description to get started — you can add more jobs any time.
       </div>
-      <Button onClick={() => navigate('/app/jobs?add=1')}>Add a job</Button>
+      <Button onClick={() => navigate('/app/targets?add=1')}>Add a job</Button>
     </div>
   );
 }

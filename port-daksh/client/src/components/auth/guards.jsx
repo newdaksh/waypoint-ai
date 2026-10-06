@@ -37,6 +37,6 @@ export function GuestOnly({ children }) {
   const { status, fresh } = useAuth();
   const [params] = useSearchParams();
   if (status === 'loading') return <Splash>Loading…</Splash>;
-  if (status === 'authed') return <Navigate to={fresh ? '/app/onboarding/profile' : safeNext(params.get('next'))} replace />;
+  if (status === 'authed') return <Navigate to={fresh ? '/app/profile' : safeNext(params.get('next'))} replace />;
   return children;
 }

@@ -1,4 +1,4 @@
-import { analytics, priorityOf } from '@waypoint/shared';
+import { activeResumeOf, analytics, priorityOf } from '@waypoint/shared';
 
 const TONES = {
   Analyst: 'TONE: neutral, precise analyst. Short sentences, no encouragement filler.',
@@ -20,7 +20,7 @@ export function chatContext(ws) {
   const a = ws.analysis;
   const activeJob = ws.jobs.find((j) => j.id === ws.activeJobId) || ws.jobs[0];
   const ats = activeJob ? ws.atsBy[activeJob.id] : null;
-  const stats = analytics(ws.apps, ws.versions);
+  const stats = analytics(ws.apps, ws.resumes);
 
   const jobs = ws.jobs
     .map((j) => {
@@ -32,7 +32,7 @@ export function chatContext(ws) {
     ? ws.roadmap.phases.flatMap((p) => p.tasks.map((x) => `${p.label}: ${x.topic}${x.done ? ' (done)' : ''}`)).join('; ')
     : 'none';
   const scores = Object.values(ws.evals || {}).map((e) => e.score);
-  const bullets = ws.resumeText
+  const bullets = activeResumeOf(ws).text
     .split('\n')
     .filter((l) => l.trim().startsWith('-'))
     .slice(0, 8)

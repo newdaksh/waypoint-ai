@@ -1,4 +1,4 @@
-import { applyPatch, isEmptyPatch, mergePatches } from '@waypoint/shared';
+import { applyPatch, isEmptyPatch, mergePatches, scopeToResume } from '@waypoint/shared';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { api, ApiError } from '../api.js';
 import { useAuth } from './AuthContext.jsx';
@@ -15,6 +15,8 @@ const RETRY_DELAY_MS = 4000;
  *    coalesced into one PATCH). Failed saves are kept and retried; `saveState` exposes the status.
  *  - `runAi(task, body)` first flushes pending edits (the server reads the resume / jobs from its
  *    own copy), runs the task, then applies the patch the server stored.
+ *  - `ws` is the workspace as the active resume sees it (`scopeToResume`): `ws.analysis` is that
+ *    resume's analysis, and results made from another resume are hidden until it is active again.
  *
  * The workspace is remembered together with the id of the user it belongs to, so logging out (or in as
  * someone else) can never expose the previous user's data, even for a single render.
@@ -23,7 +25,8 @@ export function WorkspaceProvider({ children }) {
   const { user } = useAuth();
   const userId = user?.id ?? null;
   const [held, setHeld] = useState({ userId: null, ws: null, error: null });
-  const ws = held.userId === userId ? held.ws : null;
+  const stored = held.userId === userId ? held.ws : null;
+  const ws = useMemo(() => stored && scopeToResume(stored), [stored]);
   const loadError = held.userId === userId ? held.error : null;
   const [saveState, setSaveState] = useState('idle'); // idle | saving | error
 
@@ -141,7 +144,7 @@ export function WorkspaceProvider({ children }) {
       saveState,
       reload: load,
       save,
-      /** Replace top-level keys, e.g. set({ resumeText }). */
+      /** Replace top-level keys, e.g. set({ jobs }). */
       set: (obj) => save({ set: obj }),
       /** Merge entries into a map key, e.g. merge('answers', { 3: 'text' }). Use null to delete. */
       merge: (key, entries) => save({ merge: { [key]: entries } }),

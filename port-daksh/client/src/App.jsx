@@ -13,16 +13,21 @@ import Signup from './pages/auth/Signup.jsx';
 import BulletOptimizer from './pages/BulletOptimizer.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Interview from './pages/Interview.jsx';
+import InterviewReport from './pages/InterviewReport.jsx';
+import InterviewRoom from './pages/InterviewRoom.jsx';
 import JobDecoder from './pages/JobDecoder.jsx';
 import JobSafety from './pages/JobSafety.jsx';
 import Landing from './pages/Landing.jsx';
-import Onboarding from './pages/Onboarding.jsx';
+import LiveInterview from './pages/LiveInterview.jsx';
+import Profile from './pages/Profile.jsx';
 import ResumeAnalyzer from './pages/ResumeAnalyzer.jsx';
+import Resumes from './pages/Resumes.jsx';
 import ResumeTailor from './pages/ResumeTailor.jsx';
 import Roadmap from './pages/Roadmap.jsx';
 import SavedJobs from './pages/SavedJobs.jsx';
 import SkillGap from './pages/SkillGap.jsx';
 import SkillProof from './pages/SkillProof.jsx';
+import TargetJobs from './pages/TargetJobs.jsx';
 import Tracker from './pages/Tracker.jsx';
 import { TaskProvider } from './state/TaskContext.jsx';
 import { useWorkspace } from './state/WorkspaceContext.jsx';
@@ -62,6 +67,9 @@ export default function App() {
       <Route path="/forgot-password" element={<GuestOnly><ForgotPassword /></GuestOnly>} />
       <Route path="/reset-password" element={<ResetPassword />} />
 
+      {/* The interview room is a full-screen page of its own: no sidebar, nothing to distract. */}
+      <Route path="/live/:id" element={<RequireAuth><Gate><InterviewRoom /></Gate></RequireAuth>} />
+
       <Route
         path="/app"
         element={
@@ -75,8 +83,13 @@ export default function App() {
         }
       >
         <Route index element={<Navigate to="dashboard" replace />} />
-        <Route path="onboarding" element={<Navigate to="profile" replace />} />
-        <Route path="onboarding/:step" element={<Onboarding />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="resumes" element={<Resumes />} />
+        <Route path="targets" element={<TargetJobs />} />
+        {/* The three used to be steps of one page; old links land on the matching page. */}
+        <Route path="onboarding/resume" element={<Navigate to="/app/resumes" replace />} />
+        <Route path="onboarding/job" element={<Navigate to="/app/targets" replace />} />
+        <Route path="onboarding/*" element={<Navigate to="/app/profile" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="resume" element={<Navigate to="health" replace />} />
         <Route path="resume/:tab" element={<ResumeAnalyzer />} />
@@ -90,6 +103,8 @@ export default function App() {
         <Route path="roadmap" element={<Roadmap />} />
         <Route path="interview" element={<Navigate to="practice" replace />} />
         <Route path="interview/:tab" element={<Interview />} />
+        <Route path="live" element={<LiveInterview />} />
+        <Route path="live/:id" element={<InterviewReport />} />
         <Route path="tracker" element={<Tracker />} />
         <Route path="analytics" element={<Analytics />} />
         <Route path="assistant" element={<Assistant />} />

@@ -144,13 +144,14 @@ Nice to have
 /** A fully populated workspace (resume, jobs, results, applications) for tests. */
 export function sampleWorkspace() {
   return {
-    version: 1,
+    version: 3,
     profile: { name: 'Aarav Mehta', role: 'Python Backend Developer', level: 'Junior', years: '1', location: 'Pune, India', skills: 'Python, Django, REST APIs, PostgreSQL, Git', goals: 'Move into a backend role at a product company within 3 months, ideally fintech or B2B SaaS.' },
-    resumeText: RESUME,
+    activeResumeId: 'master',
+    madeFrom: {},
     jobs: JOBS.map(j => ({ ...j })),
     activeJobId: 'j1',
     src: { analysis: 'demo', ats: 'demo', questions: 'demo', decoder: 'demo', gap: 'demo', roadmap: 'demo', proof: 'demo', tailor: 'demo', bullets: 'demo', safety: 'demo', priority: 'demo', apps: 'demo' },
-    analysis: {
+    analysisBy: { master: {
       summary: 'A solid foundation for a junior backend role: Python and Django experience is recent and real. Most bullets describe duties rather than results, and several listed skills have no supporting evidence.',
       scores: { overall: 66, ats: 74, skills: 71, content: 58, achievements: 34, proof: 52 },
       strengths: ['Recent production experience with Python, Django and DRF', 'MySQL → PostgreSQL migration maps to common backend requirements', 'Two personal projects on a modern stack (FastAPI, Docker)'],
@@ -176,7 +177,7 @@ export function sampleWorkspace() {
         { title: 'Practice PostgreSQL query-optimization questions', why: 'Indexing and query tuning are required in your target JD; your resume shows only a migration.', action: 'Answer the predicted PostgreSQL questions and review EXPLAIN ANALYZE output.', impact: 'Medium', module: 'Interview Predictor' },
         { title: 'Add pytest and CI to Expense Splitter API', why: 'pytest and CI/CD are listed in the JD and missing from your resume.', action: 'Add a test suite and a GitHub Actions workflow, then mention both.', impact: 'Medium', module: 'Learning Roadmap' }
       ]
-    },
+    } },
     atsBy: { j1: {
       score: 72, keywordCoverage: 64, jobFit: 80,
       titleAlignment: '"Junior Software Engineer" is close to "Backend Developer" but doesn\'t contain the word backend.',
@@ -254,7 +255,7 @@ export function sampleWorkspace() {
       { section: 'Experience', change: 'Rewrote passive bullets with direct verbs and moved the PostgreSQL migration up.', reason: 'PostgreSQL is a must-have.' },
       { section: 'Skills', change: 'Removed Microservices, Kubernetes, Machine Learning, HTML, CSS and the "Advanced" rating.', reason: 'Unsupported or irrelevant to this role.' }
     ], notIncluded: ['pytest', 'Query optimization', 'Celery / Redis', 'AWS'] } },
-    versions: [
+    resumes: [
       { id: 'master', name: 'Master resume', note: 'Original upload', created: '2026-07-02', text: RESUME },
       { id: 'v1', name: 'v1 · Backend roles', note: 'Backend emphasis', created: '2026-08-05', text: RESUME },
       { id: 'v2', name: 'v2 · Python roles', note: 'Python generalist', created: '2026-08-11', text: RESUME },

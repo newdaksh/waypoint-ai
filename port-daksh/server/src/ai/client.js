@@ -113,8 +113,8 @@ export function toHttpError(err, fallbackMessage = 'The AI service returned an e
   return new HttpError(502, fallbackMessage);
 }
 
-async function geminiTransport({ system, messages, maxTokens, json = false, temperature, errorMessage }) {
-  const { model } = getConfig().ai;
+async function geminiTransport({ system, messages, maxTokens, json = false, temperature, errorMessage, model: override }) {
+  const model = override || getConfig().ai.model;
   try {
     const res = await getClient().models.generateContent({
       model,
@@ -152,11 +152,11 @@ function parseJson(text) {
  * Ask for one JSON object. A malformed, empty or truncated reply is retried once (with more room if it
  * was cut off); transport failures are not retried here — the SDK already retries transient errors.
  */
-export async function completeJson(prompt, maxTokens = 2500) {
+export async function completeJson(prompt, maxTokens = 2500, { model } = {}) {
   let budget = maxTokens;
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const text = await transport({ system: SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }], maxTokens: budget, json: true });
+      const text = await transport({ system: SYSTEM_PROMPT, messages: [{ role: 'user', content: prompt }], maxTokens: budget, json: true, model });
       return parseJson(text);
     } catch (err) {
       if (err instanceof HttpError) throw err;
@@ -184,4 +184,75 @@ export async function completeText({ system, messages, maxTokens = 900 }) {
     if (err.message === 'empty') throw new HttpError(502, errorMessage);
     throw err instanceof HttpError ? err : toHttpError(err, errorMessage);
   }
+}
+
+// ───────────────────────────────────────────────── Live API (real-time voice)
+
+/** Throws the "isn't configured" error unless a key (or a test fake) is available. */
+export function assertAiConfigured() {
+  getClient();
+}
+
+/** Translate a failed Live API connection (an error, or the close event the service sends instead) for the UI. */
+function liveError(err, model) {
+  if (err instanceof HttpError) return err;
+  const detail = String(err?.reason || err?.message || '');
+  if (/api key|API_KEY_INVALID|permission|unauthenticated|\b40[13]\b/i.test(detail)) {
+    return new HttpError(503, "The AI service rejected this server's API key or it lacks access. Check GEMINI_API_KEY in server/.env.", { canRetry: false });
+  }
+  if (/not found|not supported|\b404\b/i.test(detail)) {
+    return new HttpError(503, `The live model "${model}" isn't available for this API key. Check GEMINI_LIVE_MODEL in server/.env.`, { canRetry: false });
+  }
+  if (/quota|resource.?exhausted|rate.?limit|\b429\b/i.test(detail)) return new HttpError(429, 'Rate limit reached. Wait a minute and retry.');
+  if (/location is not supported/i.test(detail)) return new HttpError(503, "The Gemini API isn't available from this region.", { canRetry: false });
+  if (err?.name === 'TimeoutError') return new HttpError(504, 'The interviewer took too long to join. Try again.');
+  console.error('[live] connection failed:', detail.slice(0, 300) || err);
+  return new HttpError(502, "Couldn't reach the AI interviewer. Check the server's connection and retry.");
+}
+
+/**
+ * Open a Live API session with the configured live model. The service reports a rejected connection (bad
+ * key, unknown model) only as a close event while `connect()` stays pending, so this settles on whichever of
+ * "connected", "closed before ready" and "timed out" comes first. Once connected, events go to `callbacks`.
+ */
+export function connectLive({ config, callbacks, timeoutMs = 15_000 }) {
+  const { model } = getConfig().live;
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    let timer = null;
+    const settle = (fn, value) => {
+      if (settled) return false;
+      settled = true;
+      clearTimeout(timer);
+      fn(value);
+      return true;
+    };
+    const fail = (err) => settle(reject, liveError(err, model));
+
+    let client;
+    try {
+      client = getClient();
+    } catch (err) {
+      fail(err);
+      return;
+    }
+    timer = setTimeout(() => fail(Object.assign(new Error('connect timed out'), { name: 'TimeoutError' })), timeoutMs);
+
+    client.live
+      .connect({
+        model,
+        config,
+        callbacks: {
+          ...callbacks,
+          onerror: (e) => (settled ? callbacks.onerror?.(e) : fail(e)),
+          onclose: (e) => (settled ? callbacks.onclose?.(e) : fail(e)),
+        },
+      })
+      .then(
+        (session) => {
+          if (!settle(resolve, session)) session.close(); // gave up waiting; don't leave an orphaned session billing
+        },
+        fail,
+      );
+  });
 }

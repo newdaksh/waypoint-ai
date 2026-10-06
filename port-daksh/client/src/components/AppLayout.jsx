@@ -1,40 +1,47 @@
+import { activeResumeOf } from '@waypoint/shared';
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { pageMeta } from '../lib/nav.js';
 import { activeJobOf } from '../lib/derive.js';
 import { useTasks } from '../state/TaskContext.jsx';
 import { useWorkspace } from '../state/WorkspaceContext.jsx';
+import ProgressCard from './ProgressCard.jsx';
 import Sidebar from './Sidebar.jsx';
-import { Card, Pill, Row, Stack } from './ui.jsx';
+import { Pill, Row, Stack } from './ui.jsx';
 
 /** Marks results that were produced by the AI (as opposed to things the user typed). */
 function aiBadge(ws, screen, tab) {
   const jid = activeJobOf(ws)?.id;
   // Per-job results carry their own flag, so switching target job shows the right one.
   const perJob = (key, map) => (map && jid && map[jid] ? ws.src[`${key}:${jid}`] : null);
+  // The flag only counts while there is a result on screen (the active resume may not have one yet).
+  const analysis = ws.analysis ? ws.src.analysis : null;
   const sources = {
-    dashboard: ws.src.analysis,
-    onboarding: ws.analysis ? ws.src.analysis : null,
-    resume: tab === 'ats' ? perJob('ats', ws.atsBy) : ws.src.analysis,
+    dashboard: analysis,
+    resumes: analysis,
+    resume: tab === 'ats' ? perJob('ats', ws.atsBy) : analysis,
     tailor: perJob('tailor', ws.tailorBy),
     bullets: ws.bullets ? ws.src.bullets : null,
     proof: perJob('proof', ws.proofBy),
-    jobs: ws.src.priority,
+    jobs: Object.keys(ws.priorityBy).length ? ws.src.priority : null,
     decoder: perJob('decoder', ws.decoderBy),
     safety: ws.safety ? ws.src.safety : null,
     gap: perJob('gap', ws.gapBy),
     roadmap: ws.roadmap ? ws.src.roadmap : null,
-    interview: ws.src.questions,
+    interview: ws.questions.length ? ws.src.questions : null,
   };
   return sources[screen] === 'live' ? { label: 'AI result', tone: ['#e6f5ee', '#0b6247'] } : null;
 }
+
+const pickerLabel = { display: 'flex', flexDirection: 'column', gap: 4, fontSize: 11.5, color: '#5b6472' };
 
 export default function AppLayout() {
   const { pathname } = useLocation();
   const { ws, set, saveState } = useWorkspace();
   const { loading, stepIdx, error, retry, dismissError } = useTasks();
-  const { screen, tab, crumb, title, desc, needsJob } = pageMeta(pathname);
+  const { screen, tab, crumb, title, desc, needsJob, usesResume } = pageMeta(pathname);
   const job = activeJobOf(ws);
+  const resume = activeResumeOf(ws);
   const badge = aiBadge(ws, screen, tab);
 
   useEffect(() => {
@@ -52,8 +59,24 @@ export default function AppLayout() {
             <div style={{ fontSize: 14, color: '#5b6472', maxWidth: 640 }}>{desc}</div>
           </Stack>
 
+          {usesResume && ws.resumes.length > 1 && (
+            <label style={pickerLabel}>
+              Resume
+              <select
+                className="select"
+                style={{ height: 36, minWidth: 180, maxWidth: 260, fontSize: 13.5 }}
+                value={resume.id}
+                onChange={(e) => set({ activeResumeId: e.target.value })}
+              >
+                {ws.resumes.map((r) => (
+                  <option key={r.id} value={r.id}>{r.name}</option>
+                ))}
+              </select>
+            </label>
+          )}
+
           {needsJob && job && (
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: 11.5, color: '#5b6472' }}>
+            <label style={pickerLabel}>
               Target job
               <select
                 className="select"
@@ -86,29 +109,7 @@ export default function AppLayout() {
           </div>
         )}
 
-        {loading && (
-          <Card
-            role="status"
-            aria-live="polite"
-            pad="18px 20px"
-            gap={9}
-            style={{ border: '1px solid var(--acc-b)', borderRadius: 14, marginBottom: 18, boxShadow: '0 8px 24px rgba(59,91,219,.08)' }}
-          >
-            <div style={{ fontWeight: 600, fontSize: 15 }}>{loading.title}</div>
-            {loading.steps.map((label, i) => {
-              const done = i < stepIdx;
-              const active = i === stepIdx;
-              return (
-                <Row key={label} gap={10} style={{ fontSize: 13.5, color: done || active ? '#0f1218' : '#8b93a1' }}>
-                  <span style={{ width: 18, height: 18, borderRadius: '50%', display: 'grid', placeItems: 'center', fontSize: 10, color: '#fff', background: done ? '#12805c' : active ? 'var(--acc)' : '#dfe2e7' }}>
-                    {done ? '✓' : active ? '•' : ''}
-                  </span>
-                  <span>{label}</span>
-                </Row>
-              );
-            })}
-          </Card>
-        )}
+        {loading && <ProgressCard title={loading.title} steps={loading.steps} stepIdx={stepIdx} style={{ marginBottom: 18 }} />}
 
         <Outlet />
       </main>

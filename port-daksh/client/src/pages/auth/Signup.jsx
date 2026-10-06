@@ -46,7 +46,7 @@ export default function Signup() {
     setFormError('');
     try {
       await signup({ name: values.name.trim(), email: values.email.trim(), password: values.password, remember: values.remember });
-      navigate('/app/onboarding/profile', { replace: true });
+      navigate('/app/profile', { replace: true });
     } catch (err) {
       if (['name', 'email', 'password'].includes(err.field)) {
         setErrors({ [err.field]: err.message });

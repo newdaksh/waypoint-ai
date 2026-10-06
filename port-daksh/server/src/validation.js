@@ -1,4 +1,4 @@
-import { AI_TONES, ACCENTS, CLIENT_MERGE_KEYS, CLIENT_SET_KEYS, ENTRY_ID, SIDEBARS } from '@waypoint/shared';
+import { AI_TONES, ACCENTS, CLIENT_DELETE_KEYS, CLIENT_MERGE_KEYS, CLIENT_SET_KEYS, ENTRY_ID, SIDEBARS } from '@waypoint/shared';
 import { HttpError } from './errors.js';
 
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -6,14 +6,16 @@ const isStr = (max) => (v) => typeof v === 'string' && v.length <= max;
 const arrOf = (max, item) => (v) => Array.isArray(v) && v.length <= max && v.every(item);
 
 const hasStrings = (...keys) => (o) => isObj(o) && keys.every((k) => typeof o[k] === 'string');
+// A resume's id becomes a field path ("analysisBy.<id>"), so it has to be a safe entry id.
+const isResume = (r) => hasStrings('id', 'name', 'text')(r) && ENTRY_ID.test(r.id) && r.name.length <= 200 && r.text.length <= 200_000;
 
 /** Whole-value validators for keys a client may replace. */
 const SET_RULES = {
   profile: (v) => isObj(v) && Object.values(v).every((x) => typeof x === 'string' && x.length <= 5000),
-  resumeText: isStr(200_000),
+  resumes: (v) => arrOf(50, isResume)(v) && v.length > 0, // there is always at least one
+  activeResumeId: isStr(80),
   jobs: arrOf(100, hasStrings('id', 'title', 'text')),
   activeJobId: isStr(64),
-  versions: arrOf(200, hasStrings('id', 'name')),
   roadmap: (v) => v === null || (isObj(v) && Array.isArray(v.phases)),
   bulletInput: isStr(20_000),
   safetyInput: isStr(20_000),
@@ -46,12 +48,13 @@ export function validateClientPatch(body) {
     clean.set[key] = value;
   }
   for (const [key, entries] of Object.entries(merge)) {
-    if (!CLIENT_MERGE_KEYS.includes(key)) throw bad(`"${key}" cannot be merged by the client.`);
+    const deleteOnly = CLIENT_DELETE_KEYS.includes(key); // results: the client may drop entries, never write them
+    if (!deleteOnly && !CLIENT_MERGE_KEYS.includes(key)) throw bad(`"${key}" cannot be merged by the client.`);
     if (!isObj(entries)) throw bad(`Entries for "${key}" must be an object.`);
     clean.merge[key] = {};
     for (const [id, value] of Object.entries(entries)) {
       if (!ENTRY_ID.test(id)) throw bad('Invalid entry id.'); // ids become MongoDB field paths
-      if (value !== null && !MERGE_RULES[key](value, id)) throw bad(`Invalid entry "${id}" for "${key}".`);
+      if (value !== null && (deleteOnly || !MERGE_RULES[key](value, id))) throw bad(`Invalid entry "${id}" for "${key}".`);
       clean.merge[key][id] = value;
     }
   }

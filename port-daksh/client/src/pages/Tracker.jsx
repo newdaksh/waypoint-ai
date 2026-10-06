@@ -1,4 +1,4 @@
-import { STATUSES } from '@waypoint/shared';
+import { activeResumeOf, STATUSES } from '@waypoint/shared';
 import { useState } from 'react';
 import { Button, Card, Chip, Field, Input, Pill, Row, Select, Spacer, Stack } from '../components/ui.jsx';
 import { today, versionShort } from '../lib/derive.js';
@@ -6,7 +6,7 @@ import { pill, statusTone } from '../lib/theme.js';
 import { useTasks } from '../state/TaskContext.jsx';
 import { useWorkspace } from '../state/WorkspaceContext.jsx';
 
-const EMPTY_DRAFT = { company: '', role: '', category: '', match: '', url: '', version: 'master' };
+const EMPTY_DRAFT = { company: '', role: '', category: '', match: '', url: '', version: '' }; // no version chosen = the resume in use
 const toScore = (v) => { const x = Math.round(Number(v)); return Number.isFinite(x) ? Math.max(0, Math.min(100, x)) : 0; };
 const gridCols = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,420px),1fr))', gap: 16, alignItems: 'start' };
 
@@ -20,6 +20,7 @@ export default function Tracker() {
   const [noteDraft, setNoteDraft] = useState('');
 
   const setDraftField = (k) => (e) => setDraft((d) => ({ ...d, [k]: e.target.value }));
+  const draftVersion = draft.version || activeResumeOf(ws).id;
   const sel = ws.apps.find((a) => a.id === selId) || null;
 
   const counts = {};
@@ -39,7 +40,7 @@ export default function Tracker() {
     const date = today();
     saveApps([
       {
-        id, company: draft.company.trim(), role: draft.role.trim(), category: draft.category.trim() || 'Other', version: draft.version,
+        id, company: draft.company.trim(), role: draft.role.trim(), category: draft.category.trim() || 'Other', version: draftVersion,
         match: toScore(draft.match), url: draft.url, recruiter: '', salary: '', interview: '', status: 'Applied', applied: date,
         events: [{ status: 'Applied', date }], notes: [],
       },
@@ -88,8 +89,8 @@ export default function Tracker() {
             <Field label="Category"><Input value={draft.category} onChange={setDraftField('category')} /></Field>
             <Field label="Match score"><Input inputMode="numeric" value={draft.match} onChange={setDraftField('match')} /></Field>
             <Field label="Resume version">
-              <Select value={draft.version} onChange={setDraftField('version')}>
-                {ws.versions.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
+              <Select value={draftVersion} onChange={setDraftField('version')}>
+                {ws.resumes.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
               </Select>
             </Field>
             <Field label="Job URL"><Input value={draft.url} onChange={setDraftField('url')} /></Field>
@@ -149,8 +150,8 @@ export default function Tracker() {
               </Field>
               <Field small label="Resume version">
                 <Select small value={sel.version} onChange={field('version')}>
-                  {!ws.versions.some((v) => v.id === sel.version) && <option value={sel.version}>—</option>}
-                  {ws.versions.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
+                  {!ws.resumes.some((v) => v.id === sel.version) && <option value={sel.version}>—</option>}
+                  {ws.resumes.map((v) => <option key={v.id} value={v.id}>{v.name}</option>)}
                 </Select>
               </Field>
               <Field small label="Recruiter"><Input small value={sel.recruiter} onChange={field('recruiter')} /></Field>

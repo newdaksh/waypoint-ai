@@ -1,6 +1,6 @@
 /** Sidebar structure: [group label, [[item label, route], …]]. */
 export const NAV = [
-  ['Overview', [['Dashboard', '/app/dashboard'], ['Profile & resume', '/app/onboarding']]],
+  ['Overview', [['Dashboard', '/app/dashboard'], ['Profile', '/app/profile'], ['Resumes', '/app/resumes'], ['Target jobs', '/app/targets']]],
   ['Resume Intelligence', [
     ['Resume Analyzer', '/app/resume'],
     ['ATS Analyzer', '/app/resume/ats'],
@@ -10,7 +10,7 @@ export const NAV = [
   ]],
   ['Job Intelligence', [['Saved Jobs & Priority', '/app/jobs'], ['Job Decoder', '/app/decoder'], ['Job Safety Analyzer', '/app/safety']]],
   ['Skill Intelligence', [['Skill Gap', '/app/gap'], ['Learning Roadmap', '/app/roadmap']]],
-  ['Interview Intelligence', [['Interview Predictor', '/app/interview/practice'], ['Consistency Check', '/app/interview/consistency']]],
+  ['Interview Intelligence', [['Live Interview', '/app/live'], ['Interview Predictor', '/app/interview/practice'], ['Consistency Check', '/app/interview/consistency']]],
   ['Career Intelligence', [['Application Tracker', '/app/tracker'], ['Analytics', '/app/analytics'], ['AI Career Assistant', '/app/assistant']]],
 ];
 
@@ -33,12 +33,14 @@ export function pageMeta(pathname) {
   const ats = tab === 'ats';
   const consistency = tab === 'consistency';
   const pages = {
-    onboarding: ['Get started', 'Profile & resume', 'Three steps: who you are, your master resume, and the job you want.'],
+    profile: ['Get started', 'Profile', 'Who you are and where you want to go. Context for every analysis.'],
+    resumes: ['Get started', 'Resumes', 'Every resume you keep. The one you select is the one all the tools use.'],
+    targets: ['Get started', 'Target jobs', 'The jobs you are aiming for. The one you select is the one all the tools compare against.'],
     dashboard: ['Career Intelligence', 'Dashboard', 'Where you stand for your target role, and what to do next.'],
     resume: [
       'Resume Intelligence',
       ats ? 'ATS Analyzer' : 'Resume Analyzer',
-      ats ? 'How a typical applicant tracking system might read your resume for this job.' : 'Health, red flags and evidence in your master resume.',
+      ats ? 'How a typical applicant tracking system might read your resume for this job.' : 'Health, red flags and evidence in your resume.',
     ],
     tailor: ['Resume Intelligence', 'Resume Tailor', 'A version of your resume focused on one job, built only from what you wrote.'],
     bullets: ['Resume Intelligence', 'Bullet Optimizer', 'Turn one weak bullet into stronger, truthful versions.'],
@@ -53,11 +55,20 @@ export function pageMeta(pathname) {
       consistency ? 'Consistency Check' : 'Interview Predictor',
       consistency ? 'Test whether your answers support what your resume claims.' : 'Likely questions for this job, with practice and feedback.',
     ],
+    live: [
+      'Interview Intelligence',
+      tab ? 'Interview report' : 'Live Interview',
+      tab ? 'Your score, answer-by-answer feedback and what to practise next.' : 'Talk with an AI interviewer in real time, built from one resume and one job.',
+    ],
     tracker: ['Career Intelligence', 'Application Tracker', 'Every application, its status, resume version and notes.'],
     analytics: ['Career Intelligence', 'Analytics', 'What your applications are telling you so far.'],
     assistant: ['Career Intelligence', 'AI Career Assistant', 'Ask questions about your resume, jobs, interviews and plan.'],
   };
   const [crumb, title, desc] = pages[screen] || ['', '', ''];
   const jobScreens = ['tailor', 'proof', 'decoder', 'gap', 'roadmap', 'interview', 'bullets', 'dashboard'];
-  return { screen, tab, crumb, title, desc, needsJob: jobScreens.includes(screen) || (screen === 'resume' && ats) };
+  return {
+    screen, tab, crumb, title, desc,
+    needsJob: jobScreens.includes(screen) || (screen === 'resume' && ats),
+    usesResume: [...jobScreens, 'resume', 'jobs'].includes(screen), // their results are made from the active resume
+  };
 }

@@ -24,6 +24,7 @@ const server = app.listen(config.port, config.host, () => {
   console.log(`Waypoint API listening on http://${config.host}:${config.port}`);
   console.log(`  database: ${host} / ${config.mongo.dbName} (MongoDB)`);
   console.log(`  model:    ${config.ai.model} (Gemini)`);
+  console.log(`  live:     ${config.live.model} (Gemini Live, voice ${config.live.voice}, ${config.live.targetMinutes} min target / ${config.live.maxMinutes} min limit)`);
   console.log(`  app url:  ${config.auth.appUrl} (password-reset links)${config.auth.smtp ? '' : ' — SMTP not configured: emails are printed here instead of sent'}`);
   if (!config.ai.apiKey) {
     console.warn('  ⚠ GEMINI_API_KEY is not set (or is still the placeholder) — AI features will return an error until it is. See server/.env.example.');
@@ -33,6 +34,7 @@ const server = app.listen(config.port, config.host, () => {
 // Finish in-flight requests, then close the database connection.
 for (const signal of ['SIGINT', 'SIGTERM']) {
   process.once(signal, () => {
+    app.closeLive().catch(() => {}); // keep every live transcript, then let connections end
     server.close(async () => {
       await store.close();
       process.exit(0);

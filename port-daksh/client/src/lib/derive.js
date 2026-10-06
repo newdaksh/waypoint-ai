@@ -68,10 +68,10 @@ export function readinessOf(ws) {
   return { readiness, readinessDeg: Math.round((readiness ?? 0) * 3.6), components, formulaText };
 }
 
-export const statsOf = (ws) => analytics(ws.apps, ws.versions);
+export const statsOf = (ws) => analytics(ws.apps, ws.resumes);
 
-/** Short resume-version label ("v2 · Python roles" → "v2"). */
+/** Short label of the resume an application was sent with ("v2 · Python roles" → "v2"). */
 export const versionShort = (ws, id) => {
-  const v = ws.versions.find((x) => x.id === id);
+  const v = ws.resumes.find((x) => x.id === id);
   return v ? v.name.split(' · ')[0] : '—';
 };

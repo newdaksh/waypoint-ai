@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
       },
       async signup(details) {
         const { user } = await api.auth.signup(details);
-        // `fresh` lets the guest-page guard send a brand-new account to onboarding instead of the dashboard.
+        // `fresh` lets the guest-page guard send a brand-new account to its profile instead of the dashboard.
         setState({ status: 'authed', user, expired: false, error: null, fresh: true });
         return user;
       },

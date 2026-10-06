@@ -64,7 +64,8 @@ export async function startServer({ limits = { disabled: true } } = {}) {
   const db = await openStore();
   const mails = []; // everything the app tried to email
   setMailSink(async (mail) => { mails.push(mail); });
-  const server = (await createApp({ store: db.store, limits })).listen(0);
+  const app = await createApp({ store: db.store, limits });
+  const server = app.listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
 
@@ -110,6 +111,7 @@ export async function startServer({ limits = { disabled: true } } = {}) {
     post: (u, b = {}) => send('POST', u, b),
     async close() {
       setMailSink(null);
+      await app.closeLive(); // open interview sockets would keep the server from closing
       await new Promise((resolve) => server.close(resolve));
       await db.drop();
     },

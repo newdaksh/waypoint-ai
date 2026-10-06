@@ -69,8 +69,9 @@ describe('auth API', () => {
       const ws = (await s.send('GET', '/api/workspace', undefined, { cookie: res.cookie.split(';')[0] })).body;
       assert.equal(ws.profile.name, 'Priya Nair', 'profile starts with the account name');
       assert.deepEqual([ws.jobs, ws.apps, ws.chat, ws.questions], [[], [], [], []]);
-      assert.deepEqual([ws.analysis, ws.roadmap, ws.safety, ws.bullets], [null, null, null, null]);
-      assert.equal(ws.resumeText, '');
+      assert.deepEqual([ws.roadmap, ws.safety, ws.bullets], [null, null, null]);
+      assert.deepEqual(ws.analysisBy, {});
+      assert.deepEqual(ws.resumes.map((r) => r.text), ['']);
       assert.equal(ws.activeJobId, null);
       assert.equal('_id' in ws, false);
     });
@@ -250,14 +251,15 @@ describe('auth API', () => {
     it("isolates users: each only ever sees and changes their own workspace", async () => {
       const a = await s.signup({ name: 'User A' });
       const b = await s.signup({ name: 'User B' });
-      await a.patch('/api/workspace', { set: { resumeText: 'A private resume '.repeat(10), bulletInput: 'only A' } });
+      await a.patch('/api/workspace', { set: { resumes: [{ id: 'master', name: 'Master resume', text: 'A private resume '.repeat(10) }], bulletInput: 'only A' } });
       await b.patch('/api/workspace', { set: { bulletInput: 'only B' } });
 
       const wa = (await a.get('/api/workspace')).body;
       const wb = (await b.get('/api/workspace')).body;
       assert.equal(wa.bulletInput, 'only A');
       assert.equal(wb.bulletInput, 'only B');
-      assert.equal(wb.resumeText, '', "B can't see A's resume");
+      assert.match(wa.resumes[0].text, /^A private resume/);
+      assert.deepEqual(wb.resumes.map((r) => r.text), [''], "B can't see A's resume");
       assert.equal(wa.profile.name, 'User A');
       assert.equal(wb.profile.name, 'User B');
       assert.equal(await s.db.raw((d) => d.collection('workspaces').countDocuments({ _id: { $in: [a.user.id, b.user.id] } })), 2);

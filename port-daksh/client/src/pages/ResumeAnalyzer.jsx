@@ -1,3 +1,4 @@
+import { activeResumeOf } from '@waypoint/shared';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Bar, Bullet, Button, Card, AutoGrid, EmptyCard, MonoLabel, Notice, Row, Segmented, Spacer, Split, Stack, Tags } from '../components/ui.jsx';
 import NoJob from '../components/NoJob.jsx';
@@ -144,7 +145,7 @@ export default function ResumeAnalyzer() {
   if (!RESUME_TABS.includes(tab)) return <Navigate to="/app/resume/health" replace />;
 
   const analysis = ws.analysis;
-  const hasResume = ws.resumeText.trim().length > 0;
+  const hasResume = activeResumeOf(ws).text.trim().length > 0;
   const flags = analysis?.redFlags || [];
   const flagCounts = { critical: 0, warning: 0, improvement: 0 };
   flags.forEach((f) => { flagCounts[f.severity] += 1; });
@@ -160,7 +161,7 @@ export default function ResumeAnalyzer() {
       <Row gap={10} wrap>
         <Segmented items={tabs} value={tab} onChange={(k) => navigate(`/app/resume/${k}`)} label="Resume analysis views" />
         <Spacer />
-        <Button variant="outline" onClick={() => navigate('/app/onboarding/resume')}>Edit resume text</Button>
+        <Button variant="outline" onClick={() => navigate('/app/resumes')}>Edit resume</Button>
         <Button onClick={analyzeResume}>{analysis ? 'Re-analyze' : 'Analyze resume'}</Button>
       </Row>
 
@@ -168,7 +169,7 @@ export default function ResumeAnalyzer() {
         <EmptyCard>
           <Stack gap={12} align="flex-start">
             <span>{hasResume ? 'No analysis yet. Choose “Analyze resume” to run one.' : 'No analysis yet. Add your resume first, then analyze it.'}</span>
-            {!hasResume && <Button onClick={() => navigate('/app/onboarding/resume')}>Add your resume</Button>}
+            {!hasResume && <Button onClick={() => navigate('/app/resumes')}>Add your resume</Button>}
           </Stack>
         </EmptyCard>
       )}

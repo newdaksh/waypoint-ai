@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 
 export const DEFAULT_MODEL = 'gemini-2.5-flash-lite';
+export const DEFAULT_LIVE_MODEL = 'gemini-3.8-live';
+export const DEFAULT_LIVE_VOICE = 'Kore';
 export const DEFAULT_DB = 'waypoint_ai';
 
 /**
@@ -41,6 +43,8 @@ export function mongoHost(uri) {
 }
 
 const truthy = (v) => /^(1|true|yes|on)$/i.test(v || '');
+/** A positive number from a string (fractions allowed, so tests can use seconds), or undefined. */
+const positive = (v) => (Number(v) > 0 ? Number(v) : undefined);
 
 /** SMTP settings for sending email, or undefined when email isn't configured. */
 export function getSmtp(env = process.env) {
@@ -54,6 +58,22 @@ export function getSmtp(env = process.env) {
     secure: readEnv('SMTP_SECURE', env) ? truthy(readEnv('SMTP_SECURE', env)) : port === 465,
     auth: user ? { user, pass: readEnv('SMTP_PASS', env) || '' } : undefined,
     from: readEnv('MAIL_FROM', env) || user || 'Waypoint <no-reply@localhost>',
+  };
+}
+
+/**
+ * Live interview settings. The interviewer paces itself to `targetMinutes` (it is told when time is short);
+ * `maxMinutes` is a hard stop so a forgotten tab can't run up an audio bill.
+ */
+export function liveSettings(env = process.env) {
+  const targetMinutes = positive(readEnv('LIVE_INTERVIEW_TARGET_MINUTES', env)) || 20;
+  const maxMinutes = Math.max(positive(readEnv('LIVE_INTERVIEW_MAX_MINUTES', env)) || 30, targetMinutes * 1.25);
+  return {
+    model: readEnv('GEMINI_LIVE_MODEL', env) || DEFAULT_LIVE_MODEL,
+    voice: readEnv('GEMINI_LIVE_VOICE', env) || DEFAULT_LIVE_VOICE,
+    targetMinutes,
+    maxMinutes,
+    maxSessions: Math.floor(positive(readEnv('LIVE_MAX_SESSIONS', env)) || 100),
   };
 }
 
@@ -85,6 +105,9 @@ export function getConfig() {
       apiKey: getApiKey(env),
       model: readEnv('GEMINI_MODEL', env) || DEFAULT_MODEL,
       timeoutMs: Number(readEnv('GEMINI_TIMEOUT_MS', env)) || 120_000,
+      // The post-interview report is the one place a stronger model pays off; defaults to the model above.
+      reportModel: readEnv('GEMINI_REPORT_MODEL', env) || readEnv('GEMINI_MODEL', env) || DEFAULT_MODEL,
     },
+    live: liveSettings(env),
   };
 }

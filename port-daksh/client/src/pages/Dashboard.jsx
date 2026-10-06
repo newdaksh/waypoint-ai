@@ -62,9 +62,9 @@ export default function Dashboard() {
   const { readiness, readinessDeg, components, formulaText } = readinessOf(ws);
   const pct = roadmapPercent(ws);
   const steps = [
-    { label: 'Set up your profile', desc: 'Target role, experience and goals.', done: Boolean(ws.profile.role.trim()), to: '/app/onboarding/profile', cta: 'Set up profile' },
-    { label: 'Add and analyze your resume', desc: 'A health check, red flags and ATS readiness.', done: Boolean(a), to: '/app/onboarding/resume', cta: 'Add your resume' },
-    { label: 'Add a target job', desc: 'Decode it, see the gaps and get a priority.', done: ws.jobs.length > 0, to: '/app/onboarding/job', cta: 'Add a target job' },
+    { label: 'Set up your profile', desc: 'Target role, experience and goals.', done: Boolean(ws.profile.role.trim()), to: '/app/profile', cta: 'Set up profile' },
+    { label: 'Add and analyze your resume', desc: 'A health check, red flags and ATS readiness.', done: Boolean(a), to: '/app/resumes', cta: 'Add your resume' },
+    { label: 'Add a target job', desc: 'Decode it, see the gaps and get a priority.', done: ws.jobs.length > 0, to: '/app/targets', cta: 'Add a target job' },
   ];
 
   const actions = a?.actions || [];

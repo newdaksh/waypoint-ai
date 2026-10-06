@@ -56,6 +56,17 @@ export const api = {
   /** Run an AI task; resolves to the workspace patch the server stored. */
   runAi: (task, body = {}) => request('POST', `/api/ai/${task}`, body),
   chat: (message) => request('POST', '/api/ai/chat', { message }),
+  interviews: {
+    list: () => request('GET', '/api/interviews'),
+    create: (body) => request('POST', '/api/interviews', body),
+    get: (id) => request('GET', `/api/interviews/${encodeURIComponent(id)}`),
+    /** Finish an interview that has no live connection (or whose connection can't be used). */
+    end: (id) => request('POST', `/api/interviews/${encodeURIComponent(id)}/end`),
+    retryReport: (id) => request('POST', `/api/interviews/${encodeURIComponent(id)}/report`),
+    remove: (id) => request('DELETE', `/api/interviews/${encodeURIComponent(id)}`),
+  },
+  /** The voice channel of a live interview: same origin, authenticated by the session cookie. */
+  liveSocketUrl: (id) => `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/api/live/${encodeURIComponent(id)}`,
   extractResume: (file) => {
     const form = new FormData();
     form.append('file', file);

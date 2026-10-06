@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { after, afterEach, before, beforeEach, describe, it } from 'node:test';
-import { priorityOf } from '@waypoint/shared';
+import { priorityOf, removeJobPatch, removeResumePatch, scopeToResume } from '@waypoint/shared';
 import { setTransport } from '../src/ai/client.js';
 import { HttpError } from '../src/errors.js';
 import { sampleWorkspace } from './fixtures/sampleWorkspace.js';
@@ -10,7 +10,7 @@ const demo = sampleWorkspace();
 
 // What a well-behaved model would return for each task (shaped like the design's demo data).
 const canned = {
-  analysis: demo.analysis,
+  analysis: demo.analysisBy.master,
   ats: demo.atsBy.j1,
   tailor: demo.tailorBy.j1,
   bullets: demo.bullets,
@@ -52,12 +52,92 @@ describe('AI tasks (fake model)', () => {
     reply = { ...canned.analysis, scores: { overall: 150, ats: '88', skills: 'x', content: -4, achievements: 40.6, proof: 52 }, redFlags: [{ ...canned.analysis.redFlags[0], severity: 'catastrophic' }] };
     const r = await run('resume-analysis');
     assert.equal(r.status, 200, JSON.stringify(r.body));
-    const a = (await ws()).analysis;
+    const a = (await ws()).analysisBy.master;
     assert.deepEqual(a.scores, { overall: 100, ats: 88, skills: 0, content: 0, achievements: 41, proof: 52 });
     assert.equal(a.redFlags[0].severity, 'improvement', 'unknown severity falls back');
     assert.equal((await ws()).src.analysis, 'live');
     assert.deepEqual((await ws()).claimTests, {}, 'old claim tests are cleared');
-    assert.ok(r.body.patch.set.analysis, 'patch is returned for the client');
+    assert.ok(r.body.patch.merge.analysisBy.master, 'patch is returned for the client');
+  });
+
+  describe('with several resumes', () => {
+    const second = { id: 'r2', name: 'Data roles', note: '', created: '2026-10-01', text: `Riya Kapoor — Data Analyst\n${'SQL, pandas and dashboards for retail analytics. '.repeat(8)}` };
+    const useSecond = async () => u.patch('/api/workspace', { set: { resumes: [...(await ws()).resumes, second], activeResumeId: 'r2' } });
+    const scoped = async () => scopeToResume(await ws());
+
+    it('analyses the active resume and keeps one analysis per resume', async () => {
+      await useSecond();
+      reply = { ...canned.analysis, summary: 'About the data resume.' };
+      assert.equal((await run('resume-analysis')).status, 200);
+      assert.match(seen[0].messages[0].content, /RESUME\nRiya Kapoor/);
+      assert.doesNotMatch(seen[0].messages[0].content, /Aarav Mehta/, 'the other resume is not sent');
+      const stored = await ws();
+      assert.equal(stored.analysisBy.r2.summary, 'About the data resume.');
+      assert.equal(stored.analysisBy.master.summary, demo.analysisBy.master.summary, "the first resume's analysis is untouched");
+      assert.equal((await scoped()).analysis.summary, 'About the data resume.');
+    });
+
+    it('stamps results with the resume they were made from, and hides them from the other resume', async () => {
+      reply = canned.ats;
+      await run('ats', { jobId: 'j1' });
+      reply = canned.questions;
+      await run('interview-questions', { jobId: 'j1' });
+      await u.patch('/api/workspace', { merge: { answers: { 0: 'drafted for the first resume' } } });
+      assert.deepEqual([(await ws()).madeFrom['atsBy:j1'], (await ws()).madeFrom.questions], ['master', 'master']);
+
+      await useSecond();
+      let mine = await scoped();
+      assert.deepEqual([mine.analysis, mine.atsBy.j1, mine.questions, mine.answers], [null, undefined, [], {}], 'nothing has been run for this resume yet');
+      assert.ok(mine.decoderBy.j1, 'results from before resumes were tracked stay visible');
+      assert.equal((await run('answer-evaluation', { index: 0, answer: 'x' })).status, 404, "can't answer the other resume's questions");
+
+      reply = { ...canned.ats, score: 41 };
+      await run('ats', { jobId: 'j1' });
+      mine = await scoped();
+      assert.equal(mine.atsBy.j1.score, 41);
+      assert.equal((await ws()).madeFrom['atsBy:j1'], 'r2');
+
+      await u.patch('/api/workspace', { set: { activeResumeId: 'master' } });
+      mine = await scoped();
+      assert.equal(mine.questions.length, 8, 'switching back brings its results back');
+      assert.equal(mine.answers[0], 'drafted for the first resume');
+      assert.equal(mine.atsBy.j1, undefined, 'the ATS result now belongs to the other resume');
+    });
+
+    it("never mixes one resume's claim tests into another's", async () => {
+      reply = canned.claimQuestion;
+      await run('claim-question', { index: 0 });
+      assert.equal((await ws()).madeFrom.claimTests, 'master');
+
+      await u.workspace.patch({ merge: { analysisBy: { r2: demo.analysisBy.master } } });
+      await useSecond();
+      assert.equal((await run('claim-evaluation', { index: 0, answer: 'x' })).status, 400, 'no question for this resume yet');
+      await run('claim-question', { index: 1 });
+      const stored = await ws();
+      assert.deepEqual(Object.keys(stored.claimTests), ['1'], "the first resume's tests were replaced, not merged into");
+      assert.equal(stored.madeFrom.claimTests, 'r2');
+    });
+
+    it('removing a resume or a job takes its results along', async () => {
+      await useSecond();
+      reply = canned.ats;
+      await run('ats', { jobId: 'j2' });
+      await u.workspace.patch({ merge: { analysisBy: { r2: demo.analysisBy.master } } });
+
+      let r = await u.patch('/api/workspace', removeResumePatch(await ws(), 'r2'));
+      assert.equal(r.status, 200, JSON.stringify(r.body));
+      let stored = await ws();
+      assert.deepEqual([stored.resumes.some((x) => x.id === 'r2'), stored.activeResumeId, stored.analysisBy.r2, stored.atsBy.j2, stored.madeFrom['atsBy:j2']], [false, 'master', undefined, undefined, undefined]);
+      assert.ok(stored.atsBy.j1 && stored.analysisBy.master, "the other resume's results are kept");
+
+      r = await u.patch('/api/workspace', removeJobPatch(stored, 'j1'));
+      assert.equal(r.status, 200, JSON.stringify(r.body));
+      stored = await ws();
+      assert.deepEqual(stored.jobs.map((j) => j.id), ['j2', 'j3', 'j4']);
+      assert.equal(stored.activeJobId, 'j2', 'the next job becomes the target');
+      for (const key of ['atsBy', 'decoderBy', 'gapBy', 'proofBy', 'tailorBy', 'priorityBy']) assert.equal(stored[key].j1, undefined, key);
+      assert.ok(stored.priorityBy.j2, 'other jobs keep their results');
+    });
   });
 
   it('prompts carry only what the task needs, plus the tone', async () => {
@@ -109,14 +189,14 @@ describe('AI tasks (fake model)', () => {
   });
 
   it('refuses over-long input instead of silently truncating', async () => {
-    await u.patch('/api/workspace', { set: { resumeText: 'x'.repeat(31_000) } });
+    await u.patch('/api/workspace', { set: { resumes: [{ id: 'master', name: 'Master resume', text: 'x'.repeat(31_000) }] } });
     const r = await run('resume-analysis');
     assert.equal(r.status, 400);
     assert.match(r.body.error.message, /longer than 30,000 characters/);
   });
 
   it('validates the short-resume case', async () => {
-    await u.patch('/api/workspace', { set: { resumeText: 'too short' } });
+    await u.patch('/api/workspace', { set: { resumes: [{ id: 'master', name: 'Master resume', text: 'too short' }] } });
     const r = await run('resume-analysis');
     assert.equal(r.status, 400);
     assert.match(r.body.error.message, /too short to analyze/);

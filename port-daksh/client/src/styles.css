@@ -212,6 +212,36 @@ details summary::-webkit-details-marker { display: none; }
 .pick[aria-pressed='true'] { border-color: var(--acc); box-shadow: 0 0 0 3px var(--acc-t); }
 .pick:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
 
+/* ───────────────────────── Resume editor ─────────────────────────
+   Plain text on the left, the same text as a page on the right (components/ResumeEditor.jsx). */
+.resume-pane { height: min(72vh, 760px); min-height: 420px; }
+textarea.resume-pane { resize: none; }
+textarea.resume-pane[readonly] { background: #fafbfc; color: var(--ink-3); }
+
+.doc-desk { background: #e9ebef; border-radius: 10px; padding: 18px; overflow: auto; }
+.doc {
+  max-width: 780px; min-height: 100%; margin: 0 auto; padding: 44px 52px;
+  background: #fff; color: #1a1a1a; outline: none;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.12), 0 8px 24px rgba(16, 24, 40, 0.06);
+  font-family: Calibri, Carlito, 'Segoe UI', Arial, sans-serif; font-size: 14.5px; line-height: 1.4;
+}
+.doc[contenteditable='true'] { cursor: text; box-shadow: 0 0 0 2px var(--acc), 0 8px 24px rgba(16, 24, 40, 0.08); }
+/* One block per line of the resume text (lib/resumeDoc.js). */
+.doc > div { white-space: pre-wrap; overflow-wrap: anywhere; }
+.doc__name { font-size: 26px; font-weight: 700; line-height: 1.2; text-align: center; }
+.doc__contact { font-size: 13px; color: #444; text-align: center; }
+.doc__section {
+  margin-top: 4px; padding-bottom: 2px; border-bottom: 1px solid #9aa3b2;
+  font-size: 13.5px; font-weight: 700; letter-spacing: 0.04em; color: #1f3864;
+}
+.doc__bullet { position: relative; padding-left: 20px; }
+.doc__bullet::before { content: '•'; position: absolute; left: 6px; }
+.doc__gap { line-height: 1; }
+@media (max-width: 560px) {
+  .doc-desk { padding: 8px; }
+  .doc { padding: 22px 18px; }
+}
+
 /* ───────────────────────── Layout helpers ───────────────────────── */
 .split { display: grid; gap: 16px; grid-template-columns: var(--cols); }
 .autogrid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 280px), 100%), 1fr)); }

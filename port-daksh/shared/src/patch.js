@@ -41,5 +41,7 @@ export function mergePatches(a, b) {
 export const isEmptyPatch = (p) => !p || (!Object.keys(p.set || {}).length && !Object.keys(p.merge || {}).length);
 
 /** Keys a client may change directly. AI-derived results are only ever written by the server. */
-export const CLIENT_SET_KEYS = ['profile', 'resumeText', 'jobs', 'activeJobId', 'versions', 'roadmap', 'bulletInput', 'safetyInput', 'apps', 'chat'];
+export const CLIENT_SET_KEYS = ['profile', 'resumes', 'activeResumeId', 'jobs', 'activeJobId', 'roadmap', 'bulletInput', 'safetyInput', 'apps', 'chat'];
 export const CLIENT_MERGE_KEYS = ['tailorBy', 'answers', 'claimTests', 'src', 'prefs'];
+/** Result maps a client may only remove entries from (when the job or resume they belong to is deleted). */
+export const CLIENT_DELETE_KEYS = ['analysisBy', 'atsBy', 'decoderBy', 'gapBy', 'proofBy', 'priorityBy', 'madeFrom'];

@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Waypoint — Career Intelligence</title>
+<link rel="stylesheet" href="_ds/organic-0267acab-0579-4a6e-a221-046053063be3/styles.css">
+<style>
+body{margin:0;background:#f5ead8}
+a{color:#8c491a}
+a:hover{color:#643312}
+textarea{font-family:inherit}
+</style>
+</helmet>
+
+<sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Landing" style="min-height:100vh;background:var(--color-bg);color:var(--color-text)">
+  <div class="nav" style="max-width:1180px;margin:0 auto;padding:22px 32px">
+    <span class="nav-brand">Waypoint</span>
+    <a href="#engines">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#faq">FAQ</a>
+    <button class="btn btn-secondary" onClick="{{ goDash }}">Log in</button>
+    <button class="btn btn-primary" onClick="{{ goOnboard }}">Sign up</button>
+  </div>
+
+  <section style="max-width:1180px;margin:0 auto;padding:72px 32px 56px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start">
+      <span class="tag tag-accent-2">15 career tools, one workspace</span>
+      <h1 style="font-size:64px;line-height:1.02;margin:0;text-wrap:balance">Your AI Career Intelligence Platform</h1>
+      <p style="font-size:19px;line-height:1.55;max-width:520px;margin:0;color:var(--color-neutral-800);text-wrap:pretty">Understand your resume. Analyze every opportunity. Close your skill gaps. Prepare for interviews. Make smarter career decisions.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn btn-primary" style="font-size:16px;padding:14px 26px" onClick="{{ goOnboard }}">Analyze My Career</button>
+        <a class="btn btn-secondary" style="font-size:16px;padding:14px 26px" href="#engines">Explore Features</a>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div style="position:absolute;width:280px;height:280px;border-radius:50%;background:var(--color-accent-2-200);right:-30px;top:-40px"></div>
+      <div style="position:absolute;width:140px;height:140px;border-radius:50%;background:var(--color-accent-200);left:-20px;bottom:-30px"></div>
+      <div class="card elev-lg" style="position:relative;padding:28px;gap:18px;background:var(--color-neutral-100)">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="card-kicker">Career readiness · example</span>
+          <span class="tag tag-neutral">Demo data</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:22px">
+          <div style="width:112px;height:112px;border-radius:50%;background:conic-gradient(var(--color-accent) 245deg,var(--color-neutral-300) 0deg);display:grid;place-items:center;flex:none">
+            <div style="width:86px;height:86px;border-radius:50%;background:var(--color-neutral-100);display:grid;place-items:center;font-family:var(--font-heading);font-size:34px">68</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-family:var(--font-heading);font-size:20px">Python Backend Developer</div>
+            <div style="font-size:14px;color:var(--color-neutral-700)">Estimate from 5 of 6 components</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--color-surface);border-radius:18px;padding:12px 14px"><div style="font-size:12px;color:var(--color-neutral-700)">Resume quality</div><div style="font-family:var(--font-heading);font-size:22px">66</div></div>
+          <div style="background:var(--color-surface);border-radius:18px;padding:12px 14px"><div style="font-size:12px;color:var(--color-neutral-700)">ATS readiness</div><div style="font-family:var(--font-heading);font-size:22px">72</div></div>
+          <div style="background:var(--color-surface);border-radius:18px;padding:12px 14px"><div style="font-size:12px;color:var(--color-neutral-700)">Skill match</div><div style="font-family:var(--font-heading);font-size:22px">64</div></div>
+          <div style="background:var(--color-surface);border-radius:18px;padding:12px 14px"><div style="font-size:12px;color:var(--color-neutral-700)">Job fit</div><div style="font-family:var(--font-heading);font-size:22px">80</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--color-neutral-800);background:var(--color-accent-100);border-radius:18px;padding:12px 14px">Next: add measurable outcomes to 4 experience bullets. Expected impact: high.</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:56px 32px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px">
+    <div>
+      <h6 style="color:var(--color-accent-700)">The problem</h6>
+      <h2 style="max-width:460px">Job searching runs on guesswork.</h2>
+      <p style="font-size:16px;color:var(--color-neutral-800);max-width:480px">Resume checkers, keyword tools, interview banks and spreadsheets each answer one question in isolation. None of them know what the others found, so you can't tell which job to apply to, what to fix first, or whether you're ready.</p>
+    </div>
+    <div>
+      <h6 style="color:var(--color-accent-2-700)">The approach</h6>
+      <h2 style="max-width:460px">One profile, read by every tool.</h2>
+      <p style="font-size:16px;color:var(--color-neutral-800);max-width:480px">Waypoint analyzes your resume once and reuses it everywhere: matching against jobs, predicting interview questions, testing your claims, and tracking which resume versions get responses. Every score shows how it was calculated.</p>
+    </div>
+  </section>
+
+  <section id="engines" style="max-width:1180px;margin:0 auto;padding:56px 32px">
+    <h6 style="color:var(--color-accent-700)">5 intelligence engines · 15 modules</h6>
+    <h2 style="margin-bottom:28px">Everything between your resume and an offer.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px">
+      <div class="card" style="padding:22px;gap:12px">
+        <span class="card-kicker">A · Resume</span>
+        <div class="card-title" style="font-size:21px">Resume Intelligence</div>
+        <div style="font-size:14px;line-height:1.75;color:var(--color-neutral-800)">Resume–Job Match Score<br>AI Resume Tailoring<br>Bullet Optimizer<br>Red-Flag Detector<br>ATS Compatibility<br>Skill-Proof Generator</div>
+      </div>
+      <div class="card" style="padding:22px;gap:12px">
+        <span class="card-kicker">B · Job</span>
+        <div class="card-title" style="font-size:21px">Job Intelligence</div>
+        <div style="font-size:14px;line-height:1.75;color:var(--color-neutral-800)">Job Description Decoder<br>Application Priority Engine<br>Scam Risk Detector</div>
+      </div>
+      <div class="card" style="padding:22px;gap:12px">
+        <span class="card-kicker">C · Skill</span>
+        <div class="card-title" style="font-size:21px">Skill Intelligence</div>
+        <div style="font-size:14px;line-height:1.75;color:var(--color-neutral-800)">Skill Gap Detector<br>Learning Roadmap</div>
+      </div>
+      <div class="card" style="padding:22px;gap:12px">
+        <span class="card-kicker">D · Interview</span>
+        <div class="card-title" style="font-size:21px">Interview Intelligence</div>
+        <div style="font-size:14px;line-height:1.75;color:var(--color-neutral-800)">JD-Based Interview Predictor<br>Resume–Interview Consistency</div>
+      </div>
+      <div class="card" style="padding:22px;gap:12px">
+        <span class="card-kicker">E · Career</span>
+        <div class="card-title" style="font-size:21px">Career Intelligence</div>
+        <div style="font-size:14px;line-height:1.75;color:var(--color-neutral-800)">Application Analytics &amp; Resume Versions<br>Job Readiness &amp; Career Score</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" style="max-width:1180px;margin:0 auto;padding:56px 32px">
+    <h6 style="color:var(--color-accent-700)">How it works</h6>
+    <h2 style="margin-bottom:28px">Four steps to a clear plan.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px">
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="width:48px;height:48px;border-radius:50%;background:var(--color-accent);color:var(--color-bg);display:grid;place-items:center;font-family:var(--font-heading);font-size:20px">1</div><div style="font-family:var(--font-heading);font-size:20px">Create your profile</div><div style="font-size:15px;color:var(--color-neutral-800)">Target role, experience, skills and goals.</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="width:48px;height:48px;border-radius:50%;background:var(--color-accent);color:var(--color-bg);display:grid;place-items:center;font-family:var(--font-heading);font-size:20px">2</div><div style="font-family:var(--font-heading);font-size:20px">Upload your resume</div><div style="font-size:15px;color:var(--color-neutral-800)">Get a health check, red flags and ATS readiness.</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="width:48px;height:48px;border-radius:50%;background:var(--color-accent-2);color:var(--color-bg);display:grid;place-items:center;font-family:var(--font-heading);font-size:20px">3</div><div style="font-family:var(--font-heading);font-size:20px">Add target jobs</div><div style="font-size:15px;color:var(--color-neutral-800)">See matched and missing requirements for each.</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="width:48px;height:48px;border-radius:50%;background:var(--color-accent-2);color:var(--color-bg);display:grid;place-items:center;font-family:var(--font-heading);font-size:20px">4</div><div style="font-family:var(--font-heading);font-size:20px">Act on the plan</div><div style="font-size:15px;color:var(--color-neutral-800)">Fix, learn, practice and apply, in priority order.</div></div>
+    </div>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:56px 32px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start">
+    <div>
+      <h6 style="color:var(--color-accent-2-700)">Trust &amp; integrity</h6>
+      <h2>Suggestions, never fabrications.</h2>
+      <p style="font-size:16px;color:var(--color-neutral-800);max-width:480px">The AI only reorganizes and clarifies what's already in your resume. It won't invent employers, metrics or certifications. Where a number would help, it tells you where to add a real one.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="card" style="padding:18px 22px;flex-direction:row;gap:14px;align-items:baseline"><span class="tag tag-accent-2">Scores</span><span style="font-size:15px">Estimates with a visible formula, not verdicts on employability.</span></div>
+      <div class="card" style="padding:18px 22px;flex-direction:row;gap:14px;align-items:baseline"><span class="tag tag-accent-2">Job safety</span><span style="font-size:15px">Risk indicators with the signals listed. Never a scam verdict.</span></div>
+      <div class="card" style="padding:18px 22px;flex-direction:row;gap:14px;align-items:baseline"><span class="tag tag-accent-2">Privacy</span><span style="font-size:15px">Only the data a task needs is sent to the model.</span></div>
+    </div>
+  </section>
+
+  <section id="faq" style="max-width:820px;padding:56px 32px;margin:0 auto 0 max(32px,calc((100vw - 1180px)/2 + 32px))">
+    <h6 style="color:var(--color-accent-700)">FAQ</h6>
+    <h2 style="margin-bottom:22px">Questions</h2>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <details class="card" style="padding:18px 22px"><summary style="cursor:pointer;font-family:var(--font-heading);font-size:18px">Will this get me interviews?</summary><p style="margin:12px 0 0;font-size:15px;color:var(--color-neutral-800)">No tool can guarantee that. Waypoint shows where your resume and a job line up, where they don't, and what to work on first.</p></details>
+      <details class="card" style="padding:18px 22px"><summary style="cursor:pointer;font-family:var(--font-heading);font-size:18px">Is the ATS score what real systems see?</summary><p style="margin:12px 0 0;font-size:15px;color:var(--color-neutral-800)">It's an AI approximation of common ATS checks: parsing, section structure and keyword coverage. Real systems vary by employer.</p></details>
+      <details class="card" style="padding:18px 22px"><summary style="cursor:pointer;font-family:var(--font-heading);font-size:18px">Which file types can I upload?</summary><p style="margin:12px 0 0;font-size:15px;color:var(--color-neutral-800)">PDF, DOCX and TXT. You can also paste plain text.</p></details>
+    </div>
+  </section>
+
+  <section style="max-width:1180px;margin:0 auto;padding:40px 32px 96px">
+    <div style="background:var(--color-accent-2-800);color:var(--color-neutral-100);border-radius:40px;padding:56px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between">
+      <h2 style="margin:0;color:var(--color-neutral-100);max-width:560px">See where you stand for your next role.</h2>
+      <button class="btn btn-primary" style="font-size:16px;padding:14px 26px" onClick="{{ goOnboard }}">Analyze My Career</button>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh;background:var(--color-bg);color:var(--color-text)">
+  <aside style="padding:14px 0 14px 14px">
+    <div style="position:sticky;top:14px;background:var(--color-surface);border-radius:28px;padding:20px 12px;display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - 28px);overflow:auto">
+      <button onClick="{{ goLanding }}" style="all:unset;cursor:pointer;font-family:var(--font-heading);font-size:22px;padding:0 10px">Waypoint</button>
+      <sc-for list="{{ nav }}" as="g" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <div style="font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--color-neutral-700);padding:4px 10px">{{ g.label }}</div>
+          <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+            <button onClick="{{ it.onClick }}" disabled="{{ it.disabled }}" style="all:unset;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:999px;font-size:14px;cursor:{{ it.cursor }};background:{{ it.bg }};color:{{ it.color }};font-weight:{{ it.weight }}">
+              <span>{{ it.label }}</span>
+              <sc-if value="{{ it.disabled }}" hint-placeholder-val="{{ false }}"><span style="font-size:10px;color:var(--color-neutral-600)">later</span></sc-if>
+            </button>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </aside>
+
+  <main style="padding:28px 40px 72px;min-width:0">
+    <div style="display:flex;align-items:flex-end;gap:14px;margin-bottom:26px">
+      <div style="margin-right:auto;min-width:0;display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:13px;color:var(--color-neutral-700)">{{ crumb }}</div>
+        <h1 style="font-size:34px;margin:0">{{ pageTitle }}</h1>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <sc-if value="{{ anyDemo }}" hint-placeholder-val="{{ false }}">
+            <span class="tag tag-neutral" style="font-size:12px">Showing demo data · run an analysis to replace it</span>
+          </sc-if>
+          <button class="btn btn-ghost" style="font-size:13px;padding:4px 10px" onClick="{{ resetDemo }}">Reset to demo</button>
+        </div>
+      </div>
+      <div title="{{ profile.name }}" style="display:flex;align-items:center;gap:10px;background:var(--color-surface);border-radius:999px;padding:5px;flex:none">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--color-accent-2-300);color:var(--color-accent-2-900);display:grid;place-items:center;font-weight:700;font-size:13px">{{ initials }}</div>
+      </div>
+    </div>
+
+    <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:14px;background:var(--color-accent-100);color:var(--color-accent-900);border-radius:22px;padding:14px 18px;margin-bottom:20px">
+        <span style="flex:1;font-size:14px">{{ error.message }}</span>
+        <sc-if value="{{ error.canRetry }}" hint-placeholder-val="{{ false }}"><button class="btn btn-primary" onClick="{{ retry }}">Retry</button></sc-if>
+        <button class="btn btn-ghost" onClick="{{ dismissError }}">Dismiss</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}">
+      <div class="card elev-md" style="padding:20px 24px;margin-bottom:22px;background:var(--color-neutral-100);gap:10px">
+        <div style="font-family:var(--font-heading);font-size:18px">{{ loadingTitle }}</div>
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+          <div style="display:flex;gap:10px;align-items:center;font-size:14px;color:{{ st.color }}">
+            <span style="width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;background:{{ st.dotBg }};color:{{ st.dotColor }}">{{ st.glyph }}</span>
+            <span>{{ st.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- ONBOARDING -->
+    <sc-if value="{{ isOnboard }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Onboarding" style="display:flex;flex-direction:column;gap:22px;max-width:920px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <sc-for list="{{ obSteps }}" as="o" hint-placeholder-count="3">
+          <button onClick="{{ o.onClick }}" style="all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:8px 16px 8px 8px;border-radius:999px;background:{{ o.bg }};color:{{ o.color }}">
+            <span style="width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;background:{{ o.dotBg }};color:{{ o.dotColor }}">{{ o.n }}</span>
+            <span style="font-size:14px">{{ o.label }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ ob1 }}" hint-placeholder-val="{{ false }}">
+      <div class="card" style="padding:28px;gap:18px">
+        <div><div class="card-title" style="font-size:22px">Your profile</div><div style="font-size:14px;color:var(--color-neutral-700)">Used as context for every analysis. Only what a task needs is sent to the model.</div></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+          <div class="field"><label>Name</label><input class="input" value="{{ profile.name }}" onChange="{{ on.name }}"></div>
+          <div class="field"><label>Target role</label><input class="input" value="{{ profile.role }}" onChange="{{ on.role }}"></div>
+          <div class="field"><label>Career level</label>
+            <select class="input" value="{{ profile.level }}" onChange="{{ on.level }}"><sc-for list="{{ levelOpts }}" as="lo" hint-placeholder-count="5"><option value="{{ lo.v }}" selected="{{ lo.sel }}">{{ lo.v }}</option></sc-for></select>
+          </div>
+          <div class="field"><label>Years of experience</label><input class="input" value="{{ profile.years }}" onChange="{{ on.years }}"></div>
+          <div class="field"><label>Location</label><input class="input" value="{{ profile.location }}" onChange="{{ on.location }}"></div>
+          <div class="field"><label>Key skills</label><input class="input" value="{{ profile.skills }}" onChange="{{ on.skills }}"></div>
+        </div>
+        <div class="field"><label>Career goals</label><textarea class="input" style="border-radius:22px;min-height:80px" value="{{ profile.goals }}" onChange="{{ on.goals }}"></textarea></div>
+        <div><button class="btn btn-primary" onClick="{{ toOb2 }}">Continue to resume</button></div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ ob2 }}" hint-placeholder-val="{{ false }}">
+      <div class="card" style="padding:28px;gap:16px">
+        <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-end">
+          <div><div class="card-title" style="font-size:22px">Master resume</div><div style="font-size:14px;color:var(--color-neutral-700)">Paste your resume text, or upload a .txt file.</div></div>
+          <label class="btn btn-secondary" style="cursor:pointer">Upload file<input type="file" accept=".txt,.md,.pdf,.docx" onChange="{{ onFile }}" style="display:none"></label>
+        </div>
+        <textarea class="input" style="border-radius:22px;min-height:340px;font-size:13.5px;line-height:1.6;padding:16px 18px" value="{{ resumeText }}" onChange="{{ onResumeText }}"></textarea>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn-primary" onClick="{{ runAnalysisOb }}" disabled="{{ busy }}">Analyze resume</button>
+          <span style="font-size:13px;color:var(--color-neutral-700)">{{ resumeStats }}</span>
+        </div>
+      </div>
+      <sc-if value="{{ hasAnalysis }}" hint-placeholder-val="{{ false }}">
+        <div class="card" style="padding:24px;gap:16px;background:var(--color-neutral-100)">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <div class="card-title" style="font-size:20px">Resume health</div>
+            <span class="tag {{ analysisTag }}">{{ analysisSourceLabel }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px">
+            <sc-for list="{{ healthCards }}" as="h" hint-placeholder-count="6">
+              <div style="background:var(--color-surface);border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+                <div style="font-size:12px;color:var(--color-neutral-700)">{{ h.label }}</div>
+                <div style="font-family:var(--font-heading);font-size:26px">{{ h.value }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn btn-primary" onClick="{{ toOb3 }}">Add a target job</button><button class="btn btn-secondary" onClick="{{ goResume }}">Open full analysis</button></div>
+        </div>
+      </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ ob3 }}" hint-placeholder-val="{{ false }}">
+      <div class="card" style="padding:28px;gap:16px">
+        <div><div class="card-title" style="font-size:22px">Target job</div><div style="font-size:14px;color:var(--color-neutral-700)">Paste the full job description. It's used for ATS, skill match and interview prediction.</div></div>
+        <textarea class="input" style="border-radius:22px;min-height:300px;font-size:13.5px;line-height:1.6;padding:16px 18px" value="{{ jdText }}" onChange="{{ onJdText }}"></textarea>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btn-primary" onClick="{{ runAtsOb }}" disabled="{{ busy }}">Analyze against this job</button>
+          <button class="btn btn-secondary" onClick="{{ goDash }}">Go to dashboard</button>
+        </div>
+      </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- DASHBOARD -->
+    <sc-if value="{{ isDash }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Dashboard" style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px">
+        <div class="card" style="padding:28px;gap:20px">
+          <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><span class="card-kicker" style="color:var(--color-accent-700)">Career readiness</span><span style="font-size:12px;color:var(--color-neutral-700)">An estimate, not a measure of employability</span></div>
+          <div style="display:flex;gap:26px;align-items:center;flex-wrap:wrap">
+            <div style="width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--color-accent) {{ readinessDeg }}deg, var(--color-neutral-300) 0deg);display:grid;place-items:center;flex:none">
+              <div style="width:118px;height:118px;border-radius:50%;background:var(--color-surface);display:flex;flex-direction:column;align-items:center;justify-content:center">
+                <span style="font-family:var(--font-heading);font-size:46px;line-height:1">{{ readiness }}</span>
+                <span style="font-size:12px;color:var(--color-neutral-700)">/ 100</span>
+              </div>
+            </div>
+            <div style="flex:1;min-width:220px;display:flex;flex-direction:column;gap:8px">
+              <div style="font-family:var(--font-heading);font-size:22px">{{ profile.role }}</div>
+              <p style="font-size:14px;color:var(--color-neutral-800);margin:0;text-wrap:pretty">{{ formulaText }}</p>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
+            <sc-for list="{{ components }}" as="c" hint-placeholder-count="6">
+              <div style="background:var(--color-neutral-100);border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--color-neutral-700)"><span>{{ c.label }}</span><span>{{ c.weightText }}</span></div>
+                <div style="font-family:var(--font-heading);font-size:26px;line-height:1">{{ c.valueText }}</div>
+                <div style="height:6px;border-radius:99px;background:var(--color-neutral-300)"><div style="height:6px;border-radius:99px;background:var(--color-accent-2-600);width:{{ c.bar }}%"></div></div>
+                <div style="font-size:12px;color:var(--color-neutral-700)">{{ c.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div class="card" style="padding:28px;gap:14px">
+          <span class="card-kicker" style="color:var(--color-accent-700)">Recommended actions</span>
+          <sc-if value="{{ hasActions }}" hint-placeholder-val="{{ true }}">
+          <sc-for list="{{ actions }}" as="ac" hint-placeholder-count="4">
+            <div style="background:var(--color-neutral-100);border-radius:22px;padding:16px 18px;display:flex;gap:14px">
+              <div style="width:30px;height:30px;border-radius:50%;background:var(--color-accent);color:var(--color-bg);display:grid;place-items:center;font-family:var(--font-heading);flex:none">{{ ac.n }}</div>
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <div style="font-weight:700;font-size:15px">{{ ac.title }}</div>
+                <div style="font-size:13.5px;color:var(--color-neutral-800)"><b>Why:</b> {{ ac.why }}</div>
+                <div style="font-size:13.5px;color:var(--color-neutral-800)"><b>Do:</b> {{ ac.action }}</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="tag tag-accent">{{ ac.impactLabel }}</span><span class="tag tag-accent-2">{{ ac.module }}</span></div>
+              </div>
+            </div>
+          </sc-for>
+          </sc-if>
+          <sc-if value="{{ noActions }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:14px;color:var(--color-neutral-700)">Analyze a resume to get recommendations.</div>
+            <div><button class="btn btn-primary" onClick="{{ goOnboard }}">Upload resume</button></div>
+          </sc-if>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px">
+        <div class="card" style="padding:24px;gap:14px">
+          <span class="card-kicker" style="color:var(--color-accent-700)">Target career</span>
+          <div style="font-family:var(--font-heading);font-size:22px">{{ profile.role }}</div>
+          <div style="font-size:13px;color:var(--color-neutral-700)">{{ targetJobLabel }}</div>
+          <div style="font-size:12px;font-weight:700">Required skills you show</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ matched }}" as="m" hint-placeholder-count="6"><span class="tag tag-accent-2">{{ m }}</span></sc-for></div>
+          <div style="font-size:12px;font-weight:700">Missing from your resume</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ missing }}" as="m" hint-placeholder-count="6"><span class="tag tag-accent">{{ m }}</span></sc-for></div>
+        </div>
+        <div class="card" style="padding:24px;gap:14px">
+          <span class="card-kicker" style="color:var(--color-accent-700)">Skill progress</span>
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+            <sc-for list="{{ skillBuckets }}" as="b" hint-placeholder-count="4">
+              <div style="background:var(--color-neutral-100);border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:700;font-size:14px">{{ b.label }}</span><span style="width:22px;height:22px;border-radius:50%;background:{{ b.color }};color:var(--color-neutral-100);font-size:11px;display:grid;place-items:center">{{ b.count }}</span></div>
+                <div style="font-size:13px;color:var(--color-neutral-800);line-height:1.5">{{ b.list }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div class="card" style="padding:24px;gap:12px">
+          <span class="card-kicker" style="color:var(--color-accent-700)">Strengths &amp; blockers</span>
+          <div style="font-size:12px;font-weight:700">Strengths</div>
+          <sc-for list="{{ strengths }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px;display:flex;gap:8px"><span style="color:var(--color-accent-2-700)">●</span><span>{{ x }}</span></div></sc-for>
+          <div style="font-size:12px;font-weight:700;margin-top:6px">Biggest blockers</div>
+          <sc-for list="{{ blockers }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px;display:flex;gap:8px"><span style="color:var(--color-accent-600)">●</span><span>{{ x }}</span></div></sc-for>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- RESUME ANALYZER -->
+    <sc-if value="{{ isResume }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Resume Analyzer" style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div style="display:flex;gap:4px;background:var(--color-surface);border-radius:999px;padding:4px">
+          <sc-for list="{{ resumeTabs }}" as="tb" hint-placeholder-count="3">
+            <button onClick="{{ tb.onClick }}" style="all:unset;cursor:pointer;padding:8px 18px;border-radius:999px;font-size:14px;background:{{ tb.bg }};color:{{ tb.color }}">{{ tb.label }}</button>
+          </sc-for>
+        </div>
+        <span class="tag {{ analysisTag }}">{{ analysisSourceLabel }}</span>
+        <span style="margin-left:auto"></span>
+        <button class="btn btn-secondary" onClick="{{ goOnboard2 }}">Edit resume text</button>
+        <button class="btn btn-primary" onClick="{{ runAnalysis }}" disabled="{{ busy }}">Re-analyze</button>
+      </div>
+
+      <sc-if value="{{ tabHealth }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:20px">
+          <div class="card" style="padding:26px;gap:14px">
+            <span class="card-kicker" style="color:var(--color-accent-700)">Resume score</span>
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--font-heading);font-size:72px;line-height:1">{{ a.scores.overall }}</span><span style="color:var(--color-neutral-700)">/ 100 estimate</span></div>
+            <p style="font-size:15px;margin:0;color:var(--color-neutral-800);text-wrap:pretty">{{ a.summary }}</p>
+            <div style="font-size:12px;font-weight:700;margin-top:6px">What's working</div>
+            <sc-for list="{{ strengths }}" as="x" hint-placeholder-count="3"><div style="font-size:14px;display:flex;gap:8px"><span style="color:var(--color-accent-2-700)">●</span><span>{{ x }}</span></div></sc-for>
+          </div>
+          <div class="card" style="padding:26px;gap:14px">
+            <span class="card-kicker" style="color:var(--color-accent-700)">Breakdown</span>
+            <sc-for list="{{ healthBars }}" as="h" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:160px minmax(0,1fr) 44px;gap:14px;align-items:center">
+                <span style="font-size:14px">{{ h.label }}</span>
+                <div style="height:10px;border-radius:99px;background:var(--color-neutral-300)"><div style="height:10px;border-radius:99px;background:{{ h.color }};width:{{ h.bar }}%"></div></div>
+                <span style="font-family:var(--font-heading);font-size:18px;text-align:right">{{ h.value }}</span>
+              </div>
+            </sc-for>
+            <div style="font-size:12px;color:var(--color-neutral-700);margin-top:4px">Red flags counts issues, not a score: {{ flagCountText }}.</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabFlags }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <sc-for list="{{ flagGroups }}" as="fg" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:10px"><h3 style="margin:0;font-size:22px">{{ fg.label }}</h3><span class="tag {{ fg.tagClass }}">{{ fg.count }}</span></div>
+              <sc-for list="{{ fg.items }}" as="f" hint-placeholder-count="2">
+                <div class="card" style="padding:20px 22px;gap:12px">
+                  <div style="font-weight:700;font-size:16px">{{ f.title }}</div>
+                  <div style="font-size:13.5px;background:var(--color-neutral-100);border-radius:14px;padding:8px 12px;font-family:ui-monospace,Menlo,monospace;color:var(--color-neutral-800)">“{{ f.quote }}”</div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;font-size:13.5px">
+                    <div><div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);margin-bottom:4px">Problem</div>{{ f.problem }}</div>
+                    <div><div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);margin-bottom:4px">Why it matters</div>{{ f.why }}</div>
+                    <div><div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-2-700);margin-bottom:4px">How to fix</div>{{ f.fix }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabAts }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div style="font-size:13px;color:var(--color-accent-900);background:var(--color-accent-100);border-radius:18px;padding:10px 16px">This is an AI approximation of common ATS checks. It doesn't reproduce any specific employer's system and isn't a guarantee of passing one.</div>
+          <sc-if value="{{ hasAts }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:20px">
+            <div class="card" style="padding:26px;gap:14px">
+              <div style="display:flex;justify-content:space-between;gap:10px"><span class="card-kicker" style="color:var(--color-accent-700)">ATS readiness</span><span class="tag {{ atsTag }}">{{ atsSourceLabel }}</span></div>
+              <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--font-heading);font-size:72px;line-height:1">{{ t.score }}</span><span style="color:var(--color-neutral-700)">/ 100</span></div>
+              <div style="font-size:13px;color:var(--color-neutral-700)">{{ targetJobLabel }}</div>
+              <p style="font-size:14.5px;margin:0;color:var(--color-neutral-800)">{{ t.summary }}</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div style="background:var(--color-neutral-100);border-radius:18px;padding:12px 14px"><div style="font-size:12px;color:var(--color-neutral-700)">Keyword coverage</div><div style="font-family:var(--font-heading);font-size:24px">{{ t.keywordCoverage }}%</div></div>
+                <div style="background:var(--color-neutral-100);border-radius:18px;padding:12px 14px"><div style="font-size:12px;color:var(--color-neutral-700)">Job fit</div><div style="font-family:var(--font-heading);font-size:24px">{{ t.jobFit }}</div></div>
+              </div>
+              <div style="font-size:13px"><b>Title alignment:</b> {{ t.titleAlignment }}</div>
+            </div>
+            <div class="card" style="padding:26px;gap:12px">
+              <span class="card-kicker" style="color:var(--color-accent-700)">Checks</span>
+              <sc-for list="{{ atsChecks }}" as="ck" hint-placeholder-count="6">
+                <div style="display:flex;gap:12px;align-items:flex-start;background:var(--color-neutral-100);border-radius:18px;padding:12px 14px">
+                  <span class="tag {{ ck.tagClass }}" style="flex:none;min-width:52px;justify-content:center">{{ ck.statusLabel }}</span>
+                  <div style="font-size:13.5px"><div style="font-weight:700">{{ ck.label }}</div><div style="color:var(--color-neutral-800)">{{ ck.note }}</div></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+            <div class="card" style="padding:22px;gap:10px"><span class="card-kicker" style="color:var(--color-accent-2-700)">Keywords found</span><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ matched }}" as="m" hint-placeholder-count="6"><span class="tag tag-accent-2">{{ m }}</span></sc-for></div></div>
+            <div class="card" style="padding:22px;gap:10px"><span class="card-kicker" style="color:var(--color-accent-700)">Keywords missing</span><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ missing }}" as="m" hint-placeholder-count="6"><span class="tag tag-accent">{{ m }}</span></sc-for></div><div style="font-size:12px;color:var(--color-neutral-700)">Only add these if they reflect work you've actually done.</div></div>
+          </div>
+          </sc-if>
+          <div class="card" style="padding:24px;gap:12px">
+            <div class="card-title">Job description</div>
+            <textarea class="input" style="border-radius:22px;min-height:180px;font-size:13.5px;line-height:1.6;padding:14px 16px" value="{{ jdText }}" onChange="{{ onJdText }}"></textarea>
+            <div><button class="btn btn-primary" onClick="{{ runAts }}" disabled="{{ busy }}">Run ATS analysis</button></div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- INTERVIEW CENTER -->
+    <sc-if value="{{ isInterview }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Interview Center" style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div style="display:flex;gap:4px;background:var(--color-surface);border-radius:999px;padding:4px">
+          <sc-for list="{{ ivTabs }}" as="tb" hint-placeholder-count="2">
+            <button onClick="{{ tb.onClick }}" style="all:unset;cursor:pointer;padding:8px 18px;border-radius:999px;font-size:14px;background:{{ tb.bg }};color:{{ tb.color }}">{{ tb.label }}</button>
+          </sc-for>
+        </div>
+        <span style="font-size:13px;color:var(--color-neutral-700)">{{ practiceStats }}</span>
+        <span style="margin-left:auto"></span>
+        <sc-if value="{{ tabPractice }}" hint-placeholder-val="{{ true }}">
+          <span class="tag {{ qTag }}">{{ qSourceLabel }}</span>
+          <button class="btn btn-primary" onClick="{{ runQuestions }}" disabled="{{ busy }}">Predict questions from resume + JD</button>
+        </sc-if>
+      </div>
+
+      <sc-if value="{{ tabPractice }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.3fr);gap:20px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ qFilters }}" as="qf" hint-placeholder-count="7">
+              <button onClick="{{ qf.onClick }}" style="all:unset;cursor:pointer;padding:5px 12px;border-radius:999px;font-size:12.5px;background:{{ qf.bg }};color:{{ qf.color }}">{{ qf.label }}</button>
+            </sc-for>
+          </div>
+          <sc-for list="{{ qList }}" as="q" hint-placeholder-count="6">
+            <button onClick="{{ q.onClick }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:16px 18px;border-radius:22px;background:{{ q.bg }};box-shadow:{{ q.shadow }}">
+              <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="tag tag-neutral">{{ q.category }}</span><span style="font-size:12px;color:var(--color-neutral-700)">{{ q.difficulty }}</span><span style="margin-left:auto;font-size:12px;color:var(--color-accent-2-700);font-weight:700">{{ q.scoreText }}</span></div>
+              <div style="font-size:14.5px;line-height:1.45">{{ q.question }}</div>
+            </button>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ sel }}" hint-placeholder-val="{{ true }}">
+        <div class="card" style="padding:26px;gap:16px;position:sticky;top:20px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="tag tag-accent">{{ sel.category }}</span><span class="tag tag-neutral">{{ sel.difficulty }}</span></div>
+          <div style="font-family:var(--font-heading);font-size:22px;line-height:1.25">{{ sel.question }}</div>
+          <div style="font-size:13.5px;color:var(--color-neutral-800)"><b>Why they may ask:</b> {{ sel.why }}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+            <div style="background:var(--color-neutral-100);border-radius:18px;padding:14px"><div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);margin-bottom:6px">Expected answer areas</div><sc-for list="{{ sel.expect }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px">· {{ x }}</div></sc-for></div>
+            <div style="background:var(--color-neutral-100);border-radius:18px;padding:14px"><div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);margin-bottom:6px">Likely follow-ups</div><sc-for list="{{ sel.followups }}" as="x" hint-placeholder-count="2"><div style="font-size:13.5px">· {{ x }}</div></sc-for></div>
+          </div>
+          <div class="field"><label>Your answer</label><textarea class="input" style="border-radius:22px;min-height:150px;padding:14px 16px" placeholder="Answer as you would out loud. Specifics from your own work score better than definitions." value="{{ sel.answer }}" onChange="{{ sel.onAnswer }}"></textarea></div>
+          <div><button class="btn btn-primary" onClick="{{ sel.evaluate }}" disabled="{{ sel.cantEval }}">Evaluate answer</button></div>
+          <sc-if value="{{ sel.ev }}" hint-placeholder-val="{{ false }}">
+            <div style="background:var(--color-neutral-100);border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-family:var(--font-heading);font-size:36px;line-height:1">{{ sel.ev.score }}</span><span style="font-size:13px;color:var(--color-neutral-700)">/ 100 answer strength (estimate)</span><span class="tag {{ sel.ev.credClass }}" style="margin-left:auto">{{ sel.ev.credLabel }}</span></div>
+              <div style="font-size:14px">{{ sel.ev.summary }}</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;font-size:13.5px">
+                <div><div style="font-weight:700;color:var(--color-accent-2-700);margin-bottom:4px">Covered</div><sc-for list="{{ sel.ev.covered }}" as="x" hint-placeholder-count="2"><div>· {{ x }}</div></sc-for></div>
+                <div><div style="font-weight:700;color:var(--color-accent-700);margin-bottom:4px">Missing</div><sc-for list="{{ sel.ev.missing }}" as="x" hint-placeholder-count="2"><div>· {{ x }}</div></sc-for></div>
+              </div>
+              <div style="font-size:13.5px;color:var(--color-neutral-800)">{{ sel.ev.credibilityNote }}</div>
+              <div style="font-size:13.5px"><b>Stronger structure:</b> {{ sel.ev.betterAnswer }}</div>
+            </div>
+          </sc-if>
+        </div>
+        </sc-if>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ tabConsistency }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <p style="font-size:14px;color:var(--color-neutral-800);max-width:720px;margin:0">Each claim on your resume implies a level of knowledge. Pick one, answer a probing question, and see whether your answer currently supports it. This measures the answer, not your honesty.</p>
+        <div style="display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.3fr);gap:20px;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ claims }}" as="cl" hint-placeholder-count="4">
+              <button onClick="{{ cl.onClick }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:16px 18px;border-radius:22px;background:{{ cl.bg }};box-shadow:{{ cl.shadow }}">
+                <div style="font-weight:700;font-size:15px">“{{ cl.claim }}”</div>
+                <div style="font-size:13px;color:var(--color-neutral-700)">Evidence on resume: {{ cl.evidence }}</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag {{ cl.priorClass }}">{{ cl.priorLabel }}</span><sc-if value="{{ cl.tested }}" hint-placeholder-val="{{ false }}"><span class="tag {{ cl.resultClass }}">{{ cl.resultLabel }}</span></sc-if></div>
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ csel }}" hint-placeholder-val="{{ false }}">
+          <div class="card" style="padding:26px;gap:16px;position:sticky;top:20px">
+            <span class="card-kicker" style="color:var(--color-accent-700)">Testing claim</span>
+            <div style="font-family:var(--font-heading);font-size:22px">“{{ csel.claim }}”</div>
+            <sc-if value="{{ csel.noQuestion }}" hint-placeholder-val="{{ false }}">
+              <div><button class="btn btn-primary" onClick="{{ csel.generate }}" disabled="{{ busy }}">Generate a probing question</button></div>
+            </sc-if>
+            <sc-if value="{{ csel.question }}" hint-placeholder-val="{{ false }}">
+              <div style="background:var(--color-neutral-100);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:6px"><div style="font-size:15px;font-weight:700">{{ csel.question }}</div><div style="font-size:13px;color:var(--color-neutral-700)">Tests: {{ csel.testing }}</div></div>
+              <div class="field"><label>Your answer</label><textarea class="input" style="border-radius:22px;min-height:150px;padding:14px 16px" value="{{ csel.answer }}" onChange="{{ csel.onAnswer }}"></textarea></div>
+              <div><button class="btn btn-primary" onClick="{{ csel.evaluate }}" disabled="{{ csel.cantEval }}">Check consistency</button></div>
+            </sc-if>
+            <sc-if value="{{ csel.ev }}" hint-placeholder-val="{{ false }}">
+              <div style="background:var(--color-neutral-100);border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:10px">
+                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span style="font-family:var(--font-heading);font-size:22px">Credibility risk</span><span class="tag {{ csel.ev.credClass }}" style="font-size:13px">{{ csel.ev.credibility }}</span></div>
+                <div style="font-size:14px">{{ csel.ev.credibilityNote }}</div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;font-size:13.5px">
+                  <div><div style="font-weight:700;color:var(--color-accent-2-700);margin-bottom:4px">Demonstrated</div><sc-for list="{{ csel.ev.covered }}" as="x" hint-placeholder-count="2"><div>· {{ x }}</div></sc-for></div>
+                  <div><div style="font-weight:700;color:var(--color-accent-700);margin-bottom:4px">Not yet shown</div><sc-for list="{{ csel.ev.missing }}" as="x" hint-placeholder-count="2"><div>· {{ x }}</div></sc-for></div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          </sc-if>
+        </div>
+      </div>
+      </sc-if>
+    </div>
+    </sc-if>
+  </main>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem('waypoint-v1')); } catch (e) {}
+    this.state = Object.assign(this.demo(), saved || {}, { loading: null, stepIdx: 0, error: null });
+  }
+
+  demo() {
+    return {
+      screen: 'landing', obStep: 1, resumeTab: 'health', ivTab: 'practice', qFilter: 'All', selQ: 0, selClaim: 0,
+      profile: { name: 'Aarav Mehta', role: 'Python Backend Developer', level: 'Junior', years: '1', location: 'Pune, India', skills: 'Python, Django, REST APIs, PostgreSQL, Git', goals: 'Move into a backend role at a product company within 3 months, ideally fintech or B2B SaaS.' },
+      resumeText: `Aarav Mehta
+Pune, India · aarav.mehta@email.com · github.com/aaravm
+
+SUMMARY
+Backend developer with 1 year of experience building REST APIs in Python and Django. Passionate team player who loves learning new technologies.
+
+EXPERIENCE
+Junior Software Engineer — Kitebyte Solutions, Pune (Jul 2025 – Present)
+- Worked on APIs for the order management module using Django REST Framework.
+- Responsible for writing unit tests.
+- Helped migrate reporting queries from MySQL to PostgreSQL.
+- Participated in code reviews and daily standups.
+
+Software Engineering Intern — Kitebyte Solutions, Pune (Jan 2025 – Jun 2025)
+- Built an internal admin dashboard with Django templates.
+- Fixed bugs reported by QA team.
+
+PROJECTS
+Expense Splitter API — FastAPI, PostgreSQL, Docker. REST API for splitting group expenses with JWT auth.
+Campus Notice Bot — Python, Telegram Bot API. Posts college notices to a Telegram channel.
+
+EDUCATION
+B.E. Computer Engineering — Savitribai Phule Pune University, 2025. CGPA 8.1
+
+SKILLS
+Python (Advanced), Django, Django REST Framework, FastAPI, PostgreSQL, MySQL, Git, Docker, Linux, HTML, CSS, Microservices, Kubernetes, Machine Learning
+
+CERTIFICATIONS
+Python for Everybody — Coursera (2023)`,
+      jdText: `Backend Developer (Python) — Ledgerline, Bengaluru (Hybrid)
+
+Ledgerline builds reconciliation software for finance teams at mid-size companies. Our backend matches millions of bank and ledger transactions every day.
+
+What you'll do
+- Design and maintain REST APIs for the reconciliation engine
+- Write tests and keep coverage healthy
+- Find and fix slow PostgreSQL queries
+- Join a light on-call rotation after onboarding
+- Work closely with product and support on customer issues
+
+Requirements
+- 1–3 years building production backend services in Python
+- Strong Django or FastAPI experience
+- PostgreSQL, including query optimization and indexing
+- REST API design: authentication, pagination, versioning
+- Testing with pytest
+- Git and code review habits
+
+Nice to have
+- Celery / Redis for background jobs
+- Docker and CI/CD (GitHub Actions)
+- AWS
+- Payments or fintech exposure`,
+      analysisSource: 'demo',
+      analysis: {
+        summary: 'A solid foundation for a junior backend role: Python and Django experience is recent and real. Most bullets describe duties rather than results, and several listed skills have no supporting evidence.',
+        scores: { overall: 66, ats: 74, skills: 71, content: 58, achievements: 34, proof: 52 },
+        strengths: ['Recent production experience with Python, Django and DRF', 'MySQL → PostgreSQL migration maps to common backend requirements', 'Two personal projects on a modern stack (FastAPI, Docker)'],
+        redFlags: [
+          { severity: 'critical', title: 'Skills listed without any evidence', quote: 'Microservices, Kubernetes, Machine Learning', problem: 'These appear only in the skills list. No role or project mentions them.', why: 'Interviewers probe listed skills. Unsupported ones invite questions you may not be able to answer.', fix: 'Remove them, or move them to a "Currently learning" line until you have work to point to.' },
+          { severity: 'critical', title: 'No measurable outcomes anywhere', quote: 'Worked on APIs for the order management module', problem: 'None of the six experience bullets include a number, scale or result.', why: 'Recruiters use outcomes to judge scope. Without them, a year of work reads like a list of tasks.', fix: 'Add real figures you know: number of endpoints, requests per day, test coverage, query time before and after.' },
+          { severity: 'warning', title: 'Weak, passive verbs', quote: 'Responsible for writing unit tests', problem: '"Responsible for", "Helped", "Participated in" hide what you did yourself.', why: 'Ownership is a key signal for junior candidates.', fix: 'Lead with what you did: "Wrote unit tests for…", "Migrated 12 reporting queries…".' },
+          { severity: 'warning', title: 'Generic summary', quote: 'Passionate team player who loves learning new technologies.', problem: 'This sentence could describe any candidate.', why: 'The summary is the most-read section. Generic phrases spend that attention.', fix: 'Name your stack and the kind of systems you want to build.' },
+          { severity: 'warning', title: '"Advanced" Python self-rating', quote: 'Python (Advanced)', problem: 'One year of professional experience paired with an advanced rating.', why: 'Self-ratings set a bar the interview will test against.', fix: 'Drop the rating and let your projects show depth.' },
+          { severity: 'improvement', title: 'Projects lack scope', quote: 'Expense Splitter API — FastAPI, PostgreSQL, Docker.', problem: 'No detail on features, testing or deployment.', why: 'Projects are your main proof for skills not used at work.', fix: 'Add what it handles, how it is tested, and a repository link.' },
+          { severity: 'improvement', title: 'Low-signal intern bullet', quote: 'Fixed bugs reported by QA team.', problem: 'Describes routine work without context.', why: 'Takes space that could show something specific.', fix: 'Describe one notable fix, or merge it into another bullet.' }
+        ],
+        skillLevels: [{ skill: 'Python', level: 'strong' }, { skill: 'Django', level: 'strong' }, { skill: 'Django REST Framework', level: 'strong' }, { skill: 'PostgreSQL', level: 'intermediate' }, { skill: 'FastAPI', level: 'intermediate' }, { skill: 'Git', level: 'intermediate' }, { skill: 'Docker', level: 'weak' }, { skill: 'Microservices', level: 'weak' }, { skill: 'Kubernetes', level: 'weak' }, { skill: 'Machine Learning', level: 'weak' }],
+        claims: [
+          { claim: 'Python (Advanced)', evidence: '1 year of Django work and two projects', risk: 'Medium' },
+          { claim: 'Microservices', evidence: 'None found', risk: 'High' },
+          { claim: 'Helped migrate reporting queries from MySQL to PostgreSQL', evidence: 'Experience bullet at Kitebyte', risk: 'Low' },
+          { claim: 'Docker', evidence: 'Listed on the Expense Splitter API project', risk: 'Medium' }
+        ],
+        actions: [
+          { title: 'Add measurable outcomes to your Kitebyte bullets', why: 'Achievement strength is your lowest component (34).', action: 'Rewrite four bullets with a real number each: endpoints, volume, coverage or speed.', impact: 'High', module: 'Resume Analyzer' },
+          { title: 'Remove or substantiate Kubernetes, Microservices, ML', why: 'Unsupported claims carry high credibility risk in interviews.', action: 'Drop them, or link a project that uses them.', impact: 'High', module: 'Interview Center' },
+          { title: 'Practice PostgreSQL query-optimization questions', why: 'Indexing and query tuning are required in your target JD; your resume shows only a migration.', action: 'Answer the predicted PostgreSQL questions and review EXPLAIN ANALYZE output.', impact: 'Medium', module: 'Interview Center' },
+          { title: 'Add pytest and CI to Expense Splitter API', why: 'pytest and CI/CD are listed in the JD and missing from your resume.', action: 'Add a test suite and a GitHub Actions workflow, then mention both.', impact: 'Medium', module: 'Skill Gap' }
+        ]
+      },
+      atsSource: 'demo',
+      ats: {
+        role: 'Backend Developer (Python)', company: 'Ledgerline', score: 72, keywordCoverage: 64, jobFit: 80,
+        titleAlignment: '"Junior Software Engineer" is close to "Backend Developer" but doesn\'t contain the word backend.',
+        summary: 'Your resume parses cleanly and covers the core stack. Coverage drops on testing, query optimization and infrastructure keywords.',
+        matched: ['Python', 'Django', 'FastAPI', 'PostgreSQL', 'REST API', 'Git', 'Code review', 'Docker'],
+        missing: ['pytest', 'Query optimization', 'Indexing', 'Pagination', 'Celery', 'Redis', 'CI/CD', 'AWS'],
+        checks: [
+          { label: 'Standard section headings', status: 'pass', note: 'Summary, Experience, Projects, Education and Skills are all recognisable.' },
+          { label: 'Single-column plain text', status: 'pass', note: 'No tables or columns that commonly break parsers.' },
+          { label: 'Contact details', status: 'pass', note: 'Email and location are on the first lines.' },
+          { label: 'Job title alignment', status: 'risk', note: 'No title contains "Backend". Consider "Junior Software Engineer (Backend)" if accurate.' },
+          { label: 'Required keyword coverage', status: 'risk', note: '"unit tests" may not match a search for "pytest".' },
+          { label: 'Date formatting', status: 'pass', note: 'Consistent month–year ranges.' }
+        ]
+      },
+      qSource: 'demo',
+      questions: [
+        { category: 'Technical', question: 'A reconciliation query on a 50M-row transactions table has become slow. How would you investigate and fix it?', difficulty: 'Hard', why: 'The JD lists query optimization and indexing as requirements.', expect: ['Reading EXPLAIN ANALYZE output', 'Choosing composite or partial indexes', 'Trade-offs on write performance'], followups: ['When would an index make things worse?', 'How would you test the fix safely?'] },
+        { category: 'Technical', question: 'How would you design pagination for an API that returns millions of transactions?', difficulty: 'Medium', why: 'Pagination is named under REST API design.', expect: ['Offset vs cursor pagination', 'Stable ordering', 'Performance at deep pages'], followups: ['How do you handle rows inserted mid-scroll?'] },
+        { category: 'Resume', question: 'You list Python as Advanced. What is something in Python you understand that most junior developers don\'t?', difficulty: 'Medium', why: 'Self-rated skills are commonly tested directly.', expect: ['Generators, context managers or the GIL', 'A concrete example from your own code'], followups: ['When have you used that in production?'] },
+        { category: 'Project', question: 'Walk me through how JWT authentication works in your Expense Splitter API.', difficulty: 'Medium', why: 'It is your clearest independent project and touches auth, a JD requirement.', expect: ['Token issue and verification flow', 'Expiry and refresh', 'Where secrets live'], followups: ['How would you revoke a token?'] },
+        { category: 'Resume', question: 'What did the MySQL to PostgreSQL migration involve, and what went wrong?', difficulty: 'Medium', why: 'It is the most relevant experience bullet for this role.', expect: ['Scope and your part in it', 'Data type or query differences', 'How you verified results'], followups: ['What would you do differently?'] },
+        { category: 'Behavioral', question: 'Tell me about a time a bug you shipped reached production.', difficulty: 'Easy', why: 'The role includes an on-call rotation.', expect: ['Situation and impact', 'How you found and fixed it', 'What changed afterwards'], followups: ['How did you communicate it?'] },
+        { category: 'HR', question: 'Why are you looking to move from Kitebyte after a year?', difficulty: 'Easy', why: 'Short tenures are usually asked about.', expect: ['Positive framing', 'Link to this role\'s domain'], followups: ['What are you looking for in your next team?'] },
+        { category: 'Role-specific', question: 'Two systems disagree on a transaction amount by one cent. How would you approach reconciling them?', difficulty: 'Hard', why: 'Reconciliation is the core of Ledgerline\'s product.', expect: ['Decimal vs float handling', 'Rounding rules', 'Audit trail'], followups: ['How would you store money values in PostgreSQL?'] }
+      ],
+      answers: {}, evals: {}, claimTests: {}
+    };
+  }
+
+  componentDidUpdate() {
+    const s = this.state;
+    const keep = ['screen', 'obStep', 'resumeTab', 'ivTab', 'qFilter', 'selQ', 'selClaim', 'profile', 'resumeText', 'jdText', 'analysis', 'analysisSource', 'ats', 'atsSource', 'questions', 'qSource', 'answers', 'evals', 'claimTests'];
+    const o = {}; keep.forEach(k => o[k] = s[k]);
+    try { localStorage.setItem('waypoint-v1', JSON.stringify(o)); } catch (e) {}
+  }
+
+  // ---------- AI layer ----------
+  sys() {
+    return 'You are the analysis engine of a career intelligence platform. Rules: Use only facts present in the provided resume, profile and job description. Never invent experience, employers, titles, technologies, certifications, achievements or metrics. Distinguish facts from suggestions. Scores are calibrated estimates, not generous. Never accuse anyone of lying. Respond with ONE JSON object only, no prose, no markdown fences.';
+  }
+  parse(text) {
+    let t = String(text || '').replace(/```json|```/g, '');
+    const a = t.indexOf('{'), b = t.lastIndexOf('}');
+    if (a < 0 || b < a) throw new Error('bad-json');
+    return JSON.parse(t.slice(a, b + 1));
+  }
+  async ai(prompt, max) {
+    if (!window.claude || !window.claude.complete) throw new Error('The AI service isn\'t available in this environment.');
+    let lastErr;
+    for (let i = 0; i < 2; i++) {
+      try {
+        const out = await Promise.race([
+          window.claude.complete({ system: this.sys(), max_tokens: max || 2500, messages: [{ role: 'user', content: prompt }] }),
+          new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 60000))
+        ]);
+        return this.parse(out);
+      } catch (e) { lastErr = e; if (e.message === 'timeout') break; }
+    }
+    if (lastErr && lastErr.message === 'timeout') throw new Error('The analysis timed out. Try again, or shorten the text.');
+    if (lastErr && /rate/i.test(lastErr.message || '')) throw new Error('Rate limit reached. Wait a minute and retry.');
+    throw new Error('The AI returned a response we couldn\'t read. Retry usually fixes this.');
+  }
+  n(v, d) { const x = Math.round(Number(v)); return isFinite(x) ? Math.max(0, Math.min(100, x)) : (d ?? 0); }
+  arr(v) { return Array.isArray(v) ? v.filter(x => x != null) : []; }
+  str(v) { return v == null ? '' : String(v); }
+
+  async task(kind, title, steps, fn) {
+    this.lastTask = () => this.task(kind, title, steps, fn);
+    this.setState({ loading: { kind, title, steps }, stepIdx: 0, error: null });
+    const iv = setInterval(() => this.setState(s => ({ stepIdx: Math.min(s.stepIdx + 1, steps.length - 1) })), 1800);
+    try { await fn(); this.setState({ loading: null }); return true; }
+    catch (e) { this.setState({ loading: null, error: { message: e.message || 'Something went wrong.', canRetry: true } }); return false; }
+    finally { clearInterval(iv); }
+  }
+
+  ctxProfile() { const p = this.state.profile; return `Target role: ${p.role}\nCareer level: ${p.level}\nYears of experience: ${p.years}\nGoals: ${p.goals}`; }
+
+  runAnalysis = () => {
+    const text = this.state.resumeText.trim();
+    if (text.length < 200) { this.setState({ error: { message: 'Resume text looks too short to analyze (under 200 characters).', canRetry: false } }); return Promise.resolve(false); }
+    return this.task('analysis', 'Analyzing resume…', ['Extracting content', 'Understanding experience', 'Matching skills', 'Detecting red flags', 'Generating recommendations'], async () => {
+      const r = await this.ai(`PROFILE\n${this.ctxProfile()}\n\nRESUME\n${text.slice(0, 12000)}\n\nReturn JSON:\n{"summary": 2 sentences,"scores":{"overall":0-100,"ats":0-100 (formatting/parsing readiness),"skills":0-100 (strength for target role),"content":0-100,"achievements":0-100 (measurable outcomes),"proof":0-100 (share of claimed skills backed by roles/projects)},"strengths":[3 short strings],"redFlags":[4-8 of {"severity":"critical"|"warning"|"improvement","title":short,"quote":exact short excerpt from resume,"problem":1 sentence,"why":1 sentence,"fix":1 sentence, never invent numbers}],"skillLevels":[{"skill":from resume only,"level":"strong"|"intermediate"|"weak" based on evidence}],"claims":[3-5 of {"claim":exact resume claim,"evidence":where it is supported or "None found","risk":"Low"|"Medium"|"High"}],"actions":[3-4 of {"title","why","action","impact":"High"|"Medium"|"Low","module":"Resume Analyzer"|"Interview Center"|"Skill Gap"|"Resume Tailor"}]}`, 3500);
+      const sc = r.scores || {};
+      const analysis = {
+        summary: this.str(r.summary),
+        scores: { overall: this.n(sc.overall), ats: this.n(sc.ats), skills: this.n(sc.skills), content: this.n(sc.content), achievements: this.n(sc.achievements), proof: this.n(sc.proof) },
+        strengths: this.arr(r.strengths).map(this.str).slice(0, 4),
+        redFlags: this.arr(r.redFlags).map(f => ({ severity: ['critical', 'warning', 'improvement'].includes(f.severity) ? f.severity : 'improvement', title: this.str(f.title), quote: this.str(f.quote), problem: this.str(f.problem), why: this.str(f.why), fix: this.str(f.fix) })),
+        skillLevels: this.arr(r.skillLevels).map(k => ({ skill: this.str(k.skill), level: ['strong', 'intermediate', 'weak'].includes(k.level) ? k.level : 'weak' })),
+        claims: this.arr(r.claims).map(c => ({ claim: this.str(c.claim), evidence: this.str(c.evidence) || 'None found', risk: ['Low', 'Medium', 'High'].includes(c.risk) ? c.risk : 'Medium' })),
+        actions: this.arr(r.actions).slice(0, 4).map(x => ({ title: this.str(x.title), why: this.str(x.why), action: this.str(x.action), impact: this.str(x.impact) || 'Medium', module: this.str(x.module) || 'Resume Analyzer' }))
+      };
+      if (!analysis.summary || !analysis.redFlags.length) throw new Error('The analysis came back incomplete. Retry usually fixes this.');
+      this.setState({ analysis, analysisSource: 'live', claimTests: {}, selClaim: 0 });
+    });
+  };
+
+  runAts = () => {
+    const jd = this.state.jdText.trim();
+    if (jd.length < 150) { this.setState({ error: { message: 'Paste a fuller job description (at least a few lines).', canRetry: false } }); return Promise.resolve(false); }
+    return this.task('ats', 'Comparing resume with the job…', ['Reading the job description', 'Extracting required keywords', 'Checking resume structure', 'Scoring coverage and fit'], async () => {
+      const r = await this.ai(`PROFILE\n${this.ctxProfile()}\n\nRESUME\n${this.state.resumeText.slice(0, 10000)}\n\nJOB DESCRIPTION\n${jd.slice(0, 8000)}\n\nSimulate a typical ATS evaluation. Return JSON:\n{"role":job title,"company":company or "","score":0-100 ATS readiness,"keywordCoverage":0-100 percent of required/important JD keywords present,"jobFit":0-100 overall fit of experience to role,"titleAlignment":1 sentence,"summary":2 sentences,"matched":[JD keywords present in resume, max 12],"missing":[important JD keywords absent from resume, max 10],"checks":[5-7 of {"label","status":"pass"|"risk"|"fail","note":1 sentence}]}`, 2500);
+      const ats = { role: this.str(r.role) || 'Target job', company: this.str(r.company), score: this.n(r.score), keywordCoverage: this.n(r.keywordCoverage), jobFit: this.n(r.jobFit), titleAlignment: this.str(r.titleAlignment), summary: this.str(r.summary), matched: this.arr(r.matched).map(this.str).slice(0, 14), missing: this.arr(r.missing).map(this.str).slice(0, 12), checks: this.arr(r.checks).map(c => ({ label: this.str(c.label), status: ['pass', 'risk', 'fail'].includes(c.status) ? c.status : 'risk', note: this.str(c.note) })) };
+      if (!ats.checks.length) throw new Error('The ATS analysis came back incomplete. Retry usually fixes this.');
+      this.setState({ ats, atsSource: 'live' });
+    });
+  };
+
+  runQuestions = () => this.task('questions', 'Predicting interview questions…', ['Reading resume and job', 'Finding likely focus areas', 'Writing questions', 'Adding follow-ups'], async () => {
+    const r = await this.ai(`RESUME\n${this.state.resumeText.slice(0, 9000)}\n\nJOB DESCRIPTION\n${this.state.jdText.slice(0, 6000)}\n\nPredict 9 interview questions this candidate is likely to face for this job: at least one each of Technical, Resume, Project, Behavioral, HR, Role-specific. Return JSON:\n{"questions":[{"category":"Technical"|"Resume"|"Project"|"Behavioral"|"HR"|"Role-specific","question","difficulty":"Easy"|"Medium"|"Hard","why":1 sentence on why an interviewer may ask,"expect":[3 expected answer areas],"followups":[2 follow-up questions]}]}`, 3500);
+    const cats = ['Technical', 'Resume', 'Project', 'Behavioral', 'HR', 'Role-specific'];
+    const questions = this.arr(r.questions).map(q => ({ category: cats.includes(q.category) ? q.category : 'Technical', question: this.str(q.question), difficulty: this.str(q.difficulty) || 'Medium', why: this.str(q.why), expect: this.arr(q.expect).map(this.str), followups: this.arr(q.followups).map(this.str) })).filter(q => q.question);
+    if (!questions.length) throw new Error('No questions came back. Retry usually fixes this.');
+    this.setState({ questions, qSource: 'live', answers: {}, evals: {}, selQ: 0, qFilter: 'All' });
+  });
+
+  async evalAnswer(question, answer, claim) {
+    const r = await this.ai(`RESUME (for context, facts only)\n${this.state.resumeText.slice(0, 6000)}\n\n${claim ? `RESUME CLAIM BEING TESTED: "${claim}"\n` : ''}QUESTION: ${question}\n\nCANDIDATE ANSWER:\n${answer.slice(0, 4000)}\n\nEvaluate the answer. Return JSON:\n{"score":0-100,"summary":1-2 sentences,"covered":[points demonstrated],"missing":[important points not shown],"credibility":"Low"|"Medium"|"High" (risk that the answer doesn't support the level implied by the resume),"credibilityNote":1-2 sentences; if not supported use wording like "Your answer does not currently demonstrate the level of knowledge implied by this resume claim." Never say the candidate is lying.,"betterAnswer":one-sentence structure for a stronger answer using only facts from the resume}`, 1500);
+    return { score: this.n(r.score), summary: this.str(r.summary), covered: this.arr(r.covered).map(this.str), missing: this.arr(r.missing).map(this.str), credibility: ['Low', 'Medium', 'High'].includes(r.credibility) ? r.credibility : 'Medium', credibilityNote: this.str(r.credibilityNote), betterAnswer: this.str(r.betterAnswer) };
+  }
+
+  evaluateQ = () => {
+    const i = this.state.selQ, q = this.state.questions[i], ans = (this.state.answers[i] || '').trim();
+    if (!q || !ans) return;
+    this.task('eval', 'Evaluating your answer…', ['Reading your answer', 'Comparing with expected areas', 'Checking against resume claims'], async () => {
+      const ev = await this.evalAnswer(q.question, ans, q.category === 'Resume' ? q.question : null);
+      this.setState(s => ({ evals: { ...s.evals, [i]: ev } }));
+    });
+  };
+
+  genClaimQ = () => {
+    const i = this.state.selClaim, c = (this.state.analysis.claims || [])[i];
+    if (!c) return;
+    this.task('claimQ', 'Writing a probing question…', ['Reading the claim', 'Choosing the right depth'], async () => {
+      const r = await this.ai(`RESUME\n${this.state.resumeText.slice(0, 6000)}\n\nCLAIM: "${c.claim}"\n\nWrite ONE interview question that tests whether the candidate has the knowledge this claim implies, at the depth it implies. Return JSON: {"question","testing":short phrase of what it tests}`, 500);
+      if (!r.question) throw new Error('No question came back. Retry usually fixes this.');
+      this.setState(s => ({ claimTests: { ...s.claimTests, [i]: { question: this.str(r.question), testing: this.str(r.testing), answer: '' } } }));
+    });
+  };
+
+  evalClaim = () => {
+    const i = this.state.selClaim, c = this.state.analysis.claims[i], t = this.state.claimTests[i];
+    if (!t || !(t.answer || '').trim()) return;
+    this.task('claimEval', 'Checking consistency…', ['Reading your answer', 'Comparing with the claimed level'], async () => {
+      const ev = await this.evalAnswer(t.question, t.answer, c.claim);
+      this.setState(s => ({ claimTests: { ...s.claimTests, [i]: { ...s.claimTests[i], ev } } }));
+    });
+  };
+
+  onFile = (e) => {
+    const f = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if (!f) return;
+    if (f.size > 5 * 1024 * 1024) { this.setState({ error: { message: 'File is larger than 5 MB.', canRetry: false } }); return; }
+    if (/\.(txt|md)$/i.test(f.name)) { const rd = new FileReader(); rd.onload = () => this.setState({ resumeText: String(rd.result) }); rd.readAsText(f); return; }
+    this.setState({ error: { message: `${f.name}: PDF and DOCX text extraction isn't available in this prototype. Paste the resume text instead.`, canRetry: false } });
+  };
+
+  renderVals() {
+    const s = this.state, a = s.analysis, t = s.ats;
+    const set = (o) => () => this.setState(o);
+    const scr = s.screen;
+    const routes = { dash: 'dash', onboard: 'onboard', resume: 'resume', interview: 'interview' };
+    const navDef = [
+      ['Overview', [['Dashboard', 'dash'], ['Profile & resume', 'onboard']]],
+      ['Resume Intelligence', [['Resume Analyzer', 'resume'], ['ATS Analyzer', 'resume:ats'], ['Resume Tailor'], ['Bullet Optimizer'], ['Skill-Proof Generator']]],
+      ['Job Intelligence', [['Job Decoder'], ['Priority Engine'], ['Job Safety Analyzer']]],
+      ['Skill Intelligence', [['Skill Gap'], ['Learning Roadmap']]],
+      ['Interview Intelligence', [['Interview Predictor', 'interview:practice'], ['Consistency Check', 'interview:consistency']]],
+      ['Career Intelligence', [['Application Tracker'], ['Analytics'], ['AI Career Assistant']]]
+    ];
+    const isActive = (r) => {
+      if (!r) return false;
+      const [x, tab] = r.split(':');
+      if (x !== scr) return false;
+      if (x === 'resume') return tab ? s.resumeTab === 'ats' : s.resumeTab !== 'ats';
+      if (x === 'interview') return tab === s.ivTab;
+      return true;
+    };
+    const nav = navDef.map(([label, items]) => ({ label, items: items.map(([l, r]) => {
+      const act = isActive(r);
+      return { label: l, disabled: !r, cursor: r ? 'pointer' : 'default', bg: act ? 'var(--color-accent)' : 'transparent', color: act ? 'var(--color-bg)' : (r ? 'var(--color-text)' : 'var(--color-neutral-600)'), weight: act ? 700 : 400,
+        onClick: () => { if (!r) return; const [x, tab] = r.split(':'); const o = { screen: x }; if (x === 'resume') o.resumeTab = tab || (s.resumeTab === 'ats' ? 'health' : s.resumeTab); if (x === 'interview') o.ivTab = tab; this.setState(o); } };
+    }) }));
+
+    const titles = { onboard: ['Get started', 'Profile & resume'], dash: ['Career Intelligence', 'Dashboard'], resume: ['Resume Intelligence', s.resumeTab === 'ats' ? 'ATS Analyzer' : 'Resume Analyzer'], interview: ['Interview Intelligence', 'Interview Center'] };
+    const [crumb, pageTitle] = titles[scr] || ['', ''];
+
+    const on = {};
+    ['name', 'role', 'level', 'years', 'location', 'skills', 'goals'].forEach(k => on[k] = (e) => { const v = e.target.value; this.setState(st => ({ profile: { ...st.profile, [k]: v } })); });
+
+    const steps = s.loading ? s.loading.steps.map((label, i) => {
+      const done = i < s.stepIdx, act = i === s.stepIdx;
+      return { label, glyph: done ? '✓' : (act ? '•' : ''), dotBg: done ? 'var(--color-accent-2-600)' : (act ? 'var(--color-accent)' : 'var(--color-neutral-300)'), dotColor: 'var(--color-neutral-100)', color: done || act ? 'var(--color-text)' : 'var(--color-neutral-600)' };
+    }) : [];
+
+    const obLabels = ['Profile', 'Resume', 'Target job'];
+    const obSteps = obLabels.map((label, i) => { const n = i + 1, act = s.obStep === n, done = n < s.obStep; return { n: done ? '✓' : n, label, onClick: set({ obStep: n }), bg: act ? 'var(--color-surface)' : 'transparent', color: 'var(--color-text)', dotBg: act || done ? 'var(--color-accent)' : 'var(--color-neutral-300)', dotColor: act || done ? 'var(--color-bg)' : 'var(--color-neutral-800)' }; });
+
+    const sc = (a && a.scores) || {};
+    const flags = (a && a.redFlags) || [];
+    const fc = { critical: 0, warning: 0, improvement: 0 }; flags.forEach(f => fc[f.severity]++);
+    const healthCards = [['Resume score', sc.overall], ['ATS readiness', sc.ats], ['Skill strength', sc.skills], ['Content quality', sc.content], ['Achievement strength', sc.achievements], ['Project proof', sc.proof]].map(([label, v]) => ({ label, value: v ?? '—', bar: v || 0, color: v >= 70 ? 'var(--color-accent-2-600)' : v >= 50 ? 'var(--color-accent-400)' : 'var(--color-accent-600)' }));
+    healthCards.push({ label: 'Red flags', value: `${fc.critical} / ${fc.warning} / ${fc.improvement}`, bar: 0, color: 'transparent' });
+    const healthBars = healthCards.slice(0, 6);
+    const flagGroups = [['critical', 'Critical', 'tag-accent'], ['warning', 'Warning', 'tag-neutral'], ['improvement', 'Improvement', 'tag-accent-2']].map(([k, label, tagClass]) => ({ label, tagClass, items: flags.filter(f => f.severity === k), count: fc[k] })).filter(g => g.count);
+
+    // readiness
+    const evVals = Object.values(s.evals || {}).map(e => e.score).concat(Object.values(s.claimTests || {}).filter(c => c.ev).map(c => c.ev.score));
+    const ivAvg = evVals.length ? Math.round(evVals.reduce((x, y) => x + y, 0) / evVals.length) : null;
+    const compDef = [['Resume Quality', 20, a ? sc.overall : null, 'Resume score'], ['ATS Readiness', 15, t ? t.score : null, 'ATS analysis'], ['Skill Match', 20, t ? t.keywordCoverage : null, 'Keyword coverage'], ['Interview Readiness', 20, ivAvg, 'Practice answers'], ['Project Proof', 10, a ? sc.proof : null, 'Resume analysis'], ['Job Fit', 15, t ? t.jobFit : null, 'ATS analysis']];
+    const measured = compDef.filter(c => c[2] != null);
+    const totalW = measured.reduce((x, c) => x + c[1], 0);
+    const readiness = totalW ? Math.round(measured.reduce((x, c) => x + c[2] * c[1], 0) / totalW) : 0;
+    const components = compDef.map(([label, w, v, src]) => ({ label, weightText: `weight ${w}%`, valueText: v == null ? '—' : v, bar: v || 0, note: v == null ? (label === 'Interview Readiness' ? 'Not measured: practice a question' : 'Not measured yet') : `+${(v * w / totalW).toFixed(1)} pts · from ${src.toLowerCase()}` }));
+    const missingComps = compDef.filter(c => c[2] == null).map(c => c[0]);
+    const formulaText = `Weighted average of ${measured.length} of 6 components (weights shown on each).` + (missingComps.length ? ` ${missingComps.join(', ')} ${missingComps.length > 1 ? 'are' : 'is'} excluded until measured, and the remaining weights are rescaled to 100%.` : '') + ' Based only on the resume and job you provided.';
+
+    const lv = (a && a.skillLevels) || [];
+    const bucket = (k) => lv.filter(x => x.level === k).map(x => x.skill);
+    const miss = (t && t.missing) || [];
+    const skillBuckets = [['Strong', bucket('strong'), 'var(--color-accent-2-700)'], ['Intermediate', bucket('intermediate'), 'var(--color-accent-2-500)'], ['Weak', bucket('weak'), 'var(--color-accent-500)'], ['Missing (from JD)', miss, 'var(--color-accent-700)']].map(([label, l, color]) => ({ label, count: l.length, list: l.length ? l.join(', ') : 'None', color }));
+
+    const blockers = flags.filter(f => f.severity === 'critical').map(f => f.title).concat(miss.slice(0, 3).length ? [`Missing from resume: ${miss.slice(0, 3).join(', ')}`] : []).slice(0, 4);
+    const actions = ((a && a.actions) || []).map((x, i) => ({ ...x, n: i + 1, impactLabel: 'Impact: ' + x.impact }));
+
+    const resumeTabs = [['health', 'Resume health'], ['flags', `Red flags · ${flags.length}`], ['ats', 'ATS analyzer']].map(([k, label]) => ({ label, onClick: set({ resumeTab: k }), bg: s.resumeTab === k ? 'var(--color-accent)' : 'transparent', color: s.resumeTab === k ? 'var(--color-bg)' : 'var(--color-text)' }));
+    const atsChecks = ((t && t.checks) || []).map(c => ({ ...c, statusLabel: c.status === 'pass' ? 'Pass' : c.status === 'risk' ? 'Risk' : 'Fail', tagClass: c.status === 'pass' ? 'tag-accent-2' : c.status === 'risk' ? 'tag-neutral' : 'tag-accent' }));
+
+    // interview
+    const qs = s.questions || [];
+    const credClass = (c) => c === 'Low' ? 'tag-accent-2' : c === 'High' ? 'tag-accent' : 'tag-neutral';
+    const cats = ['All', 'Technical', 'Resume', 'Project', 'Behavioral', 'HR', 'Role-specific'].filter(c => c === 'All' || qs.some(q => q.category === c));
+    const qFilters = cats.map(c => ({ label: c, onClick: set({ qFilter: c }), bg: s.qFilter === c ? 'var(--color-accent-2-700)' : 'var(--color-surface)', color: s.qFilter === c ? 'var(--color-neutral-100)' : 'var(--color-text)' }));
+    const qList = qs.map((q, i) => ({ ...q, i })).filter(q => s.qFilter === 'All' || q.category === s.qFilter).map(q => ({ ...q, onClick: set({ selQ: q.i }), bg: q.i === s.selQ ? 'var(--color-neutral-100)' : 'var(--color-surface)', shadow: q.i === s.selQ ? 'var(--shadow-md)' : 'none', scoreText: s.evals[q.i] ? `${s.evals[q.i].score}/100` : '' }));
+    const sq = qs[s.selQ];
+    const sev = sq && s.evals[s.selQ];
+    const sel = sq ? { ...sq, answer: s.answers[s.selQ] || '', onAnswer: (e) => { const v = e.target.value; this.setState(st => ({ answers: { ...st.answers, [st.selQ]: v } })); }, evaluate: this.evaluateQ, cantEval: !!s.loading || !(s.answers[s.selQ] || '').trim(), ev: sev ? { ...sev, credClass: credClass(sev.credibility), credLabel: 'Credibility risk: ' + sev.credibility } : null } : null;
+    const ivTabs = [['practice', 'Interview practice'], ['consistency', 'Resume consistency']].map(([k, label]) => ({ label, onClick: set({ ivTab: k }), bg: s.ivTab === k ? 'var(--color-accent)' : 'transparent', color: s.ivTab === k ? 'var(--color-bg)' : 'var(--color-text)' }));
+    const practiceStats = evVals.length ? `${evVals.length} answer${evVals.length > 1 ? 's' : ''} evaluated · average ${ivAvg}/100` : 'No answers evaluated yet';
+
+    const cls = (a && a.claims) || [];
+    const claims = cls.map((c, i) => { const tt = s.claimTests[i]; return { ...c, onClick: set({ selClaim: i }), bg: i === s.selClaim ? 'var(--color-neutral-100)' : 'var(--color-surface)', shadow: i === s.selClaim ? 'var(--shadow-md)' : 'none', priorClass: credClass(c.risk), priorLabel: 'Prior risk: ' + c.risk, resultLabel: tt && tt.ev ? 'After test: ' + tt.ev.credibility : '', tested: !!(tt && tt.ev), result: tt && tt.ev ? tt.ev.credibility : '', resultClass: tt && tt.ev ? credClass(tt.ev.credibility) : '' }; });
+    const sc0 = cls[s.selClaim], ct = s.claimTests[s.selClaim];
+    const csel = sc0 ? { claim: sc0.claim, noQuestion: !ct, question: ct ? ct.question : '', testing: ct ? ct.testing : '', answer: ct ? ct.answer : '', onAnswer: (e) => { const v = e.target.value; this.setState(st => ({ claimTests: { ...st.claimTests, [st.selClaim]: { ...st.claimTests[st.selClaim], answer: v } } })); }, generate: this.genClaimQ, evaluate: this.evalClaim, cantEval: !!s.loading || !(ct && (ct.answer || '').trim()), ev: ct && ct.ev ? { ...ct.ev, credClass: credClass(ct.ev.credibility) } : null } : null;
+
+    const srcLabel = (x) => x === 'live' ? 'Live AI analysis' : 'Demo data';
+    const srcTag = (x) => x === 'live' ? 'tag-accent-2' : 'tag-neutral';
+    const words = s.resumeText.trim() ? s.resumeText.trim().split(/\s+/).length : 0;
+
+    return {
+      isLanding: scr === 'landing', isApp: scr !== 'landing', isOnboard: scr === 'onboard', isDash: scr === 'dash', isResume: scr === 'resume', isInterview: scr === 'interview',
+      goLanding: set({ screen: 'landing' }), goDash: set({ screen: 'dash' }), goOnboard: set({ screen: 'onboard', obStep: 1 }), goOnboard2: set({ screen: 'onboard', obStep: 2 }), goResume: set({ screen: 'resume', resumeTab: 'health' }),
+      nav, crumb, pageTitle, levelOpts: ['Student', 'Entry-level', 'Junior', 'Mid-level', 'Senior'].map(v => ({ v, sel: v === s.profile.level })), profile: s.profile, on, initials: s.profile.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
+      anyDemo: s.analysisSource === 'demo' || s.atsSource === 'demo' || s.qSource === 'demo',
+      resetDemo: () => { const d = this.demo(); delete d.screen; this.setState({ ...d, error: null }); },
+      error: s.error, dismissError: set({ error: null }), retry: () => this.lastTask && this.lastTask(),
+      loading: !!s.loading, busy: !!s.loading, loadingTitle: s.loading ? s.loading.title : '', steps,
+      obSteps, ob1: s.obStep === 1, ob2: s.obStep === 2, ob3: s.obStep === 3, toOb2: set({ obStep: 2 }), toOb3: set({ obStep: 3 }),
+      resumeText: s.resumeText, onResumeText: (e) => this.setState({ resumeText: e.target.value }), onFile: this.onFile,
+      resumeStats: `${words} words · ${s.analysisSource === 'live' ? 'last analysis was live' : 'current results are demo data'}`,
+      runAnalysis: this.runAnalysis, runAnalysisOb: this.runAnalysis,
+      jdText: s.jdText, onJdText: (e) => this.setState({ jdText: e.target.value }), runAts: this.runAts,
+      runAtsOb: async () => { if (await this.runAts()) this.setState({ screen: 'dash' }); },
+      hasAnalysis: !!a, a, healthCards, healthBars, analysisTag: srcTag(s.analysisSource), analysisSourceLabel: srcLabel(s.analysisSource),
+      flagGroups, flagCountText: `${fc.critical} critical, ${fc.warning} warnings, ${fc.improvement} improvements`,
+      readiness, readinessDeg: Math.round(readiness * 3.6), components, formulaText,
+      actions, hasActions: actions.length > 0, noActions: !actions.length,
+      targetJobLabel: t ? `Compared against ${t.role}${t.company ? ' at ' + t.company : ''}` : 'No target job analyzed yet',
+      matched: (t && t.matched) || [], missing: miss, skillBuckets, strengths: (a && a.strengths) || [], blockers,
+      resumeTabs, tabHealth: s.resumeTab === 'health', tabFlags: s.resumeTab === 'flags', tabAts: s.resumeTab === 'ats',
+      hasAts: !!t, t, atsChecks, atsTag: srcTag(s.atsSource), atsSourceLabel: srcLabel(s.atsSource),
+      ivTabs, tabPractice: s.ivTab === 'practice', tabConsistency: s.ivTab === 'consistency', practiceStats,
+      qFilters, qList, sel, qTag: srcTag(s.qSource), qSourceLabel: s.qSource === 'live' ? 'Live AI questions' : 'Demo questions', runQuestions: this.runQuestions,
+      claims, csel
+    };
+  }
+}
+</script>
+</body>
+</html>

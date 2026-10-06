@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Waypoint — Career Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<script src="waypoint-data.js"></script>
+<style>
+body{margin:0;background:#f5f6f8;font-family:'Geist',system-ui,sans-serif;color:#0f1218;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:var(--acc,#3b5bdb);text-decoration:none}
+a:hover{color:var(--acc-d,#2f4ac0);text-decoration:underline}
+::selection{background:var(--acc-b,#dfe5fc)}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--acc,#3b5bdb);outline-offset:2px}
+textarea,input,select{font-family:inherit}
+details summary::-webkit-details-marker{display:none}
+</style>
+</helmet>
+
+<sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Landing" style="min-height:100vh;background:#f7f8fa;color:#0f1218">
+  <div style="position:sticky;top:0;z-index:5;background:rgba(247,248,250,.86);backdrop-filter:blur(10px);border-bottom:1px solid #e8eaee">
+    <div style="max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:28px">
+      <div style="display:flex;align-items:center;gap:10px;margin-right:auto">
+        <div style="width:26px;height:26px;border-radius:8px;background:var(--acc,#3b5bdb);display:grid;place-items:center"><div style="width:9px;height:9px;border-radius:50%;background:#fff"></div></div>
+        <span style="font-weight:650;font-size:17px;letter-spacing:-.02em">Waypoint</span>
+      </div>
+      <a href="#engines" style="color:#3c4452;font-size:14px">Features</a>
+      <a href="#how" style="color:#3c4452;font-size:14px">How it works</a>
+      <a href="#trust" style="color:#3c4452;font-size:14px">Trust</a>
+      <a href="#faq" style="color:#3c4452;font-size:14px">FAQ</a>
+      <div style="display:flex;gap:8px">
+        <button onClick="{{ go.dash }}" style="all:unset;box-sizing:border-box;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;border:1px solid #d8dce3;background:#fff;font-size:13.5px;font-weight:500;cursor:pointer" style-hover="background:#f1f3f5">Log in</button>
+        <button onClick="{{ go.onboard }}" style="all:unset;box-sizing:border-box;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:#0f1218;color:#fff;font-size:13.5px;font-weight:500;cursor:pointer" style-hover="background:#262c36">Sign up</button>
+      </div>
+    </div>
+  </div>
+
+  <section style="max-width:1200px;margin:0 auto;padding:84px 32px 72px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:64px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 12px 5px 6px;border-radius:99px;background:#fff;border:1px solid #e3e6eb;font-size:13px;color:#3c4452"><span style="padding:2px 8px;border-radius:99px;background:var(--acc-t,#eef1fd);color:var(--acc-i,#2a3fa8);font-weight:600;font-size:12px">New</span>15 career tools in one workspace</div>
+      <h1 style="font-size:66px;line-height:1.02;letter-spacing:-.04em;font-weight:650;margin:0;text-wrap:balance">Your AI <span style="color:var(--acc,#3b5bdb)">Career Intelligence</span> Platform</h1>
+      <p style="font-size:19px;line-height:1.55;max-width:540px;margin:0;color:#4a5260;text-wrap:pretty">Understand your resume. Analyze every opportunity. Close your skill gaps. Prepare for interviews. Make smarter career decisions.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button onClick="{{ go.onboard }}" style="all:unset;box-sizing:border-box;display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:11px;background:var(--acc,#3b5bdb);color:#fff;font-size:15.5px;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(59,91,219,.28)" style-hover="background:var(--acc-d,#2f4ac0)">Analyze My Career</button>
+        <a href="#engines" style="display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:11px;background:#fff;border:1px solid #d8dce3;color:#0f1218;font-size:15.5px;font-weight:500;text-decoration:none">Explore Features</a>
+      </div>
+      <div style="display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:#5b6472">
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:6px;height:6px;border-radius:50%;background:#12805c"></span>No fabricated experience</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:6px;height:6px;border-radius:50%;background:#12805c"></span>Every score explained</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:6px;height:6px;border-radius:50%;background:#12805c"></span>Private by default</span>
+      </div>
+    </div>
+    <div style="position:relative;padding:20px 0 40px">
+      <div style="position:absolute;inset:-30px -60px -10px 40px;border-radius:40px;background:radial-gradient(closest-side,#e3e8fc,rgba(227,232,252,0))"></div>
+      <div style="position:relative;background:#fff;border:1px solid #e5e7eb;border-radius:18px;box-shadow:0 24px 60px rgba(16,24,40,.12),0 2px 6px rgba(16,24,40,.05);padding:22px;display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Career readiness</span><span style="font-size:11.5px;padding:3px 9px;border-radius:99px;background:#f1f3f5;color:#4a5260">Example · demo data</span></div>
+        <div style="display:flex;gap:22px;align-items:center">
+          <div style="width:108px;height:108px;border-radius:50%;background:conic-gradient(var(--acc,#3b5bdb) 245deg,#eceef2 0deg);display:grid;place-items:center;flex:none"><div style="width:86px;height:86px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:34px;font-weight:650;letter-spacing:-.03em">68</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;flex:1">
+            <div style="display:grid;grid-template-columns:96px 1fr 26px;gap:10px;align-items:center;font-size:12.5px"><span style="color:#5b6472">Resume</span><div style="height:6px;border-radius:9px;background:#eef0f3"><div style="width:66%;height:6px;border-radius:9px;background:var(--acc,#3b5bdb)"></div></div><span style="font-weight:600">66</span></div>
+            <div style="display:grid;grid-template-columns:96px 1fr 26px;gap:10px;align-items:center;font-size:12.5px"><span style="color:#5b6472">ATS</span><div style="height:6px;border-radius:9px;background:#eef0f3"><div style="width:72%;height:6px;border-radius:9px;background:var(--acc,#3b5bdb)"></div></div><span style="font-weight:600">72</span></div>
+            <div style="display:grid;grid-template-columns:96px 1fr 26px;gap:10px;align-items:center;font-size:12.5px"><span style="color:#5b6472">Skill match</span><div style="height:6px;border-radius:9px;background:#eef0f3"><div style="width:64%;height:6px;border-radius:9px;background:var(--acc,#3b5bdb)"></div></div><span style="font-weight:600">64</span></div>
+            <div style="display:grid;grid-template-columns:96px 1fr 26px;gap:10px;align-items:center;font-size:12.5px"><span style="color:#5b6472">Job fit</span><div style="height:6px;border-radius:9px;background:#eef0f3"><div style="width:80%;height:6px;border-radius:9px;background:#12805c"></div></div><span style="font-weight:600">80</span></div>
+          </div>
+        </div>
+        <div style="border-top:1px solid #eef0f3;padding-top:14px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px"><span style="width:20px;height:20px;border-radius:6px;background:var(--acc-t,#eef1fd);color:var(--acc-i,#2a3fa8);display:grid;place-items:center;font-size:11px;font-weight:700">1</span>Add measurable outcomes to 4 bullets<span style="margin-left:auto;font-size:11.5px;padding:2px 8px;border-radius:99px;background:#fdecea;color:#a8322a">High impact</span></div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px"><span style="width:20px;height:20px;border-radius:6px;background:var(--acc-t,#eef1fd);color:var(--acc-i,#2a3fa8);display:grid;place-items:center;font-size:11px;font-weight:700">2</span>Practice PostgreSQL indexing questions<span style="margin-left:auto;font-size:11.5px;padding:2px 8px;border-radius:99px;background:#fcf3e1;color:#8a5a12">Medium</span></div>
+        </div>
+      </div>
+      <div style="position:absolute;left:-36px;bottom:0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 14px 34px rgba(16,24,40,.12);padding:12px 14px;display:flex;gap:12px;align-items:center">
+        <div style="width:36px;height:36px;border-radius:10px;background:#e6f5ee;color:#0b6247;display:grid;place-items:center;font-weight:700;font-size:13px">82</div>
+        <div><div style="font-size:13px;font-weight:600">Ledgerline · Backend Developer</div><div style="font-size:12px;color:#0b6247">Apply now</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:40px 32px 80px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px">
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:32px">
+      <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#a8322a;margin-bottom:12px">The problem</div>
+      <h2 style="font-size:30px;letter-spacing:-.03em;font-weight:620;margin:0 0 12px;max-width:440px">Job searching runs on guesswork.</h2>
+      <p style="font-size:15.5px;line-height:1.6;color:#4a5260;margin:0;max-width:480px">Resume checkers, keyword tools, interview banks and spreadsheets each answer one question in isolation. None of them know what the others found, so you can't tell which job to apply to, what to fix first, or whether you're ready.</p>
+    </div>
+    <div style="background:#0f1218;color:#fff;border-radius:18px;padding:32px">
+      <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9fb0f5;margin-bottom:12px">The approach</div>
+      <h2 style="font-size:30px;letter-spacing:-.03em;font-weight:620;margin:0 0 12px;max-width:440px">One profile, read by every tool.</h2>
+      <p style="font-size:15.5px;line-height:1.6;color:#c4cad4;margin:0;max-width:480px">Waypoint analyzes your resume once and reuses it everywhere: matching against jobs, predicting interview questions, testing your claims, and tracking which resume versions get responses. Every score shows how it was calculated.</p>
+    </div>
+  </section>
+
+  <section id="engines" style="background:#0f1218;color:#fff">
+    <div style="max-width:1200px;margin:0 auto;padding:88px 32px">
+      <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9fb0f5;margin-bottom:12px">5 intelligence engines · 15 modules</div>
+      <h2 style="font-size:40px;letter-spacing:-.035em;font-weight:620;margin:0 0 40px;max-width:640px">Everything between your resume and an offer.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+        <div style="background:#171c25;border:1px solid #262d3a;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:14px">
+          <div style="width:34px;height:34px;border-radius:10px;background:var(--acc,#3b5bdb);display:grid;place-items:center;font-weight:700;font-size:14px">A</div>
+          <div style="font-weight:600;font-size:17px">Resume Intelligence</div>
+          <div style="font-size:13.5px;line-height:1.9;color:#b4bbc7">Resume–Job Match Score<br>AI Resume Tailoring<br>Bullet Optimizer<br>Red-Flag Detector<br>ATS Compatibility<br>Skill-Proof Generator</div>
+        </div>
+        <div style="background:#171c25;border:1px solid #262d3a;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:14px">
+          <div style="width:34px;height:34px;border-radius:10px;background:#7048e8;display:grid;place-items:center;font-weight:700;font-size:14px">B</div>
+          <div style="font-weight:600;font-size:17px">Job Intelligence</div>
+          <div style="font-size:13.5px;line-height:1.9;color:#b4bbc7">Job Description Decoder<br>Application Priority Engine<br>Scam Risk Detector</div>
+        </div>
+        <div style="background:#171c25;border:1px solid #262d3a;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:14px">
+          <div style="width:34px;height:34px;border-radius:10px;background:#12805c;display:grid;place-items:center;font-weight:700;font-size:14px">C</div>
+          <div style="font-weight:600;font-size:17px">Skill Intelligence</div>
+          <div style="font-size:13.5px;line-height:1.9;color:#b4bbc7">Skill Gap Detector<br>Personalized Learning Roadmap</div>
+        </div>
+        <div style="background:#171c25;border:1px solid #262d3a;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:14px">
+          <div style="width:34px;height:34px;border-radius:10px;background:#b7791f;display:grid;place-items:center;font-weight:700;font-size:14px">D</div>
+          <div style="font-weight:600;font-size:17px">Interview Intelligence</div>
+          <div style="font-size:13.5px;line-height:1.9;color:#b4bbc7">JD-Based Interview Predictor<br>Resume–Interview Consistency</div>
+        </div>
+        <div style="background:#171c25;border:1px solid #262d3a;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:14px">
+          <div style="width:34px;height:34px;border-radius:10px;background:#d1453b;display:grid;place-items:center;font-weight:700;font-size:14px">E</div>
+          <div style="font-weight:600;font-size:17px">Career Intelligence</div>
+          <div style="font-size:13.5px;line-height:1.9;color:#b4bbc7">Application Analytics &amp; Resume Versions<br>Job Readiness &amp; Career Score</div>
+        </div>
+      </div>
+      <div style="margin-top:56px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;color:#c4cad4">
+        <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7d8696;margin-right:8px">Career workflow</span>
+        <span style="padding:7px 14px;border-radius:99px;border:1px solid #2c3442">Resume</span><span style="color:#5b6472">→</span>
+        <span style="padding:7px 14px;border-radius:99px;border:1px solid #2c3442">Analyze</span><span style="color:#5b6472">→</span>
+        <span style="padding:7px 14px;border-radius:99px;border:1px solid #2c3442">Match</span><span style="color:#5b6472">→</span>
+        <span style="padding:7px 14px;border-radius:99px;border:1px solid #2c3442">Close gaps</span><span style="color:#5b6472">→</span>
+        <span style="padding:7px 14px;border-radius:99px;border:1px solid #2c3442">Practice</span><span style="color:#5b6472">→</span>
+        <span style="padding:7px 14px;border-radius:99px;border:1px solid #2c3442">Apply</span><span style="color:#5b6472">→</span>
+        <span style="padding:7px 14px;border-radius:99px;background:var(--acc,#3b5bdb);color:#fff">Track</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" style="max-width:1200px;margin:0 auto;padding:88px 32px">
+    <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc,#3b5bdb);margin-bottom:12px">How it works</div>
+    <h2 style="font-size:40px;letter-spacing:-.035em;font-weight:620;margin:0 0 40px">Four steps to a clear plan.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px"><div style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--acc,#3b5bdb)">01</div><div style="font-weight:600;font-size:17px">Create your profile</div><div style="font-size:14px;line-height:1.55;color:#5b6472">Target role, experience, skills and goals.</div></div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px"><div style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--acc,#3b5bdb)">02</div><div style="font-weight:600;font-size:17px">Upload your resume</div><div style="font-size:14px;line-height:1.55;color:#5b6472">Get a health check, red flags and ATS readiness.</div></div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px"><div style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--acc,#3b5bdb)">03</div><div style="font-weight:600;font-size:17px">Add target jobs</div><div style="font-size:14px;line-height:1.55;color:#5b6472">Decode each one, see the gaps and get a priority.</div></div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px"><div style="font-family:'Geist Mono',monospace;font-size:13px;color:var(--acc,#3b5bdb)">04</div><div style="font-weight:600;font-size:17px">Act and track</div><div style="font-size:14px;line-height:1.55;color:#5b6472">Learn, practice, apply, and see what's working.</div></div>
+    </div>
+  </section>
+
+  <section id="trust" style="max-width:1200px;margin:0 auto;padding:0 32px 88px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:start">
+    <div>
+      <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#12805c;margin-bottom:12px">Trust &amp; integrity</div>
+      <h2 style="font-size:40px;letter-spacing:-.035em;font-weight:620;margin:0 0 14px">Suggestions, never fabrications.</h2>
+      <p style="font-size:15.5px;line-height:1.6;color:#4a5260;max-width:460px;margin:0">The AI only reorganizes and clarifies what's already in your resume. It won't invent employers, metrics or certifications. Where a number would help, it tells you where to add a real one.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px"><div style="font-weight:600;margin-bottom:6px">Transparent scores</div><div style="font-size:14px;color:#5b6472;line-height:1.55">Estimates with a visible formula, not verdicts on employability.</div></div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px"><div style="font-weight:600;margin-bottom:6px">Risk, not verdicts</div><div style="font-size:14px;color:#5b6472;line-height:1.55">Job safety shows the signals it found. It never declares a scam.</div></div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px"><div style="font-weight:600;margin-bottom:6px">Minimal data sharing</div><div style="font-size:14px;color:#5b6472;line-height:1.55">Each AI task receives only the data it needs.</div></div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px"><div style="font-weight:600;margin-bottom:6px">No guarantees</div><div style="font-size:14px;color:#5b6472;line-height:1.55">We don't promise interviews, jobs or ATS results.</div></div>
+    </div>
+  </section>
+
+  <section id="faq" style="max-width:820px;margin:0 auto;padding:0 32px 88px">
+    <h2 style="font-size:32px;letter-spacing:-.03em;font-weight:620;margin:0 0 20px">Questions</h2>
+    <div style="display:flex;flex-direction:column;border-top:1px solid #e5e7eb">
+      <details style="border-bottom:1px solid #e5e7eb;padding:18px 0"><summary style="cursor:pointer;font-weight:600;font-size:16px;list-style:none">Will this get me interviews?</summary><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#4a5260">No tool can guarantee that. Waypoint shows where your resume and a job line up, where they don't, and what to work on first.</p></details>
+      <details style="border-bottom:1px solid #e5e7eb;padding:18px 0"><summary style="cursor:pointer;font-weight:600;font-size:16px;list-style:none">Is the ATS score what real systems see?</summary><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#4a5260">It's an AI approximation of common ATS checks: parsing, section structure and keyword coverage. Real systems vary by employer.</p></details>
+      <details style="border-bottom:1px solid #e5e7eb;padding:18px 0"><summary style="cursor:pointer;font-weight:600;font-size:16px;list-style:none">Can the AI add skills I don't have?</summary><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#4a5260">No. Tailoring only reorders and rewrites what you provided. Missing requirements are listed separately so you can decide what to learn.</p></details>
+      <details style="border-bottom:1px solid #e5e7eb;padding:18px 0"><summary style="cursor:pointer;font-weight:600;font-size:16px;list-style:none">Which file types can I upload?</summary><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#4a5260">PDF, DOCX and TXT. You can also paste plain text.</p></details>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:0 32px 64px">
+    <div style="background:var(--acc,#3b5bdb);color:#fff;border-radius:22px;padding:56px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between">
+      <h2 style="margin:0;font-size:36px;letter-spacing:-.035em;font-weight:620;max-width:560px">See where you stand for your next role.</h2>
+      <button onClick="{{ go.onboard }}" style="all:unset;box-sizing:border-box;display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:11px;background:#fff;color:#0f1218;font-size:15.5px;font-weight:600;cursor:pointer" style-hover="background:var(--acc-t,#eef1fd)">Analyze My Career</button>
+    </div>
+    <div style="display:flex;justify-content:space-between;padding:28px 4px 0;font-size:13px;color:#8b93a1"><span>© 2026 Waypoint</span><span>AI scores are estimates based on the information you provide.</span></div>
+  </section>
+</div>
+</sc-if>
+
+<sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:244px minmax(0,1fr);min-height:100vh;background:#f5f6f8;color:#0f1218">
+  <aside style="background:var(--side-bg,#0f1218);color:var(--side-text,#c4cad4);border-right:1px solid var(--side-border,#0f1218)">
+    <div style="position:sticky;top:0;height:100vh;overflow:auto;padding:18px 12px;display:flex;flex-direction:column;gap:16px">
+      <button onClick="{{ go.landing }}" style="all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:4px 10px">
+        <div style="width:24px;height:24px;border-radius:7px;background:var(--acc,#3b5bdb);display:grid;place-items:center"><div style="width:8px;height:8px;border-radius:50%;background:#fff"></div></div>
+        <span style="font-weight:650;font-size:16px;color:var(--side-strong,#fff);letter-spacing:-.02em">Waypoint</span>
+      </button>
+      <sc-for list="{{ nav }}" as="g" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;gap:1px">
+          <div style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--side-mute,#6b7383);padding:4px 10px 6px">{{ g.label }}</div>
+          <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+            <button onClick="{{ it.onClick }}" style="all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:8px;font-size:13.5px;background:{{ it.bg }};color:{{ it.color }}" style-hover="background:var(--side-hover,#1b212b);color:var(--side-strong,#fff)">
+              <span style="width:6px;height:6px;border-radius:50%;background:{{ it.dot }};flex:none"></span>
+              <span>{{ it.label }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-for>
+      <div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:var(--side-card,#171c25)">
+        <div style="width:30px;height:30px;border-radius:50%;background:var(--acc,#3b5bdb);color:#fff;display:grid;place-items:center;font-weight:600;font-size:12px;flex:none">{{ initials }}</div>
+        <div style="min-width:0"><div style="font-size:13px;color:var(--side-strong,#fff);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ profile.name }}</div><div style="font-size:11.5px;color:var(--side-mute,#8b93a1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ profile.role }}</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main style="padding:26px 36px 80px;min-width:0">
+    <div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:22px;flex-wrap:wrap">
+      <div style="margin-right:auto;min-width:0;display:flex;flex-direction:column;gap:4px">
+        <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">{{ crumb }}</div>
+        <h1 style="font-size:28px;letter-spacing:-.03em;font-weight:620;margin:0">{{ pageTitle }}</h1>
+        <div style="font-size:14px;color:#5b6472;max-width:640px">{{ pageDesc }}</div>
+      </div>
+      <sc-if value="{{ needsJob }}" hint-placeholder-val="{{ false }}">
+        <label style="display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:#5b6472">Target job
+          <select onChange="{{ onJob }}" style="height:36px;min-width:240px;border:1px solid #d8dce3;border-radius:9px;padding:0 10px;font-size:13.5px;background:#fff;color:#0f1218">
+            <sc-for list="{{ jobOpts }}" as="jo" hint-placeholder-count="4"><option value="{{ jo.id }}" selected="{{ jo.sel }}">{{ jo.label }}</option></sc-for>
+          </select>
+        </label>
+      </sc-if>
+      <div style="display:flex;align-items:center;gap:8px">
+        <sc-if value="{{ pageSrc }}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:12px;padding:4px 10px;border-radius:99px;background:{{ pageSrc.bg }};color:{{ pageSrc.fg }};font-weight:500">{{ pageSrc.label }}</span>
+        </sc-if>
+        <button onClick="{{ resetDemo }}" style="all:unset;cursor:pointer;font-size:12.5px;color:#5b6472;padding:4px 8px;border-radius:6px" style-hover="background:#e9ebef;color:#0f1218">Reset demo</button>
+      </div>
+    </div>
+
+    <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:12px;background:#fdecea;border:1px solid #f6c9c4;color:#8a2a22;border-radius:12px;padding:12px 14px;margin-bottom:18px">
+        <span style="flex:1;font-size:14px">{{ error.message }}</span>
+        <sc-if value="{{ error.canRetry }}" hint-placeholder-val="{{ false }}"><button onClick="{{ retry }}" style="all:unset;cursor:pointer;height:32px;padding:0 12px;border-radius:8px;background:#d1453b;color:#fff;font-size:13px;font-weight:500;display:inline-flex;align-items:center">Retry</button></sc-if>
+        <button onClick="{{ dismissError }}" style="all:unset;cursor:pointer;font-size:13px;padding:0 8px">Dismiss</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border:1px solid var(--acc-b,#dfe5fc);border-radius:14px;padding:18px 20px;margin-bottom:18px;display:flex;flex-direction:column;gap:9px;box-shadow:0 8px 24px rgba(59,91,219,.08)">
+        <div style="font-weight:600;font-size:15px">{{ loadingTitle }}</div>
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+          <div style="display:flex;gap:10px;align-items:center;font-size:13.5px;color:{{ st.color }}">
+            <span style="width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:10px;background:{{ st.dotBg }};color:#fff">{{ st.glyph }}</span>
+            <span>{{ st.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- ONBOARDING -->
+    <sc-if value="{{ is.onboard }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Onboarding" style="display:flex;flex-direction:column;gap:18px;max-width:920px">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:5px;align-self:flex-start">
+        <sc-for list="{{ obSteps }}" as="o" hint-placeholder-count="3">
+          <button onClick="{{ o.onClick }}" style="all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:8px;background:{{ o.bg }}">
+            <span style="width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-size:12px;font-weight:600;background:{{ o.dotBg }};color:{{ o.dotColor }}">{{ o.n }}</span>
+            <span style="font-size:13.5px;font-weight:500">{{ o.label }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ ob1 }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:18px">
+        <div><div style="font-weight:600;font-size:17px">Your profile</div><div style="font-size:13.5px;color:#5b6472">Used as context for every analysis. Only what a task needs is sent to the model.</div></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Name<input value="{{ profile.name }}" onChange="{{ on.name }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Target role<input value="{{ profile.role }}" onChange="{{ on.role }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Career level<select onChange="{{ on.level }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 10px;font-size:14px;background:#fff"><sc-for list="{{ levelOpts }}" as="lo" hint-placeholder-count="5"><option value="{{ lo.v }}" selected="{{ lo.sel }}">{{ lo.v }}</option></sc-for></select></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Years of experience<input value="{{ profile.years }}" onChange="{{ on.years }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Location<input value="{{ profile.location }}" onChange="{{ on.location }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Key skills<input value="{{ profile.skills }}" onChange="{{ on.skills }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+        </div>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Career goals<textarea value="{{ profile.goals }}" onChange="{{ on.goals }}" style="min-height:80px;border:1px solid #d8dce3;border-radius:9px;padding:10px 12px;font-size:14px;resize:vertical"></textarea></label>
+        <div><button onClick="{{ toOb2 }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:38px;padding:0 16px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Continue to resume</button></div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ ob2 }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-end">
+          <div><div style="font-weight:600;font-size:17px">Master resume</div><div style="font-size:13.5px;color:#5b6472">Paste your resume text, or upload a .txt file.</div></div>
+          <label style="cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;border:1px solid #d8dce3;font-size:13.5px;font-weight:500">Upload file<input type="file" accept=".txt,.md,.pdf,.docx" onChange="{{ onFile }}" style="display:none"></label>
+        </div>
+        <textarea value="{{ resumeText }}" onChange="{{ onResumeText }}" style="min-height:340px;border:1px solid #d8dce3;border-radius:10px;padding:14px 16px;font-family:'Geist Mono',monospace;font-size:12.5px;line-height:1.65;resize:vertical;background:#fafbfc"></textarea>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <button onClick="{{ runAnalysis }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:38px;padding:0 16px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Analyze resume</button>
+          <span style="font-size:13px;color:#5b6472">{{ resumeStats }}</span>
+        </div>
+      </div>
+      <sc-if value="{{ hasAnalysis }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px">
+          <div style="font-weight:600;font-size:16px">Resume health</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px">
+            <sc-for list="{{ healthCards }}" as="h" hint-placeholder-count="7">
+              <div style="background:#f7f8fa;border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:4px">
+                <div style="font-size:12px;color:#5b6472">{{ h.label }}</div>
+                <div style="font-size:22px;font-weight:620;letter-spacing:-.02em;color:{{ h.ink }}">{{ h.value }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button onClick="{{ toOb3 }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Add a target job</button>
+            <button onClick="{{ go.resume }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;border:1px solid #d8dce3;font-size:13.5px;font-weight:500" style-hover="background:#f1f3f5">Open full analysis</button>
+          </div>
+        </div>
+      </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ ob3 }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:14px">
+        <div><div style="font-weight:600;font-size:17px">Target job</div><div style="font-size:13.5px;color:#5b6472">Editing the active job. Add more under Saved Jobs &amp; Priority.</div></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Job title<input value="{{ activeJob.title }}" onChange="{{ onJobField.title }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Company<input value="{{ activeJob.company }}" onChange="{{ onJobField.company }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+        </div>
+        <textarea value="{{ activeJob.text }}" onChange="{{ onJobField.text }}" style="min-height:280px;border:1px solid #d8dce3;border-radius:10px;padding:14px 16px;font-size:13.5px;line-height:1.6;resize:vertical;background:#fafbfc"></textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button onClick="{{ runAtsOb }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:38px;padding:0 16px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Analyze against this job</button>
+          <button onClick="{{ go.dash }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:38px;padding:0 16px;border-radius:9px;border:1px solid #d8dce3;font-size:13.5px;font-weight:500" style-hover="background:#f1f3f5">Go to dashboard</button>
+        </div>
+      </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- DASHBOARD -->
+    <sc-if value="{{ is.dash }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Dashboard" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Career readiness</span><span style="font-size:12px;color:#8b93a1">An estimate, not a measure of employability</span></div>
+          <div style="display:flex;gap:26px;align-items:center;flex-wrap:wrap">
+            <div style="width:144px;height:144px;border-radius:50%;background:conic-gradient(var(--acc,#3b5bdb) {{ readinessDeg }}deg, #eceef2 0deg);display:grid;place-items:center;flex:none">
+              <div style="width:116px;height:116px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                <span style="font-size:44px;font-weight:650;letter-spacing:-.04em;line-height:1">{{ readiness }}</span>
+                <span style="font-size:12px;color:#8b93a1">of 100</span>
+              </div>
+            </div>
+            <div style="flex:1;min-width:220px;display:flex;flex-direction:column;gap:8px">
+              <div style="font-size:20px;font-weight:600;letter-spacing:-.02em">{{ profile.role }}</div>
+              <p style="font-size:13.5px;line-height:1.55;color:#5b6472;margin:0;text-wrap:pretty">{{ formulaText }}</p>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
+            <sc-for list="{{ components }}" as="c" hint-placeholder-count="6">
+              <div style="background:#f7f8fa;border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:7px">
+                <div style="display:flex;justify-content:space-between;font-size:12px;color:#5b6472"><span>{{ c.label }}</span><span style="font-family:'Geist Mono',monospace;font-size:11px">{{ c.weightText }}</span></div>
+                <div style="font-size:22px;font-weight:620;letter-spacing:-.02em;line-height:1">{{ c.valueText }}</div>
+                <div style="height:5px;border-radius:9px;background:#e6e8ec"><div style="height:5px;border-radius:9px;background:var(--acc,#3b5bdb);width:{{ c.bar }}%"></div></div>
+                <div style="font-size:11.5px;color:#8b93a1">{{ c.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Recommended actions</span>
+          <sc-for list="{{ actions }}" as="ac" hint-placeholder-count="4">
+            <div style="border:1px solid #eceef2;border-radius:12px;padding:14px;display:flex;gap:12px">
+              <div style="width:26px;height:26px;border-radius:7px;background:var(--acc-t,#eef1fd);color:var(--acc-i,#2a3fa8);display:grid;place-items:center;font-weight:650;font-size:13px;flex:none">{{ ac.n }}</div>
+              <div style="display:flex;flex-direction:column;gap:5px;min-width:0;flex:1">
+                <div style="font-weight:600;font-size:14.5px">{{ ac.title }}</div>
+                <div style="font-size:13px;color:#4a5260;line-height:1.5">{{ ac.why }} {{ ac.action }}</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:2px">
+                  <span style="font-size:11.5px;padding:2px 8px;border-radius:99px;background:{{ ac.ibg }};color:{{ ac.ifg }}">{{ ac.impactLabel }}</span>
+                  <button onClick="{{ ac.onGo }}" style="all:unset;cursor:pointer;font-size:12.5px;color:var(--acc,#3b5bdb);font-weight:500" style-hover="text-decoration:underline">Open {{ ac.module }} →</button>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ noActions }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:#5b6472">Analyze a resume to get recommendations.</div></sc-if>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Target career</span>
+          <div style="font-size:18px;font-weight:600;letter-spacing:-.02em">{{ profile.role }}</div>
+          <div style="font-size:13px;color:#5b6472">{{ targetJobLabel }}</div>
+          <div style="font-size:12px;font-weight:600;color:#3c4452">Required skills you show</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ matched }}" as="m" hint-placeholder-count="6"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:#e6f5ee;color:#0b6247">{{ m }}</span></sc-for></div>
+          <div style="font-size:12px;font-weight:600;color:#3c4452">Missing from your resume</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ missing }}" as="m" hint-placeholder-count="6"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:#fdecea;color:#a8322a">{{ m }}</span></sc-for></div>
+          <button onClick="{{ go.roadmap }}" style="all:unset;cursor:pointer;font-size:13px;color:var(--acc,#3b5bdb);font-weight:500;margin-top:4px">Learning path · {{ roadmapPct }}% complete →</button>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Skill progress</span>
+          <div style="display:flex;height:10px;border-radius:9px;overflow:hidden;gap:2px">
+            <sc-for list="{{ skillBuckets }}" as="b" hint-placeholder-count="4"><div style="flex:{{ b.count }};background:{{ b.color }}"></div></sc-for>
+          </div>
+          <sc-for list="{{ skillBuckets }}" as="b" hint-placeholder-count="4">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <span style="width:10px;height:10px;border-radius:3px;background:{{ b.color }};margin-top:4px;flex:none"></span>
+              <div style="min-width:0"><div style="font-size:13px;font-weight:600">{{ b.label }} · {{ b.count }}</div><div style="font-size:12.5px;color:#5b6472;line-height:1.5">{{ b.list }}</div></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Strengths &amp; blockers</span>
+          <sc-for list="{{ strengths }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px;display:flex;gap:9px;line-height:1.45"><span style="color:#12805c;font-weight:700">+</span><span>{{ x }}</span></div></sc-for>
+          <div style="height:1px;background:#eef0f3;margin:4px 0"></div>
+          <sc-for list="{{ blockers }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px;display:flex;gap:9px;line-height:1.45"><span style="color:#d1453b;font-weight:700">!</span><span>{{ x }}</span></div></sc-for>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Recent applications</span><button onClick="{{ go.tracker }}" style="all:unset;cursor:pointer;font-size:13px;color:var(--acc,#3b5bdb);font-weight:500">View all →</button></div>
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+          <thead><tr style="text-align:left;color:#6b7280;font-size:12px"><th style="padding:8px 10px;font-weight:500;border-bottom:1px solid #eceef2">Company</th><th style="padding:8px 10px;font-weight:500;border-bottom:1px solid #eceef2">Role</th><th style="padding:8px 10px;font-weight:500;border-bottom:1px solid #eceef2;text-align:right">Match</th><th style="padding:8px 10px;font-weight:500;border-bottom:1px solid #eceef2">Resume</th><th style="padding:8px 10px;font-weight:500;border-bottom:1px solid #eceef2">Status</th></tr></thead>
+          <tbody>
+            <sc-for list="{{ recentApps }}" as="r" hint-placeholder-count="5">
+              <tr><td style="padding:10px;border-bottom:1px solid #f1f2f5;font-weight:500">{{ r.company }}</td><td style="padding:10px;border-bottom:1px solid #f1f2f5;color:#3c4452">{{ r.role }}</td><td style="padding:10px;border-bottom:1px solid #f1f2f5;text-align:right;font-family:'Geist Mono',monospace">{{ r.match }}%</td><td style="padding:10px;border-bottom:1px solid #f1f2f5;color:#5b6472">{{ r.versionShort }}</td><td style="padding:10px;border-bottom:1px solid #f1f2f5"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:{{ r.sbg }};color:{{ r.sfg }}">{{ r.status }}</span></td></tr>
+            </sc-for>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- RESUME ANALYZER -->
+    <sc-if value="{{ is.resume }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Resume Analyzer" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <div style="display:flex;gap:2px;background:#e9ebef;border-radius:10px;padding:3px">
+          <sc-for list="{{ resumeTabs }}" as="tb" hint-placeholder-count="3">
+            <button onClick="{{ tb.onClick }}" style="all:unset;cursor:pointer;padding:7px 14px;border-radius:8px;font-size:13.5px;font-weight:500;background:{{ tb.bg }};color:{{ tb.color }};box-shadow:{{ tb.shadow }}">{{ tb.label }}</button>
+          </sc-for>
+        </div>
+        <span style="margin-left:auto"></span>
+        <button onClick="{{ goOnboard2 }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;border:1px solid #d8dce3;background:#fff;font-size:13.5px;font-weight:500" style-hover="background:#f1f3f5">Edit resume text</button>
+        <button onClick="{{ runAnalysis }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Re-analyze</button>
+      </div>
+
+      <sc-if value="{{ tabHealth }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Resume score</span>
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:64px;font-weight:650;letter-spacing:-.05em;line-height:1">{{ a.scores.overall }}</span><span style="color:#8b93a1;font-size:14px">/ 100 · estimate</span></div>
+            <p style="font-size:14.5px;line-height:1.6;margin:0;color:#3c4452;text-wrap:pretty">{{ a.summary }}</p>
+            <div style="font-size:12px;font-weight:600;color:#3c4452;margin-top:4px">What's working</div>
+            <sc-for list="{{ strengths }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px;display:flex;gap:9px"><span style="color:#12805c;font-weight:700">+</span><span>{{ x }}</span></div></sc-for>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Breakdown</span>
+            <sc-for list="{{ healthBars }}" as="h" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:150px minmax(0,1fr) 36px;gap:14px;align-items:center">
+                <span style="font-size:13.5px;color:#3c4452">{{ h.label }}</span>
+                <div style="height:8px;border-radius:9px;background:#eef0f3"><div style="height:8px;border-radius:9px;background:{{ h.color }};width:{{ h.bar }}%"></div></div>
+                <span style="font-size:15px;font-weight:600;text-align:right;font-family:'Geist Mono',monospace">{{ h.value }}</span>
+              </div>
+            </sc-for>
+            <div style="font-size:12.5px;color:#5b6472;border-top:1px solid #eef0f3;padding-top:12px">Red flags: {{ flagCountText }}</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabFlags }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <sc-for list="{{ flagGroups }}" as="fg" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:{{ fg.dot }}"></span><span style="font-weight:600;font-size:15px">{{ fg.label }}</span><span style="font-size:12px;color:#8b93a1">{{ fg.count }}</span></div>
+              <sc-for list="{{ fg.items }}" as="f" hint-placeholder-count="2">
+                <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:12px">
+                  <div style="font-weight:600;font-size:15px">{{ f.title }}</div>
+                  <div style="font-size:12.5px;background:#f7f8fa;border-left:3px solid {{ fg.dot }};border-radius:6px;padding:8px 12px;font-family:'Geist Mono',monospace;color:#3c4452">{{ f.quote }}</div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;font-size:13.5px;line-height:1.5">
+                    <div><div style="font-size:11.5px;color:#8b93a1;margin-bottom:3px">Problem</div>{{ f.problem }}</div>
+                    <div><div style="font-size:11.5px;color:#8b93a1;margin-bottom:3px">Why it matters</div>{{ f.why }}</div>
+                    <div><div style="font-size:11.5px;color:#12805c;margin-bottom:3px">How to fix</div>{{ f.fix }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabAts }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="font-size:13px;color:#8a5a12;background:#fcf3e1;border:1px solid #f3e0b8;border-radius:10px;padding:10px 14px">AI approximation of common ATS checks. It doesn't reproduce any specific employer's system and isn't a guarantee of passing one.</div>
+          <sc-if value="{{ hasAts }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px">
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">ATS readiness</span>
+              <div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:64px;font-weight:650;letter-spacing:-.05em;line-height:1">{{ t.score }}</span><span style="color:#8b93a1;font-size:14px">/ 100</span></div>
+              <div style="font-size:13px;color:#5b6472">{{ targetJobLabel }}</div>
+              <p style="font-size:14px;line-height:1.55;margin:0;color:#3c4452">{{ t.summary }}</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div style="background:#f7f8fa;border-radius:10px;padding:12px 14px"><div style="font-size:12px;color:#5b6472">Keyword coverage</div><div style="font-size:22px;font-weight:620">{{ t.keywordCoverage }}%</div></div>
+                <div style="background:#f7f8fa;border-radius:10px;padding:12px 14px"><div style="font-size:12px;color:#5b6472">Job fit</div><div style="font-size:22px;font-weight:620">{{ t.jobFit }}</div></div>
+              </div>
+              <div style="font-size:13px;line-height:1.5"><b style="font-weight:600">Title alignment.</b> {{ t.titleAlignment }}</div>
+            </div>
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:4px">
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280;margin-bottom:8px">Checks</span>
+              <sc-for list="{{ atsChecks }}" as="ck" hint-placeholder-count="6">
+                <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f1f2f5">
+                  <span style="flex:none;width:44px;text-align:center;font-size:11.5px;font-weight:600;padding:2px 0;border-radius:99px;background:{{ ck.bg }};color:{{ ck.fg }}">{{ ck.statusLabel }}</span>
+                  <div style="font-size:13.5px;line-height:1.45"><div style="font-weight:600">{{ ck.label }}</div><div style="color:#5b6472">{{ ck.note }}</div></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;font-weight:600;color:#0b6247">Keywords found</span><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ matched }}" as="m" hint-placeholder-count="6"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:#e6f5ee;color:#0b6247">{{ m }}</span></sc-for></div></div>
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;font-weight:600;color:#a8322a">Keywords missing</span><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ missing }}" as="m" hint-placeholder-count="6"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:#fdecea;color:#a8322a">{{ m }}</span></sc-for></div><div style="font-size:12px;color:#8b93a1">Only add these if they reflect work you've actually done.</div></div>
+          </div>
+          </sc-if>
+          <div style="display:flex;gap:10px"><button onClick="{{ runAts }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Run ATS analysis for this job</button></div>
+        </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- RESUME TAILOR -->
+    <sc-if value="{{ is.tailor }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Resume Tailor" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px 14px">
+        <span style="font-size:13px;color:#5b6472;flex:1;min-width:240px">Reorders and rewrites only what's in your master resume. Nothing is added that you didn't provide.</span>
+        <button onClick="{{ runTailor }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Tailor for this job</button>
+      </div>
+      <sc-if value="{{ tl.empty }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border:1px dashed #cfd4dc;border-radius:14px;padding:40px;text-align:left;font-size:14px;color:#5b6472">No tailored version for {{ jobLabel }} yet. Run tailoring to generate one.</div>
+      </sc-if>
+      <sc-if value="{{ tl.has }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600;font-size:14px">Master resume</span><span style="font-size:12px;color:#8b93a1">Original</span></div>
+            <textarea readonly value="{{ tl.original }}" style="min-height:520px;border:1px solid #eceef2;border-radius:10px;padding:14px;font-family:'Geist Mono',monospace;font-size:12px;line-height:1.65;background:#fafbfc;color:#5b6472;resize:vertical"></textarea>
+          </div>
+          <div style="background:#fff;border:1px solid var(--acc-b,#c9d3f7);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 24px rgba(59,91,219,.07)">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600;font-size:14px">Tailored for {{ jobLabel }}</span><span style="font-size:12px;color:var(--acc-i,#2a3fa8)">Editable</span></div>
+            <textarea value="{{ tl.text }}" onChange="{{ tl.onText }}" style="min-height:520px;border:1px solid var(--acc-b,#dfe5fc);border-radius:10px;padding:14px;font-family:'Geist Mono',monospace;font-size:12px;line-height:1.65;resize:vertical"></textarea>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:4px">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280;margin-bottom:8px">What changed</span>
+            <sc-for list="{{ tl.changes }}" as="ch" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid #f1f2f5;font-size:13.5px;line-height:1.5"><span style="font-weight:600;color:var(--acc-i,#2a3fa8)">{{ ch.section }}</span><div>{{ ch.change }}<div style="color:#5b6472;font-size:12.5px">{{ ch.reason }}</div></div></div>
+            </sc-for>
+            <div style="font-size:12.5px;color:#5b6472;margin-top:10px">Not added because your resume has no evidence: <b style="font-weight:600;color:#a8322a">{{ tl.notIncludedText }}</b></div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Save &amp; export</span>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Version name<input value="{{ tl.versionName }}" onChange="{{ tl.onVersionName }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button onClick="{{ tl.save }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Save as new version</button>
+              <button onClick="{{ tl.download }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;border:1px solid #d8dce3;font-size:13.5px;font-weight:500" style-hover="background:#f1f3f5">Download .txt</button>
+            </div>
+            <sc-if value="{{ tl.savedMsg }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;color:#0b6247">{{ tl.savedMsg }}</div></sc-if>
+            <div style="font-size:12px;font-weight:600;color:#3c4452;margin-top:6px">Resume versions</div>
+            <sc-for list="{{ versionsList }}" as="v" hint-placeholder-count="4">
+              <div style="display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0;border-bottom:1px solid #f1f2f5"><span style="font-weight:500">{{ v.name }}</span><span style="color:#8b93a1;font-family:'Geist Mono',monospace;font-size:12px">{{ v.usage }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- BULLET OPTIMIZER -->
+    <sc-if value="{{ is.bullets }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Bullet Optimizer" style="display:flex;flex-direction:column;gap:16px;max-width:1000px">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Resume bullet<textarea value="{{ bulletInput }}" onChange="{{ onBulletInput }}" style="min-height:76px;border:1px solid #d8dce3;border-radius:9px;padding:10px 12px;font-size:15px;resize:vertical"></textarea></label>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <button onClick="{{ runBullets }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Generate versions</button>
+          <span style="font-size:12.5px;color:#5b6472">Uses your resume and {{ jobLabel }} as context. Never invents results.</span>
+        </div>
+      </div>
+      <sc-if value="{{ bl.has }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+          <sc-for list="{{ bl.variants }}" as="v" hint-placeholder-count="4">
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px;background:#f1ecfd;color:#5531c4">{{ v.style }}</span><button onClick="{{ v.onCopy }}" style="all:unset;cursor:pointer;font-size:12.5px;color:var(--acc,#3b5bdb);font-weight:500">{{ v.copyLabel }}</button></div>
+              <div style="font-size:15px;line-height:1.5">{{ v.text }}</div>
+              <div style="font-size:12.5px;color:#5b6472">{{ v.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background:#fcf3e1;border:1px solid #f3e0b8;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px">
+          <div style="font-weight:600;font-size:14px;color:#8a5a12">Add a real metric</div>
+          <sc-for list="{{ bl.metricPrompts }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px;color:#5c3d0c">· {{ x }}</div></sc-for>
+        </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- SKILL PROOF -->
+    <sc-if value="{{ is.proof }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Skill-Proof" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <sc-for list="{{ pf.counts }}" as="pc" hint-placeholder-count="3"><span style="font-size:13px;padding:6px 12px;border-radius:99px;background:{{ pc.bg }};color:{{ pc.fg }};font-weight:500">{{ pc.label }}</span></sc-for>
+        <span style="margin-left:auto"></span>
+        <button onClick="{{ runProof }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Check proof for this job</button>
+      </div>
+      <sc-if value="{{ pf.empty }}" hint-placeholder-val="{{ false }}"><div style="background:#fff;border:1px dashed #cfd4dc;border-radius:14px;padding:40px;font-size:14px;color:#5b6472">No skill-proof check for {{ jobLabel }} yet.</div></sc-if>
+      <sc-if value="{{ pf.has }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:170px minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr);gap:16px;padding:10px 18px;background:#f7f8fa;font-size:12px;color:#6b7280;font-weight:500"><span>Skill</span><span>Existing evidence</span><span>Evidence gap</span><span>Recommended proof</span></div>
+        <sc-for list="{{ pf.items }}" as="p" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:170px minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr);gap:16px;padding:16px 18px;border-top:1px solid #f1f2f5;font-size:13.5px;line-height:1.5">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start"><span style="font-weight:600">{{ p.skill }}</span><span style="font-size:11.5px;padding:2px 8px;border-radius:99px;background:{{ p.bg }};color:{{ p.fg }};font-weight:500">{{ p.status }}</span></div>
+            <div style="color:#3c4452">{{ p.evidence }}</div>
+            <div style="color:#5b6472">{{ p.gap }}</div>
+            <div><div>{{ p.proof }}</div><sc-if value="{{ p.hasIdea }}" hint-placeholder-val="{{ false }}"><div style="margin-top:6px;font-size:12.5px;color:var(--acc-i,#2a3fa8);background:var(--acc-t,#eef1fd);border-radius:8px;padding:7px 10px">Project idea: {{ p.idea }}</div></sc-if></div>
+          </div>
+        </sc-for>
+      </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- SAVED JOBS & PRIORITY -->
+    <sc-if value="{{ is.jobs }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Priority Engine" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <span style="font-size:13px;color:#5b6472;flex:1;min-width:260px">{{ priorityFormula }}</span>
+        <button onClick="{{ toggleAddJob }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;border:1px solid #d8dce3;background:#fff;font-size:13.5px;font-weight:500" style-hover="background:#f1f3f5">Add job</button>
+        <button onClick="{{ runPriority }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Score all jobs</button>
+      </div>
+      <sc-if value="{{ addingJob }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border:1px solid var(--acc-b,#c9d3f7);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Job title<input value="{{ jobDraft.title }}" onChange="{{ onJobDraft.title }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Company<input value="{{ jobDraft.company }}" onChange="{{ onJobDraft.company }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Location<input value="{{ jobDraft.location }}" onChange="{{ onJobDraft.location }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Job description<textarea value="{{ jobDraft.text }}" onChange="{{ onJobDraft.text }}" style="min-height:180px;border:1px solid #d8dce3;border-radius:9px;padding:10px 12px;font-size:13.5px;line-height:1.55;resize:vertical"></textarea></label>
+          <div style="display:flex;gap:8px"><button onClick="{{ saveJob }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Save job</button><button onClick="{{ toggleAddJob }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;border:1px solid #d8dce3;font-size:13.5px">Cancel</button></div>
+        </div>
+      </sc-if>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:13.5px;min-width:880px">
+          <thead><tr style="background:#f7f8fa">
+            <sc-for list="{{ jobCols }}" as="jc" hint-placeholder-count="8"><th style="padding:10px 12px;text-align:{{ jc.align }};font-weight:500;font-size:12px;color:#6b7280"><button onClick="{{ jc.onClick }}" style="all:unset;cursor:pointer;color:{{ jc.color }}">{{ jc.label }}</button></th></sc-for>
+            <th style="padding:10px 12px"></th>
+          </tr></thead>
+          <tbody>
+            <sc-for list="{{ jobRows }}" as="jr" hint-placeholder-count="4">
+              <tr style="border-top:1px solid #f1f2f5;background:{{ jr.rowBg }}">
+                <td style="padding:14px 12px;max-width:340px"><div style="font-weight:600">{{ jr.title }}</div><div style="font-size:12.5px;color:#5b6472">{{ jr.company }} · {{ jr.location }}</div><div style="font-size:12.5px;color:#5b6472;margin-top:6px;line-height:1.45">{{ jr.reason }}</div></td>
+                <td style="padding:14px 12px;text-align:right;font-family:'Geist Mono',monospace">{{ jr.resume }}</td>
+                <td style="padding:14px 12px;text-align:right;font-family:'Geist Mono',monospace">{{ jr.skill }}</td>
+                <td style="padding:14px 12px;text-align:right;font-family:'Geist Mono',monospace">{{ jr.experience }}</td>
+                <td style="padding:14px 12px;text-align:right;font-family:'Geist Mono',monospace">{{ jr.goal }}</td>
+                <td style="padding:14px 12px">{{ jr.effort }}</td>
+                <td style="padding:14px 12px;text-align:right;font-weight:650;font-size:15px">{{ jr.score }}</td>
+                <td style="padding:14px 12px"><span style="font-size:12px;padding:3px 10px;border-radius:99px;background:{{ jr.pbg }};color:{{ jr.pfg }};font-weight:500;white-space:nowrap">{{ jr.priority }}</span></td>
+                <td style="padding:14px 12px;white-space:nowrap"><button onClick="{{ jr.onActive }}" style="all:unset;cursor:pointer;font-size:12.5px;color:var(--acc,#3b5bdb);font-weight:500">{{ jr.activeLabel }}</button></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- JOB DECODER -->
+    <sc-if value="{{ is.decoder }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Job Decoder" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;justify-content:flex-end"><button onClick="{{ runDecoder }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Decode this job</button></div>
+      <sc-if value="{{ dc.empty }}" hint-placeholder-val="{{ false }}"><div style="background:#fff;border:1px dashed #cfd4dc;border-radius:14px;padding:40px;font-size:14px;color:#5b6472">{{ jobLabel }} hasn't been decoded yet.</div></sc-if>
+      <sc-if value="{{ dc.has }}" hint-placeholder-val="{{ true }}">
+        <div style="background:#0f1218;color:#fff;border-radius:14px;padding:26px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px">
+          <div><div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9fb0f5;margin-bottom:8px">Role summary</div><div style="font-size:17px;line-height:1.5">{{ dc.d.summary }}</div></div>
+          <div><div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9fb0f5;margin-bottom:8px">What they really want</div><div style="font-size:15px;line-height:1.55;color:#d3d8e0">{{ dc.d.reallyWants }}</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px"><div style="font-weight:600;font-size:14px;color:#a8322a">Must-have skills</div><sc-for list="{{ dc.d.mustHave }}" as="x" hint-placeholder-count="4"><div style="font-size:13.5px;display:flex;gap:8px"><span style="color:#d1453b">●</span>{{ x }}</div></sc-for></div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px"><div style="font-weight:600;font-size:14px;color:#8a5a12">Nice-to-have</div><sc-for list="{{ dc.d.niceToHave }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px;display:flex;gap:8px"><span style="color:#b7791f">●</span>{{ x }}</div></sc-for></div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px"><div style="font-weight:600;font-size:14px">Responsibilities</div><sc-for list="{{ dc.d.responsibilities }}" as="x" hint-placeholder-count="4"><div style="font-size:13.5px;display:flex;gap:8px"><span style="color:#8b93a1">●</span>{{ x }}</div></sc-for></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+            <div><div style="font-size:12px;color:#6b7280">Seniority</div><div style="font-size:16px;font-weight:600">{{ dc.d.seniority }}</div></div>
+            <div><div style="font-size:12px;color:#6b7280">Experience expectation</div><div style="font-size:14px;line-height:1.5">{{ dc.d.experience }}</div></div>
+          </div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px"><div style="font-weight:600;font-size:14px;color:var(--acc-i,#2a3fa8)">Likely interview focus</div><sc-for list="{{ dc.d.interviewFocus }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px">→ {{ x }}</div></sc-for></div>
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px"><div style="font-weight:600;font-size:14px;color:#5531c4">Hidden signals</div><sc-for list="{{ dc.d.hiddenSignals }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px;line-height:1.5">{{ x }}</div></sc-for></div>
+        </div>
+        <div style="background:#e6f5ee;border:1px solid #c6e8d7;border-radius:14px;padding:18px 20px"><div style="font-weight:600;font-size:14px;color:#0b6247;margin-bottom:4px">Candidate suitability</div><div style="font-size:14px;line-height:1.55;color:#0d3d2d">{{ dc.d.suitability }}</div></div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- JOB SAFETY -->
+    <sc-if value="{{ is.safety }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Job Safety" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;align-items:start">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Job post, recruiter message or email<textarea value="{{ safetyInput }}" onChange="{{ onSafetyInput }}" style="min-height:300px;border:1px solid #d8dce3;border-radius:9px;padding:12px;font-size:13.5px;line-height:1.55;resize:vertical"></textarea></label>
+        <button onClick="{{ runSafety }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;align-self:flex-start;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Assess risk</button>
+        <div style="font-size:12px;color:#8b93a1;line-height:1.5">A risk assessment of warning signals in the text. It is not a verdict on whether the job is real.</div>
+      </div>
+      <sc-if value="{{ sf.has }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:{{ sf.bg }};border:1px solid {{ sf.border }};border-radius:14px;padding:20px">
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:{{ sf.fg }};margin-bottom:6px">Job risk assessment</div>
+          <div style="font-size:22px;font-weight:620;letter-spacing:-.02em;color:{{ sf.fg }}">{{ sf.s.level }}</div>
+          <div style="font-size:14px;line-height:1.55;margin-top:6px;color:#3c4452">{{ sf.s.summary }}</div>
+        </div>
+        <sc-for list="{{ sf.signals }}" as="sg" hint-placeholder-count="4">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11.5px;padding:2px 8px;border-radius:99px;background:{{ sg.bg }};color:{{ sg.fg }};font-weight:500">{{ sg.severity }}</span><span style="font-weight:600;font-size:14px">{{ sg.signal }}</span></div>
+            <div style="font-size:12.5px;font-family:'Geist Mono',monospace;color:#3c4452;background:#f7f8fa;border-radius:6px;padding:6px 10px">{{ sg.quote }}</div>
+            <div style="font-size:13px;color:#5b6472">{{ sg.explain }}</div>
+          </div>
+        </sc-for>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px"><div style="font-weight:600;font-size:14px">Suggested next steps</div><sc-for list="{{ sf.s.nextSteps }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px">→ {{ x }}</div></sc-for></div>
+      </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- SKILL GAP -->
+    <sc-if value="{{ is.gap }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Skill Gap" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap">
+        <button onClick="{{ go.roadmap }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;border:1px solid #d8dce3;background:#fff;font-size:13.5px;font-weight:500" style-hover="background:#f1f3f5">View roadmap</button>
+        <button onClick="{{ runGap }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Detect skill gaps</button>
+      </div>
+      <sc-if value="{{ gp.empty }}" hint-placeholder-val="{{ false }}"><div style="background:#fff;border:1px dashed #cfd4dc;border-radius:14px;padding:40px;font-size:14px;color:#5b6472">No skill-gap analysis for {{ jobLabel }} yet.</div></sc-if>
+      <sc-if value="{{ gp.has }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start">
+        <sc-for list="{{ gp.cols }}" as="gc" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden">
+            <div style="padding:14px 18px;border-bottom:1px solid #f1f2f5;display:flex;align-items:center;gap:8px;border-top:3px solid {{ gc.color }}"><span style="font-weight:600;font-size:15px">{{ gc.label }}</span><span style="font-size:12px;color:#8b93a1">{{ gc.count }}</span></div>
+            <sc-for list="{{ gc.items }}" as="gi" hint-placeholder-count="3">
+              <div style="padding:14px 18px;border-bottom:1px solid #f1f2f5;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span style="font-weight:600;font-size:14px">{{ gi.skill }}</span><span style="font-size:11.5px;padding:2px 8px;border-radius:99px;background:{{ gi.pbg }};color:{{ gi.pfg }};white-space:nowrap">{{ gi.priority }}</span></div>
+                <div style="font-size:12px;color:#5b6472;font-family:'Geist Mono',monospace;line-height:1.5">JD: “{{ gi.evidence }}”</div>
+                <div style="font-size:13px;color:#3c4452">{{ gi.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- ROADMAP -->
+    <sc-if value="{{ is.roadmap }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Learning Roadmap" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <div style="display:flex;gap:2px;background:#e9ebef;border-radius:10px;padding:3px">
+          <sc-for list="{{ rm.tabs }}" as="tb" hint-placeholder-count="4">
+            <button onClick="{{ tb.onClick }}" style="all:unset;cursor:pointer;padding:7px 14px;border-radius:8px;font-size:13.5px;font-weight:500;background:{{ tb.bg }};box-shadow:{{ tb.shadow }};display:flex;gap:8px;align-items:center">{{ tb.label }}<span style="font-size:11.5px;color:#8b93a1;font-family:'Geist Mono',monospace">{{ tb.prog }}</span></button>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#5b6472"><div style="width:120px;height:6px;border-radius:9px;background:#e6e8ec"><div style="height:6px;border-radius:9px;background:#12805c;width:{{ roadmapPct }}%"></div></div>{{ roadmapPctText }}</div>
+        <span style="margin-left:auto;font-size:12.5px;color:#5b6472">{{ rm.basis }}</span>
+        <button onClick="{{ runRoadmap }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Generate roadmap from gaps</button>
+      </div>
+      <sc-if value="{{ rm.has }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px">
+        <sc-for list="{{ rm.tasks }}" as="tk" hint-placeholder-count="2">
+          <div style="background:#fff;border:1px solid {{ tk.border }};border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <button onClick="{{ tk.toggle }}" style="all:unset;cursor:pointer;width:22px;height:22px;border-radius:7px;border:1.5px solid {{ tk.boxBorder }};background:{{ tk.boxBg }};color:#fff;display:grid;place-items:center;font-size:13px;flex:none;margin-top:1px">{{ tk.check }}</button>
+              <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:16px;text-decoration:{{ tk.strike }}">{{ tk.topic }}</div><div style="font-size:13px;color:#5b6472;margin-top:2px">{{ tk.why }}</div></div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none"><span style="font-size:11.5px;padding:2px 8px;border-radius:99px;background:{{ tk.dbg }};color:{{ tk.dfg }}">{{ tk.difficulty }}</span><span style="font-size:12px;color:#8b93a1;font-family:'Geist Mono',monospace">{{ tk.hoursText }}</span></div>
+            </div>
+            <div style="display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px 12px;font-size:13px;line-height:1.5">
+              <span style="color:#8b93a1">Objective</span><span>{{ tk.objective }}</span>
+              <span style="color:#8b93a1">Practice</span><span>{{ tk.practice }}</span>
+              <span style="color:#8b93a1">Project</span><span>{{ tk.project }}</span>
+              <span style="color:#8b93a1">Interview Qs</span><span style="color:var(--acc-i,#2a3fa8)">{{ tk.qText }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- INTERVIEW CENTER -->
+    <sc-if value="{{ is.interview }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Interview Center" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <div style="display:flex;gap:2px;background:#e9ebef;border-radius:10px;padding:3px">
+          <sc-for list="{{ ivTabs }}" as="tb" hint-placeholder-count="2">
+            <button onClick="{{ tb.onClick }}" style="all:unset;cursor:pointer;padding:7px 14px;border-radius:8px;font-size:13.5px;font-weight:500;background:{{ tb.bg }};box-shadow:{{ tb.shadow }}">{{ tb.label }}</button>
+          </sc-for>
+        </div>
+        <span style="font-size:13px;color:#5b6472">{{ practiceStats }}</span>
+        <span style="margin-left:auto"></span>
+        <sc-if value="{{ tabPractice }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ runQuestions }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Predict questions</button>
+        </sc-if>
+      </div>
+
+      <sc-if value="{{ tabPractice }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:16px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px">
+            <sc-for list="{{ qFilters }}" as="qf" hint-placeholder-count="7">
+              <button onClick="{{ qf.onClick }}" style="all:unset;cursor:pointer;padding:5px 11px;border-radius:99px;font-size:12.5px;font-weight:500;background:{{ qf.bg }};color:{{ qf.color }};border:1px solid {{ qf.border }}">{{ qf.label }}</button>
+            </sc-for>
+          </div>
+          <sc-for list="{{ qList }}" as="q" hint-placeholder-count="6">
+            <button onClick="{{ q.onClick }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:12px;background:#fff;border:1px solid {{ q.border }};box-shadow:{{ q.shadow }}">
+              <div style="display:flex;gap:8px;align-items:center;font-size:12px"><span style="color:var(--acc-i,#2a3fa8);font-weight:600">{{ q.category }}</span><span style="color:#8b93a1">{{ q.difficulty }}</span><span style="margin-left:auto;color:#0b6247;font-weight:600;font-family:'Geist Mono',monospace">{{ q.scoreText }}</span></div>
+              <div style="font-size:14px;line-height:1.45">{{ q.question }}</div>
+            </button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ sel }}" hint-placeholder-val="{{ true }}">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px;position:sticky;top:20px">
+          <div style="display:flex;gap:6px"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:var(--acc-t,#eef1fd);color:var(--acc-i,#2a3fa8);font-weight:500">{{ sel.category }}</span><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:#f1f3f5;color:#3c4452">{{ sel.difficulty }}</span></div>
+          <div style="font-size:20px;font-weight:600;letter-spacing:-.02em;line-height:1.3">{{ sel.question }}</div>
+          <div style="font-size:13.5px;color:#4a5260"><b style="font-weight:600">Why they may ask.</b> {{ sel.why }}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+            <div style="background:#f7f8fa;border-radius:10px;padding:12px 14px"><div style="font-size:12px;color:#6b7280;margin-bottom:6px">Expected answer areas</div><sc-for list="{{ sel.expect }}" as="x" hint-placeholder-count="3"><div style="font-size:13.5px">· {{ x }}</div></sc-for></div>
+            <div style="background:#f7f8fa;border-radius:10px;padding:12px 14px"><div style="font-size:12px;color:#6b7280;margin-bottom:6px">Likely follow-ups</div><sc-for list="{{ sel.followups }}" as="x" hint-placeholder-count="2"><div style="font-size:13.5px">· {{ x }}</div></sc-for></div>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Your answer<textarea placeholder="Answer as you would out loud. Specifics from your own work score better than definitions." value="{{ sel.answer }}" onChange="{{ sel.onAnswer }}" style="min-height:140px;border:1px solid #d8dce3;border-radius:9px;padding:10px 12px;font-size:14px;line-height:1.55;resize:vertical"></textarea></label>
+          <div><button onClick="{{ sel.evaluate }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550;opacity:{{ sel.btnOpacity }}" style-hover="background:var(--acc-d,#2f4ac0)">Evaluate answer</button></div>
+          <sc-if value="{{ sel.ev }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid #e5e7eb;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-size:34px;font-weight:650;letter-spacing:-.04em;line-height:1">{{ sel.ev.score }}</span><span style="font-size:13px;color:#8b93a1">/ 100 answer strength · estimate</span><span style="margin-left:auto;font-size:12px;padding:3px 9px;border-radius:99px;background:{{ sel.ev.cbg }};color:{{ sel.ev.cfg }};font-weight:500">{{ sel.ev.credLabel }}</span></div>
+              <div style="font-size:14px;line-height:1.5">{{ sel.ev.summary }}</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;font-size:13.5px">
+                <div><div style="font-weight:600;color:#0b6247;margin-bottom:4px">Covered</div><sc-for list="{{ sel.ev.covered }}" as="x" hint-placeholder-count="2"><div>· {{ x }}</div></sc-for></div>
+                <div><div style="font-weight:600;color:#a8322a;margin-bottom:4px">Missing</div><sc-for list="{{ sel.ev.missing }}" as="x" hint-placeholder-count="2"><div>· {{ x }}</div></sc-for></div>
+              </div>
+              <div style="font-size:13.5px;color:#4a5260">{{ sel.ev.credibilityNote }}</div>
+              <div style="font-size:13.5px"><b style="font-weight:600">Stronger structure.</b> {{ sel.ev.betterAnswer }}</div>
+            </div>
+          </sc-if>
+        </div>
+        </sc-if>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ tabConsistency }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <p style="font-size:14px;line-height:1.55;color:#4a5260;max-width:720px;margin:0">Each claim on your resume implies a level of knowledge. Pick one, answer a probing question, and see whether your answer currently supports it. This measures the answer, not your honesty.</p>
+        <div style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:16px;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ claims }}" as="cl" hint-placeholder-count="4">
+              <button onClick="{{ cl.onClick }}" style="all:unset;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:12px;background:#fff;border:1px solid {{ cl.border }};box-shadow:{{ cl.shadow }}">
+                <div style="font-weight:600;font-size:14.5px">“{{ cl.claim }}”</div>
+                <div style="font-size:12.5px;color:#5b6472">Evidence: {{ cl.evidence }}</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="font-size:11.5px;padding:2px 8px;border-radius:99px;background:{{ cl.pbg }};color:{{ cl.pfg }}">{{ cl.priorLabel }}</span><sc-if value="{{ cl.tested }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;padding:2px 8px;border-radius:99px;background:{{ cl.rbg }};color:{{ cl.rfg }}">{{ cl.resultLabel }}</span></sc-if></div>
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ csel }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px;position:sticky;top:20px">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Testing claim</span>
+            <div style="font-size:20px;font-weight:600;letter-spacing:-.02em">“{{ csel.claim }}”</div>
+            <sc-if value="{{ csel.noQuestion }}" hint-placeholder-val="{{ false }}">
+              <div><button onClick="{{ csel.generate }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Generate a probing question</button></div>
+            </sc-if>
+            <sc-if value="{{ csel.question }}" hint-placeholder-val="{{ false }}">
+              <div style="background:#f7f8fa;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:4px"><div style="font-size:15px;font-weight:600">{{ csel.question }}</div><div style="font-size:12.5px;color:#6b7280">Tests: {{ csel.testing }}</div></div>
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Your answer<textarea value="{{ csel.answer }}" onChange="{{ csel.onAnswer }}" style="min-height:140px;border:1px solid #d8dce3;border-radius:9px;padding:10px 12px;font-size:14px;line-height:1.55;resize:vertical"></textarea></label>
+              <div><button onClick="{{ csel.evaluate }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Check consistency</button></div>
+            </sc-if>
+            <sc-if value="{{ csel.ev }}" hint-placeholder-val="{{ false }}">
+              <div style="border:1px solid #e5e7eb;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px">
+                <div style="display:flex;gap:10px;align-items:center"><span style="font-size:16px;font-weight:600">Credibility risk</span><span style="font-size:12.5px;padding:3px 10px;border-radius:99px;background:{{ csel.ev.cbg }};color:{{ csel.ev.cfg }};font-weight:600">{{ csel.ev.credibility }}</span></div>
+                <div style="font-size:14px;line-height:1.5">{{ csel.ev.credibilityNote }}</div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;font-size:13.5px">
+                  <div><div style="font-weight:600;color:#0b6247;margin-bottom:4px">Demonstrated</div><sc-for list="{{ csel.ev.covered }}" as="x" hint-placeholder-count="2"><div>· {{ x }}</div></sc-for></div>
+                  <div><div style="font-weight:600;color:#a8322a;margin-bottom:4px">Not yet shown</div><sc-for list="{{ csel.ev.missing }}" as="x" hint-placeholder-count="2"><div>· {{ x }}</div></sc-for></div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          </sc-if>
+        </div>
+      </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- APPLICATION TRACKER -->
+    <sc-if value="{{ is.tracker }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Application Tracker" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+        <sc-for list="{{ tr.filters }}" as="tf" hint-placeholder-count="8">
+          <button onClick="{{ tf.onClick }}" style="all:unset;cursor:pointer;padding:5px 11px;border-radius:99px;font-size:12.5px;font-weight:500;background:{{ tf.bg }};color:{{ tf.color }};border:1px solid {{ tf.border }};display:flex;gap:6px">{{ tf.label }}<span style="font-family:'Geist Mono',monospace;opacity:.7">{{ tf.count }}</span></button>
+        </sc-for>
+        <span style="margin-left:auto"></span>
+        <button onClick="{{ tr.toggleAdd }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Add application</button>
+      </div>
+      <sc-if value="{{ tr.adding }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border:1px solid var(--acc-b,#c9d3f7);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Company<input value="{{ tr.draft.company }}" onChange="{{ tr.onDraft.company }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Role<input value="{{ tr.draft.role }}" onChange="{{ tr.onDraft.role }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Category<input value="{{ tr.draft.category }}" onChange="{{ tr.onDraft.category }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Match score<input value="{{ tr.draft.match }}" onChange="{{ tr.onDraft.match }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Resume version<select onChange="{{ tr.onDraft.version }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 10px;font-size:14px;background:#fff"><sc-for list="{{ tr.versionOptsDraft }}" as="vo" hint-placeholder-count="4"><option value="{{ vo.id }}" selected="{{ vo.sel }}">{{ vo.name }}</option></sc-for></select></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:#3c4452;font-weight:500">Job URL<input value="{{ tr.draft.url }}" onChange="{{ tr.onDraft.url }}" style="height:38px;border:1px solid #d8dce3;border-radius:9px;padding:0 12px;font-size:14px"></label>
+          </div>
+          <div style="display:flex;gap:8px"><button onClick="{{ tr.saveDraft }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;background:var(--acc,#3b5bdb);color:#fff;font-size:13.5px;font-weight:550">Save as Applied</button><button onClick="{{ tr.toggleAdd }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:9px;border:1px solid #d8dce3;font-size:13.5px">Cancel</button></div>
+        </div>
+      </sc-if>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px;align-items:start">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:13.5px;min-width:560px">
+            <thead><tr style="background:#f7f8fa;text-align:left;font-size:12px;color:#6b7280"><th style="padding:10px 12px;font-weight:500">Company · role</th><th style="padding:10px 12px;font-weight:500">Status</th><th style="padding:10px 12px;font-weight:500;text-align:right">Match</th><th style="padding:10px 12px;font-weight:500">Resume</th><th style="padding:10px 12px;font-weight:500">Applied</th></tr></thead>
+            <tbody>
+              <sc-for list="{{ tr.rows }}" as="r" hint-placeholder-count="8">
+                <tr onClick="{{ r.onClick }}" style="border-top:1px solid #f1f2f5;cursor:pointer;background:{{ r.rowBg }}">
+                  <td style="padding:12px"><div style="font-weight:600">{{ r.company }}</div><div style="font-size:12.5px;color:#5b6472">{{ r.role }}</div></td>
+                  <td style="padding:12px"><span style="font-size:12px;padding:3px 9px;border-radius:99px;background:{{ r.sbg }};color:{{ r.sfg }};white-space:nowrap">{{ r.status }}</span></td>
+                  <td style="padding:12px;text-align:right;font-family:'Geist Mono',monospace">{{ r.match }}%</td>
+                  <td style="padding:12px;color:#5b6472;font-size:12.5px">{{ r.versionShort }}</td>
+                  <td style="padding:12px;color:#5b6472;font-size:12.5px;font-family:'Geist Mono',monospace">{{ r.applied }}</td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        <sc-if value="{{ tr.sel }}" hint-placeholder-val="{{ true }}">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px;position:sticky;top:20px">
+          <div><div style="font-size:18px;font-weight:620;letter-spacing:-.02em">{{ tr.sel.company }}</div><div style="font-size:13.5px;color:#5b6472">{{ tr.sel.role }}</div></div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px">
+            <label style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:#5b6472">Status<select onChange="{{ tr.onStatus }}" style="width:100%;min-width:0;height:34px;border:1px solid #d8dce3;border-radius:8px;padding:0 8px;font-size:13.5px;background:#fff"><sc-for list="{{ tr.statusOpts }}" as="so" hint-placeholder-count="9"><option value="{{ so.v }}" selected="{{ so.sel }}">{{ so.v }}</option></sc-for></select></label>
+            <label style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:#5b6472">Resume version<select onChange="{{ tr.onField.version }}" style="width:100%;min-width:0;height:34px;border:1px solid #d8dce3;border-radius:8px;padding:0 8px;font-size:13.5px;background:#fff"><sc-for list="{{ tr.versionOpts }}" as="vo" hint-placeholder-count="4"><option value="{{ vo.id }}" selected="{{ vo.sel }}">{{ vo.name }}</option></sc-for></select></label>
+            <label style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:#5b6472">Recruiter<input value="{{ tr.sel.recruiter }}" onChange="{{ tr.onField.recruiter }}" style="width:100%;min-width:0;height:34px;border:1px solid #d8dce3;border-radius:8px;padding:0 10px;font-size:13.5px"></label>
+            <label style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:#5b6472">Salary<input value="{{ tr.sel.salary }}" onChange="{{ tr.onField.salary }}" style="width:100%;min-width:0;height:34px;border:1px solid #d8dce3;border-radius:8px;padding:0 10px;font-size:13.5px"></label>
+            <label style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:#5b6472">Interview date<input type="date" value="{{ tr.sel.interview }}" onChange="{{ tr.onField.interview }}" style="width:100%;min-width:0;height:34px;border:1px solid #d8dce3;border-radius:8px;padding:0 10px;font-size:13.5px"></label>
+            <label style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:#5b6472">Job URL<input value="{{ tr.sel.url }}" onChange="{{ tr.onField.url }}" style="width:100%;min-width:0;height:34px;border:1px solid #d8dce3;border-radius:8px;padding:0 10px;font-size:13.5px"></label>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:600;color:#3c4452;margin-bottom:8px">Timeline</div>
+            <sc-for list="{{ tr.sel.events }}" as="ev" hint-placeholder-count="3">
+              <div style="display:flex;gap:10px;align-items:center;font-size:13px;padding:4px 0"><span style="width:8px;height:8px;border-radius:50%;background:var(--acc,#3b5bdb);flex:none"></span><span style="font-weight:500">{{ ev.status }}</span><span style="margin-left:auto;color:#8b93a1;font-family:'Geist Mono',monospace;font-size:12px">{{ ev.date }}</span></div>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:12px;font-weight:600;color:#3c4452">Notes</div>
+            <sc-for list="{{ tr.sel.notes }}" as="nt" hint-placeholder-count="1"><div style="background:#f7f8fa;border-radius:8px;padding:8px 10px;font-size:13px;line-height:1.45"><div style="font-size:11.5px;color:#8b93a1;font-family:'Geist Mono',monospace">{{ nt.date }}</div>{{ nt.text }}</div></sc-for>
+            <div style="display:flex;gap:6px"><input value="{{ tr.noteDraft }}" onChange="{{ tr.onNote }}" placeholder="Add a note" style="flex:1;height:34px;border:1px solid #d8dce3;border-radius:8px;padding:0 10px;font-size:13.5px"><button onClick="{{ tr.addNote }}" style="all:unset;cursor:pointer;height:34px;padding:0 12px;border-radius:8px;background:#0f1218;color:#fff;font-size:13px;display:inline-flex;align-items:center">Add</button></div>
+          </div>
+          <button onClick="{{ tr.remove }}" style="all:unset;cursor:pointer;font-size:12.5px;color:#a8322a;align-self:flex-start">Delete application</button>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ANALYTICS -->
+    <sc-if value="{{ is.analytics }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Analytics" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px">
+        <sc-for list="{{ an.kpis }}" as="k" hint-placeholder-count="8">
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px"><div style="font-size:12px;color:#5b6472">{{ k.label }}</div><div style="font-size:26px;font-weight:650;letter-spacing:-.03em">{{ k.value }}</div></div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ an.small }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:#8a5a12;background:#fcf3e1;border:1px solid #f3e0b8;border-radius:10px;padding:10px 14px">{{ an.smallText }}</div></sc-if>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Pipeline</span>
+          <sc-for list="{{ an.funnel }}" as="f" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:90px minmax(0,1fr) 32px;gap:12px;align-items:center;font-size:13px"><span>{{ f.label }}</span><div style="height:24px;border-radius:6px;background:#f1f3f5"><div style="height:24px;border-radius:6px;background:var(--acc,#3b5bdb);width:{{ f.w }}%"></div></div><span style="text-align:right;font-family:'Geist Mono',monospace">{{ f.n }}</span></div>
+          </sc-for>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Interview rate by resume version</span>
+          <sc-for list="{{ an.byVersion }}" as="g" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:130px minmax(0,1fr) 92px;gap:12px;align-items:center;font-size:13px"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ g.name }}</span><div style="height:10px;border-radius:9px;background:#f1f3f5"><div style="height:10px;border-radius:9px;background:#7048e8;width:{{ g.rate }}%"></div></div><span style="text-align:right;font-family:'Geist Mono',monospace;font-size:12px">{{ g.rate }}% · {{ g.interviews }}/{{ g.n }}</span></div>
+          </sc-for>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Interview rate by match score</span>
+          <sc-for list="{{ an.byMatch }}" as="g" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:130px minmax(0,1fr) 92px;gap:12px;align-items:center;font-size:13px"><span>{{ g.label }}</span><div style="height:10px;border-radius:9px;background:#f1f3f5"><div style="height:10px;border-radius:9px;background:#12805c;width:{{ g.rate }}%"></div></div><span style="text-align:right;font-family:'Geist Mono',monospace;font-size:12px">{{ g.rate }}% · {{ g.interviews }}/{{ g.n }}</span></div>
+          </sc-for>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Interview rate by job category</span>
+          <sc-for list="{{ an.byCat }}" as="g" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:130px minmax(0,1fr) 92px;gap:12px;align-items:center;font-size:13px"><span>{{ g.label }}</span><div style="height:10px;border-radius:9px;background:#f1f3f5"><div style="height:10px;border-radius:9px;background:#b7791f;width:{{ g.rate }}%"></div></div><span style="text-align:right;font-family:'Geist Mono',monospace;font-size:12px">{{ g.rate }}% · {{ g.interviews }}/{{ g.n }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Insights from your data</span><button onClick="{{ runInsights }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:34px;padding:0 12px;border-radius:9px;border:1px solid #d8dce3;font-size:13px;font-weight:500" style-hover="background:#f1f3f5">Ask AI for deeper insights</button></div>
+        <sc-for list="{{ an.insights }}" as="x" hint-placeholder-count="3"><div style="font-size:14px;line-height:1.5;display:flex;gap:10px"><span style="color:var(--acc,#3b5bdb)">→</span><span>{{ x }}</span></div></sc-for>
+        <sc-if value="{{ an.aiInsights }}" hint-placeholder-val="{{ false }}">
+          <div style="border-top:1px solid #eef0f3;padding-top:10px;display:flex;flex-direction:column;gap:6px"><div style="font-size:12px;color:#5531c4;font-weight:600">AI insights</div><sc-for list="{{ an.aiInsights }}" as="x" hint-placeholder-count="3"><div style="font-size:14px;line-height:1.5;display:flex;gap:10px"><span style="color:#7048e8">→</span><span>{{ x }}</span></div></sc-for></div>
+        </sc-if>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ASSISTANT -->
+    <sc-if value="{{ is.assistant }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="AI Career Assistant" style="display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px;align-items:start">
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;display:flex;flex-direction:column;min-height:560px">
+        <div style="flex:1;padding:22px;display:flex;flex-direction:column;gap:14px">
+          <sc-if value="{{ ch.empty }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:14px;padding:20px 0">
+              <div style="font-size:20px;font-weight:620;letter-spacing:-.02em">Ask about your search.</div>
+              <div style="font-size:14px;color:#5b6472;max-width:520px;line-height:1.55">The assistant sees a summary of your profile, scores, saved jobs, applications and roadmap. It doesn't see your contact details.</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ ch.suggestions }}" as="sg" hint-placeholder-count="6"><button onClick="{{ sg.onClick }}" style="all:unset;cursor:pointer;padding:8px 12px;border-radius:10px;border:1px solid #e0e3e8;font-size:13.5px;background:#fafbfc" style-hover="border-color:var(--acc,#3b5bdb);background:var(--acc-t,#eef1fd)">{{ sg.text }}</button></sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-for list="{{ ch.messages }}" as="m" hint-placeholder-count="0">
+            <div style="display:flex;justify-content:{{ m.justify }}">
+              <div style="max-width:78%;padding:11px 14px;border-radius:12px;font-size:14px;line-height:1.55;white-space:pre-wrap;background:{{ m.bg }};color:{{ m.fg }}">{{ m.content }}</div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ ch.thinking }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:#8b93a1">Thinking…</div></sc-if>
+        </div>
+        <div style="border-top:1px solid #eef0f3;padding:12px;display:flex;gap:8px">
+          <input value="{{ ch.draft }}" onChange="{{ ch.onDraft }}" onKeyDown="{{ ch.onKey }}" placeholder="Ask anything about your resume, jobs or interviews" style="flex:1;height:42px;border:1px solid #d8dce3;border-radius:10px;padding:0 14px;font-size:14px">
+          <button onClick="{{ ch.send }}" style="all:unset;cursor:pointer;display:inline-flex;align-items:center;height:42px;padding:0 16px;border-radius:10px;background:var(--acc,#3b5bdb);color:#fff;font-size:14px;font-weight:550" style-hover="background:var(--acc-d,#2f4ac0)">Send</button>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6b7280">Context shared</span>
+        <sc-for list="{{ ch.contextItems }}" as="ci" hint-placeholder-count="6"><div style="font-size:13px;display:flex;gap:8px"><span style="color:#12805c">✓</span>{{ ci }}</div></sc-for>
+        <div style="font-size:13px;display:flex;gap:8px;color:#8b93a1"><span>✕</span>Email, phone, full resume text</div>
+        <sc-if value="{{ ch.hasMessages }}" hint-placeholder-val="{{ false }}"><button onClick="{{ ch.clear }}" style="all:unset;cursor:pointer;font-size:12.5px;color:#5b6472;margin-top:8px">Clear conversation</button></sc-if>
+      </div>
+    </div>
+    </sc-if>
+  </main>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Indigo&quot;,&quot;Emerald&quot;,&quot;Graphite&quot;,&quot;Violet&quot;],&quot;default&quot;:&quot;Indigo&quot;,&quot;tsType&quot;:&quot;'Indigo'|'Emerald'|'Graphite'|'Violet'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;sidebar&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Ink&quot;,&quot;Light&quot;],&quot;default&quot;:&quot;Ink&quot;,&quot;tsType&quot;:&quot;'Ink'|'Light'&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;aiTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Analyst&quot;,&quot;Coach&quot;,&quot;Recruiter&quot;],&quot;default&quot;:&quot;Analyst&quot;,&quot;tsType&quot;:&quot;'Analyst'|'Coach'|'Recruiter'&quot;,&quot;section&quot;:&quot;AI behavior&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = window.WP ? this.init() : { booting: true };
+  }
+  init() {
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem('waypoint-v2')); } catch (e) {}
+    return Object.assign(window.WP.demo(), { rmPhase: '7', jobSort: { key: 'score', dir: -1 }, jobDraft: { title: '', company: '', location: '', text: '' }, appDraft: { company: '', role: '', category: '', match: '', url: '', version: 'master' }, noteDraft: '', chatDraft: '', copied: -1, savedMsg: '', versionName: '' }, saved || {}, { loading: null, stepIdx: 0, error: null, thinking: false, booting: false });
+  }
+  componentDidMount() {
+    if (this.state.booting) { const t = setInterval(() => { if (window.WP) { clearInterval(t); this.setState(this.init()); } }, 40); }
+    this.applyTheme();
+  }
+  componentDidUpdate() {
+    this.applyTheme();
+    const s = this.state; if (s.booting) return;
+    const skip = ['loading', 'stepIdx', 'error', 'thinking', 'booting', 'copied', 'savedMsg'];
+    const o = {}; Object.keys(s).forEach(k => { if (!skip.includes(k)) o[k] = s[k]; });
+    try { localStorage.setItem('waypoint-v2', JSON.stringify(o)); } catch (e) {}
+  }
+  applyTheme() {
+    const P = { Indigo: ['#3b5bdb', '#2f4ac0', '#eef1fd', '#2a3fa8', '#c9d3f7'], Emerald: ['#0f7b5f', '#0b6650', '#e4f4ee', '#0a5a45', '#bfe3d5'], Graphite: ['#1f2937', '#0b1220', '#eef0f3', '#1f2937', '#d1d5db'], Violet: ['#6d4ae0', '#5a38c9', '#f1ecfd', '#4b2aa8', '#d8ccf7'] };
+    const p = P[this.props.accent] || P.Indigo;
+    const light = this.props.sidebar === 'Light';
+    const S = light ? ['#ffffff', '#0f1218', '#3c4452', '#8b93a1', '#f1f3f5', '#f5f6f8', '#e5e7eb'] : ['#0f1218', '#ffffff', '#c4cad4', '#6b7383', '#1b212b', '#171c25', '#0f1218'];
+    const r = document.documentElement.style;
+    ['--acc', '--acc-d', '--acc-t', '--acc-i', '--acc-b'].forEach((k, i) => r.setProperty(k, p[i]));
+    ['--side-bg', '--side-strong', '--side-text', '--side-mute', '--side-hover', '--side-card', '--side-border'].forEach((k, i) => r.setProperty(k, S[i]));
+  }
+
+  tone() {
+    const t = this.props.aiTone || 'Analyst';
+    return { Analyst: 'TONE: neutral, precise analyst. Short sentences, no encouragement filler.', Coach: 'TONE: supportive career coach. Warm and encouraging, but still specific and honest about gaps.', Recruiter: 'TONE: candid technical recruiter. Frame everything by how a hiring panel would read it.' }[t] || '';
+  }
+  job() { const s = this.state; return s.jobs.find(j => j.id === s.activeJobId) || s.jobs[0]; }
+  srcSet(k) { const id = this.state.activeJobId; return { src: { ...this.state.src, [k]: 'live', [k + ':' + id]: 'live' } }; }
+  today() { return new Date().toISOString().slice(0, 10); }
+  ctxProfile() { const p = this.state.profile; return `Target role: ${p.role}\nCareer level: ${p.level}\nYears of experience: ${p.years}\nGoals: ${p.goals}`; }
+  setJobMap(map, val, k) { const id = this.state.activeJobId; this.setState({ [map]: { ...this.state[map], [id]: val }, ...this.srcSet(k) }); }
+
+  async task(title, steps, fn) {
+    if (this.state.loading) return false;
+    this.lastTask = () => this.task(title, steps, fn);
+    this.setState({ loading: { title, steps }, stepIdx: 0, error: null });
+    const iv = setInterval(() => this.setState(s => ({ stepIdx: Math.min(s.stepIdx + 1, steps.length - 1) })), 1700);
+    try { await fn(); this.setState({ loading: null }); return true; }
+    catch (e) { this.setState({ loading: null, error: { message: e.message || 'Something went wrong.', canRetry: true } }); return false; }
+    finally { clearInterval(iv); }
+  }
+  fail(msg) { this.setState({ error: { message: msg, canRetry: false } }); return Promise.resolve(false); }
+  ai(prompt, max) { return window.WP.ai(this.tone() + '\n\n' + prompt, max); }
+
+  runAnalysis = () => {
+    const W = window.WP, text = this.state.resumeText.trim();
+    if (text.length < 200) return this.fail('Resume text looks too short to analyze (under 200 characters).');
+    return this.task('Analyzing resume…', ['Extracting content', 'Understanding experience', 'Matching skills', 'Detecting red flags', 'Generating recommendations'], async () => {
+      const r = await this.ai(`PROFILE\n${this.ctxProfile()}\n\nRESUME\n${text.slice(0, 12000)}\n\nReturn JSON:\n{"summary":2 sentences,"scores":{"overall":0-100,"ats":0-100 formatting/parsing readiness,"skills":0-100,"content":0-100,"achievements":0-100 measurable outcomes,"proof":0-100 share of claimed skills backed by roles/projects},"strengths":[3 strings],"redFlags":[4-8 of {"severity":"critical"|"warning"|"improvement","title","quote":exact short excerpt,"problem","why","fix"}],"skillLevels":[{"skill":from resume only,"level":"strong"|"intermediate"|"weak"}],"claims":[3-5 of {"claim":exact resume claim,"evidence":"where supported or None found","risk":"Low"|"Medium"|"High"}],"actions":[3-4 of {"title","why","action","impact":"High"|"Medium"|"Low","module":"Bullet Optimizer"|"Skill-Proof"|"Interview Predictor"|"Learning Roadmap"|"Resume Tailor"}]}`, 3500);
+      const sc = r.scores || {};
+      const analysis = { summary: W.str(r.summary), scores: { overall: W.n(sc.overall), ats: W.n(sc.ats), skills: W.n(sc.skills), content: W.n(sc.content), achievements: W.n(sc.achievements), proof: W.n(sc.proof) }, strengths: W.arr(r.strengths).map(W.str).slice(0, 4),
+        redFlags: W.arr(r.redFlags).map(f => ({ severity: W.one(f.severity, ['critical', 'warning', 'improvement'], 'improvement'), title: W.str(f.title), quote: W.str(f.quote), problem: W.str(f.problem), why: W.str(f.why), fix: W.str(f.fix) })),
+        skillLevels: W.arr(r.skillLevels).map(k => ({ skill: W.str(k.skill), level: W.one(k.level, ['strong', 'intermediate', 'weak'], 'weak') })),
+        claims: W.arr(r.claims).map(c => ({ claim: W.str(c.claim), evidence: W.str(c.evidence) || 'None found', risk: W.one(c.risk, ['Low', 'Medium', 'High'], 'Medium') })),
+        actions: W.arr(r.actions).slice(0, 4).map(x => ({ title: W.str(x.title), why: W.str(x.why), action: W.str(x.action), impact: W.one(x.impact, ['High', 'Medium', 'Low'], 'Medium'), module: W.str(x.module) || 'Resume Tailor' })) };
+      if (!analysis.summary || !analysis.redFlags.length) throw new Error('The analysis came back incomplete. Retry usually fixes this.');
+      this.setState({ analysis, src: { ...this.state.src, analysis: 'live' }, claimTests: {}, selClaim: 0 });
+    });
+  };
+
+  needJD() { const t = (this.job() || {}).text || ''; if (t.trim().length < 150) { this.fail('Paste a fuller job description for the target job first.'); return null; } return t; }
+
+  runAts = () => {
+    const W = window.WP, jd = this.needJD(); if (!jd) return Promise.resolve(false);
+    return this.task('Comparing resume with the job…', ['Reading the job description', 'Extracting required keywords', 'Checking resume structure', 'Scoring coverage and fit'], async () => {
+      const r = await this.ai(`RESUME\n${this.state.resumeText.slice(0, 10000)}\n\nJOB DESCRIPTION\n${jd.slice(0, 8000)}\n\nSimulate a typical ATS evaluation. Return JSON:\n{"score":0-100,"keywordCoverage":0-100,"jobFit":0-100,"titleAlignment":1 sentence,"summary":2 sentences,"matched":[JD keywords present, max 12],"missing":[important JD keywords absent, max 10],"checks":[5-7 of {"label","status":"pass"|"risk"|"fail","note"}]}`, 2500);
+      const v = { score: W.n(r.score), keywordCoverage: W.n(r.keywordCoverage), jobFit: W.n(r.jobFit), titleAlignment: W.str(r.titleAlignment), summary: W.str(r.summary), matched: W.arr(r.matched).map(W.str).slice(0, 14), missing: W.arr(r.missing).map(W.str).slice(0, 12), checks: W.arr(r.checks).map(c => ({ label: W.str(c.label), status: W.one(c.status, ['pass', 'risk', 'fail'], 'risk'), note: W.str(c.note) })) };
+      if (!v.checks.length) throw new Error('The ATS analysis came back incomplete. Retry usually fixes this.');
+      this.setJobMap('atsBy', v, 'ats');
+    });
+  };
+
+  runTailor = () => {
+    const W = window.WP, jd = this.needJD(); if (!jd) return;
+    this.task('Tailoring your resume…', ['Reading the job', 'Ranking your relevant experience', 'Rewriting for clarity', 'Checking nothing was invented'], async () => {
+      const r = await this.ai(`MASTER RESUME\n${this.state.resumeText.slice(0, 10000)}\n\nTARGET JOB\n${jd.slice(0, 7000)}\n\nRewrite the resume for this job. You may reorder, clarify, tighten wording, and emphasise relevant truthful content. You must NOT add any experience, company, title, technology, certification, achievement or metric that isn't in the master resume. Return JSON:\n{"text":full tailored resume as plain text,"changes":[3-6 of {"section","change","reason"}],"notIncluded":[JD requirements you did not add because the resume has no evidence]}`, 4000);
+      if (!r.text || String(r.text).length < 200) throw new Error('The tailored resume came back incomplete. Retry usually fixes this.');
+      this.setJobMap('tailorBy', { text: W.str(r.text), changes: W.arr(r.changes).map(c => ({ section: W.str(c.section), change: W.str(c.change), reason: W.str(c.reason) })), notIncluded: W.arr(r.notIncluded).map(W.str) }, 'tailor');
+    });
+  };
+
+  runBullets = () => {
+    const W = window.WP, b = this.state.bulletInput.trim(); if (!b) return this.fail('Enter a bullet to optimize.');
+    const jd = (this.job() || {}).text || '';
+    this.task('Rewriting bullet…', ['Reading the bullet', 'Finding supporting facts in your resume', 'Writing variants'], async () => {
+      const r = await this.ai(`RESUME (facts available)\n${this.state.resumeText.slice(0, 6000)}\n\nTARGET JOB (for emphasis only)\n${jd.slice(0, 3000)}\n\nBULLET: "${b}"\n\nWrite 4 improved versions using only facts in the resume. Never invent numbers; use [number] placeholders where a real metric would help. Return JSON:\n{"variants":[{"style":"ATS-focused"},{"style":"Achievement-focused"},{"style":"Technical"},{"style":"Concise"}] each with "text" and "note","metricPrompts":[3 questions asking the user for real metrics]}`, 1500);
+      const variants = W.arr(r.variants).map(v => ({ style: W.str(v.style), text: W.str(v.text), note: W.str(v.note) })).filter(v => v.text);
+      if (!variants.length) throw new Error('No variants came back. Retry usually fixes this.');
+      this.setState({ bullets: { variants, metricPrompts: W.arr(r.metricPrompts).map(W.str) }, src: { ...this.state.src, bullets: 'live' }, copied: -1 });
+    });
+  };
+
+  runProof = () => {
+    const W = window.WP, jd = this.needJD(); if (!jd) return;
+    this.task('Checking skill proof…', ['Listing important skills', 'Searching your resume for evidence', 'Suggesting proof'], async () => {
+      const r = await this.ai(`RESUME\n${this.state.resumeText.slice(0, 9000)}\n\nJOB\n${jd.slice(0, 5000)}\n\nFor the 6-8 most important skills (claimed on the resume or required by the job), ask "where is the proof?". Return JSON:\n{"items":[{"skill","status":"Proven"|"Partial"|"Unproven","evidence":existing evidence from resume or "None","gap","proof":recommended proof,"idea":project idea or ""}]}`, 2500);
+      const items = W.arr(r.items).map(p => ({ skill: W.str(p.skill), status: W.one(p.status, ['Proven', 'Partial', 'Unproven'], 'Partial'), evidence: W.str(p.evidence), gap: W.str(p.gap), proof: W.str(p.proof), idea: W.str(p.idea) }));
+      if (!items.length) throw new Error('No results came back. Retry usually fixes this.');
+      this.setJobMap('proofBy', items, 'proof');
+    });
+  };
+
+  runPriority = () => {
+    const W = window.WP, jobs = this.state.jobs;
+    this.task(`Scoring ${jobs.length} saved jobs…`, ['Reading each job', 'Comparing with your resume', 'Weighing your career goals'], async () => {
+      const list = jobs.map(j => `ID ${j.id}: ${j.title} at ${j.company}\n${(j.text || '').slice(0, 1800)}`).join('\n\n---\n\n');
+      const r = await this.ai(`PROFILE\n${this.ctxProfile()}\n\nRESUME\n${this.state.resumeText.slice(0, 6000)}\n\nJOBS\n${list}\n\nScore each job. Return JSON:\n{"jobs":[{"id","resume":0-100 overall resume match,"skill":0-100 required-skill match,"experience":0-100,"goal":0-100 alignment with career goals,"effort":"Low"|"Medium"|"High" learning effort to be competitive,"reason":1 sentence}]}`, 2500);
+      const out = { ...this.state.priorityBy };
+      W.arr(r.jobs).forEach(j => { if (jobs.some(x => x.id === j.id)) out[j.id] = { resume: W.n(j.resume), skill: W.n(j.skill), experience: W.n(j.experience), goal: W.n(j.goal), effort: W.one(j.effort, ['Low', 'Medium', 'High'], 'Medium'), reason: W.str(j.reason) }; });
+      this.setState({ priorityBy: out, src: { ...this.state.src, priority: 'live' } });
+    });
+  };
+
+  runDecoder = () => {
+    const W = window.WP, jd = this.needJD(); if (!jd) return;
+    this.task('Decoding the job description…', ['Reading the posting', 'Separating must-haves from nice-to-haves', 'Looking for hidden signals', 'Assessing your suitability'], async () => {
+      const r = await this.ai(`JOB\n${jd.slice(0, 8000)}\n\nCANDIDATE RESUME (for suitability only)\n${this.state.resumeText.slice(0, 5000)}\n\nExplain this job in plain language. Return JSON:\n{"summary":1-2 sentences,"reallyWants":2 sentences,"mustHave":[],"niceToHave":[],"responsibilities":[],"experience":1 sentence,"seniority":short,"interviewFocus":[3-4],"hiddenSignals":[2-4 inferences from wording, phrased as likely not certain],"suitability":2 sentences}`, 2000);
+      if (!r.summary) throw new Error('The decoder came back incomplete. Retry usually fixes this.');
+      const L = (x) => W.arr(x).map(W.str);
+      this.setJobMap('decoderBy', { summary: W.str(r.summary), reallyWants: W.str(r.reallyWants), mustHave: L(r.mustHave), niceToHave: L(r.niceToHave), responsibilities: L(r.responsibilities), experience: W.str(r.experience), seniority: W.str(r.seniority), interviewFocus: L(r.interviewFocus), hiddenSignals: L(r.hiddenSignals), suitability: W.str(r.suitability) }, 'decoder');
+    });
+  };
+
+  runSafety = () => {
+    const W = window.WP, t = this.state.safetyInput.trim(); if (t.length < 40) return this.fail('Paste the full job post or message to assess.');
+    this.task('Assessing risk indicators…', ['Checking payment and document requests', 'Checking contact details', 'Checking the hiring process'], async () => {
+      const r = await this.ai(`CONTENT TO ASSESS\n${t.slice(0, 6000)}\n\nAssess recruitment-fraud risk indicators: payment requests, unrealistic salary, urgency, suspicious contact info, missing company details, sensitive info requests, unusual process, inconsistencies. This is a risk assessment, never a verdict. Return JSON:\n{"level":"Low apparent risk"|"Moderate risk indicators"|"High risk indicators","summary":2 sentences,"signals":[{"signal","severity":"High"|"Medium"|"Low","quote":exact excerpt,"explain"}],"nextSteps":[3-4]}`, 1800);
+      const level = W.one(r.level, ['Low apparent risk', 'Moderate risk indicators', 'High risk indicators'], 'Moderate risk indicators');
+      this.setState({ safety: { level, summary: W.str(r.summary), signals: W.arr(r.signals).map(s => ({ signal: W.str(s.signal), severity: W.one(s.severity, ['High', 'Medium', 'Low'], 'Medium'), quote: W.str(s.quote), explain: W.str(s.explain) })), nextSteps: W.arr(r.nextSteps).map(W.str) }, src: { ...this.state.src, safety: 'live' } });
+    });
+  };
+
+  runGap = () => {
+    const W = window.WP, jd = this.needJD(); if (!jd) return;
+    this.task('Detecting skill gaps…', ['Extracting required skills', 'Matching your evidence', 'Classifying priority'], async () => {
+      const r = await this.ai(`RESUME\n${this.state.resumeText.slice(0, 8000)}\n\nJOB\n${jd.slice(0, 6000)}\n\nCompare skills. Return JSON:\n{"have":[],"missing":[],"strengthen":[]} where each item is {"skill","priority":"Must Have"|"Important"|"Nice to Have","evidence":exact short quote from the JD,"note":1 short sentence about the resume evidence}`, 2500);
+      const m = (x) => W.arr(x).map(g => ({ skill: W.str(g.skill), priority: W.one(g.priority, ['Must Have', 'Important', 'Nice to Have'], 'Important'), evidence: W.str(g.evidence), note: W.str(g.note) }));
+      const v = { have: m(r.have), missing: m(r.missing), strengthen: m(r.strengthen) };
+      if (!v.have.length && !v.missing.length) throw new Error('The skill-gap analysis came back empty. Retry usually fixes this.');
+      this.setJobMap('gapBy', v, 'gap');
+    });
+  };
+
+  runRoadmap = () => {
+    const W = window.WP, s = this.state, g = s.gapBy[s.activeJobId];
+    if (!g) return this.fail('Run Skill Gap for this job first. The roadmap is built from those gaps.');
+    const gaps = [...g.missing, ...g.strengthen].map(x => `${x.skill} (${x.priority})`).join(', ');
+    this.task('Building your roadmap…', ['Ordering gaps by priority', 'Sizing each topic', 'Writing practice and projects'], async () => {
+      const r = await this.ai(`PROFILE\n${this.ctxProfile()}\n\nSKILL GAPS FOR ${this.job().title} at ${this.job().company}: ${gaps}\n\nBuild a learning roadmap. Return JSON:\n{"phases":[{"key":"7","tasks":[2 tasks]},{"key":"30","tasks":[2]},{"key":"60","tasks":[2]},{"key":"90","tasks":[2]}]} where each task is {"topic","why","difficulty":"Easy"|"Medium"|"Hard","hours":number,"objective","practice","project","questions":[2 interview questions]}`, 3500);
+      const labels = { '7': '7-day', '30': '30-day', '60': '60-day', '90': '90-day' };
+      const phases = ['7', '30', '60', '90'].map(k => { const p = W.arr(r.phases).find(x => String(x.key) === k) || { tasks: [] }; return { key: k, label: labels[k], tasks: W.arr(p.tasks).map(t => ({ topic: W.str(t.topic), why: W.str(t.why), difficulty: W.one(t.difficulty, ['Easy', 'Medium', 'Hard'], 'Medium'), hours: Number(t.hours) || 0, objective: W.str(t.objective), practice: W.str(t.practice), project: W.str(t.project), questions: W.arr(t.questions).map(W.str), done: false })) }; });
+      if (!phases.some(p => p.tasks.length)) throw new Error('The roadmap came back empty. Retry usually fixes this.');
+      this.setState({ roadmap: { jobId: s.activeJobId, phases }, src: { ...this.state.src, roadmap: 'live' }, rmPhase: '7' });
+    });
+  };
+
+  runQuestions = () => {
+    const W = window.WP, jd = this.needJD(); if (!jd) return;
+    this.task('Predicting interview questions…', ['Reading resume and job', 'Finding likely focus areas', 'Writing questions', 'Adding follow-ups'], async () => {
+      const r = await this.ai(`RESUME\n${this.state.resumeText.slice(0, 9000)}\n\nJOB\n${jd.slice(0, 6000)}\n\nPredict 9 interview questions, at least one each of Technical, Resume, Project, Behavioral, HR, Role-specific. Return JSON:\n{"questions":[{"category","question","difficulty":"Easy"|"Medium"|"Hard","why","expect":[3],"followups":[2]}]}`, 3500);
+      const cats = ['Technical', 'Resume', 'Project', 'Behavioral', 'HR', 'Role-specific'];
+      const questions = W.arr(r.questions).map(q => ({ category: W.one(q.category, cats, 'Technical'), question: W.str(q.question), difficulty: W.one(q.difficulty, ['Easy', 'Medium', 'Hard'], 'Medium'), why: W.str(q.why), expect: W.arr(q.expect).map(W.str), followups: W.arr(q.followups).map(W.str) })).filter(q => q.question);
+      if (!questions.length) throw new Error('No questions came back. Retry usually fixes this.');
+      this.setState({ questions, src: { ...this.state.src, questions: 'live' }, answers: {}, evals: {}, selQ: 0, qFilter: 'All' });
+    });
+  };
+
+  async evalAnswer(question, answer, claim) {
+    const W = window.WP;
+    const r = await this.ai(`RESUME (context)\n${this.state.resumeText.slice(0, 6000)}\n\n${claim ? `RESUME CLAIM BEING TESTED: "${claim}"\n` : ''}QUESTION: ${question}\n\nANSWER:\n${answer.slice(0, 4000)}\n\nEvaluate. Return JSON:\n{"score":0-100,"summary":1-2 sentences,"covered":[],"missing":[],"credibility":"Low"|"Medium"|"High" risk that the answer doesn't support the level implied by the resume,"credibilityNote":1-2 sentences; if unsupported, use wording like "Your answer does not currently demonstrate the level of knowledge implied by this resume claim." Never say the candidate is lying.,"betterAnswer":1 sentence structure using only resume facts}`, 1500);
+    return { score: W.n(r.score), summary: W.str(r.summary), covered: W.arr(r.covered).map(W.str), missing: W.arr(r.missing).map(W.str), credibility: W.one(r.credibility, ['Low', 'Medium', 'High'], 'Medium'), credibilityNote: W.str(r.credibilityNote), betterAnswer: W.str(r.betterAnswer) };
+  }
+  evaluateQ = () => {
+    const i = this.state.selQ, q = this.state.questions[i], ans = (this.state.answers[i] || '').trim();
+    if (!q || !ans) return this.fail('Write an answer first.');
+    this.task('Evaluating your answer…', ['Reading your answer', 'Comparing with expected areas', 'Checking against resume claims'], async () => {
+      const ev = await this.evalAnswer(q.question, ans, q.category === 'Resume' ? q.question : null);
+      this.setState(s => ({ evals: { ...s.evals, [i]: ev } }));
+    });
+  };
+  genClaimQ = () => {
+    const W = window.WP, i = this.state.selClaim, c = (this.state.analysis.claims || [])[i]; if (!c) return;
+    this.task('Writing a probing question…', ['Reading the claim', 'Choosing the right depth'], async () => {
+      const r = await this.ai(`RESUME\n${this.state.resumeText.slice(0, 6000)}\n\nCLAIM: "${c.claim}"\n\nWrite ONE interview question that tests the knowledge this claim implies, at the depth it implies. Return JSON: {"question","testing":short phrase}`, 500);
+      if (!r.question) throw new Error('No question came back. Retry usually fixes this.');
+      this.setState(s => ({ claimTests: { ...s.claimTests, [i]: { question: W.str(r.question), testing: W.str(r.testing), answer: '' } } }));
+    });
+  };
+  evalClaim = () => {
+    const i = this.state.selClaim, c = this.state.analysis.claims[i], t = this.state.claimTests[i];
+    if (!t || !(t.answer || '').trim()) return this.fail('Write an answer first.');
+    this.task('Checking consistency…', ['Reading your answer', 'Comparing with the claimed level'], async () => {
+      const ev = await this.evalAnswer(t.question, t.answer, c.claim);
+      this.setState(s => ({ claimTests: { ...s.claimTests, [i]: { ...s.claimTests[i], ev } } }));
+    });
+  };
+
+  runInsights = () => {
+    const W = window.WP, st = W.analytics(this.state.apps, this.state.versions);
+    const agg = { sent: st.sent, interviews: st.interviews, offers: st.offers, rejections: st.rejections, responseRate: st.responseRate, interviewRate: st.interviewRate, avgMatch: st.avgMatch, byVersion: st.byVersion.map(g => ({ version: g.name, apps: g.n, interviews: g.interviews })), byMatch: st.byMatch, byCategory: st.byCat };
+    this.task('Reading your application data…', ['Aggregating results', 'Looking for patterns'], async () => {
+      const r = await this.ai(`AGGREGATED APPLICATION STATS (no personal data)\n${JSON.stringify(agg)}\n\nGive 3-4 insights grounded only in these numbers, with one suggested action each. Mention when sample sizes are too small to be reliable. Return JSON: {"insights":[strings]}`, 1000);
+      this.setState({ insights: W.arr(r.insights).map(W.str) });
+    });
+  };
+
+  chatContext() {
+    const s = this.state, W = window.WP, a = s.analysis, t = s.atsBy[s.activeJobId], st = W.analytics(s.apps, s.versions);
+    const jobs = s.jobs.map(j => { const p = W.priorityOf(s.priorityBy[j.id]); return `- ${j.title} at ${j.company}${p ? ` (score ${p.score}, ${p.label})` : ''}`; }).join('\n');
+    const rm = s.roadmap ? s.roadmap.phases.flatMap(p => p.tasks.map(x => `${p.label}: ${x.topic}${x.done ? ' (done)' : ''}`)).join('; ') : 'none';
+    const evs = Object.values(s.evals || {}).map(e => e.score);
+    return `PROFILE: ${s.profile.role}, ${s.profile.level}, ${s.profile.years} yrs. Goals: ${s.profile.goals}\nRESUME SCORES: ${a ? JSON.stringify(a.scores) : 'not analyzed'}\nRESUME RED FLAGS: ${a ? a.redFlags.map(f => f.title).join('; ') : 'n/a'}\nRESUME SKILLS: ${a ? a.skillLevels.map(k => k.skill + ' (' + k.level + ')').join(', ') : 'n/a'}\nRESUME EXPERIENCE (excerpt): ${s.resumeText.split('\n').filter(l => l.trim().startsWith('-')).slice(0, 8).join(' ')}\nACTIVE TARGET JOB: ${this.job().title} at ${this.job().company}. ATS: ${t ? `score ${t.score}, missing ${t.missing.join(', ')}` : 'not run'}\nSAVED JOBS:\n${jobs}\nAPPLICATIONS: ${st.sent} sent, ${st.interviews} interviews, ${st.offers} offers. By version: ${st.byVersion.map(g => `${g.name} ${g.interviews}/${g.n}`).join(', ')}\nROADMAP: ${rm}\nINTERVIEW PRACTICE: ${evs.length ? evs.length + ' answers, avg ' + Math.round(evs.reduce((x, y) => x + y, 0) / evs.length) : 'none yet'}`;
+  }
+  sendChat = (text) => {
+    const msg = (typeof text === 'string' ? text : this.state.chatDraft).trim();
+    if (!msg || this.state.thinking) return;
+    const chat = [...this.state.chat, { role: 'user', content: msg }];
+    this.setState({ chat, chatDraft: '', thinking: true, error: null });
+    const system = `You are Waypoint's career assistant. ${this.tone()}\nUse only the context below and the conversation. Never invent experience, metrics or certifications; if you suggest resume wording, use only facts present. Scores are estimates, never guarantees. Be concise: under 180 words, short paragraphs or brief lists, plain text without markdown headings.\n\nCONTEXT\n${this.chatContext()}`;
+    window.WP.chat(system, chat.slice(-12)).then(reply => this.setState(s => ({ chat: [...s.chat, { role: 'assistant', content: reply.trim() }], thinking: false })))
+      .catch(e => this.setState({ thinking: false, error: { message: e.message, canRetry: false } }));
+  };
+
+  onFile = (e) => {
+    const f = e.target.files && e.target.files[0]; e.target.value = ''; if (!f) return;
+    if (f.size > 5 * 1024 * 1024) return this.fail('File is larger than 5 MB.');
+    if (/\.(txt|md)$/i.test(f.name)) { const rd = new FileReader(); rd.onload = () => this.setState({ resumeText: String(rd.result) }); rd.readAsText(f); return; }
+    this.fail(`${f.name}: PDF and DOCX text extraction isn't available in this prototype. Paste the resume text instead.`);
+  };
+
+  renderVals() {
+    const s = this.state;
+    if (s.booting || !window.WP) return { isLanding: false, isApp: false };
+    const W = window.WP, a = s.analysis, J = this.job(), jid = J.id, t = s.atsBy[jid];
+    const set = (o) => () => this.setState(o);
+    const scr = s.screen;
+    const ACC = 'var(--acc,#3b5bdb)', ACC_T = 'var(--acc-t,#eef1fd)', ACC_I = 'var(--acc-i,#2a3fa8)';
+    const pill = { green: ['#e6f5ee', '#0b6247'], red: ['#fdecea', '#a8322a'], amber: ['#fcf3e1', '#8a5a12'], gray: ['#f1f3f5', '#3c4452'], blue: [ACC_T, ACC_I], violet: ['#f1ecfd', '#5531c4'] };
+    const stCol = { Saved: pill.gray, Applied: pill.blue, Screening: pill.violet, Interview: pill.amber, 'Technical Round': pill.amber, 'HR Round': pill.amber, Offer: pill.green, Rejected: pill.red, Withdrawn: ['#f1f3f5', '#6b7280'] };
+    const riskCol = (r) => r === 'Low' ? pill.green : r === 'High' ? pill.red : pill.amber;
+    const segTab = (on) => ({ bg: on ? '#fff' : 'transparent', color: on ? '#0f1218' : '#5b6472', shadow: on ? '0 1px 2px rgba(16,24,40,.12)' : 'none' });
+
+    const go = {}; ['dash', 'onboard', 'landing', 'resume', 'roadmap', 'tracker'].forEach(k => go[k] = set(k === 'onboard' ? { screen: 'onboard', obStep: 1 } : k === 'resume' ? { screen: 'resume', resumeTab: 'health' } : { screen: k }));
+
+    const navDef = [
+      ['Overview', [['Dashboard', 'dash'], ['Profile & resume', 'onboard']]],
+      ['Resume Intelligence', [['Resume Analyzer', 'resume'], ['ATS Analyzer', 'resume:ats'], ['Resume Tailor', 'tailor'], ['Bullet Optimizer', 'bullets'], ['Skill-Proof Generator', 'proof']]],
+      ['Job Intelligence', [['Saved Jobs & Priority', 'jobs'], ['Job Decoder', 'decoder'], ['Job Safety Analyzer', 'safety']]],
+      ['Skill Intelligence', [['Skill Gap', 'gap'], ['Learning Roadmap', 'roadmap']]],
+      ['Interview Intelligence', [['Interview Predictor', 'interview:practice'], ['Consistency Check', 'interview:consistency']]],
+      ['Career Intelligence', [['Application Tracker', 'tracker'], ['Analytics', 'analytics'], ['AI Career Assistant', 'assistant']]]
+    ];
+    const isActive = (r) => { const [x, tab] = r.split(':'); if (x !== scr) return false; if (x === 'resume') return tab ? s.resumeTab === 'ats' : s.resumeTab !== 'ats'; if (x === 'interview') return tab === s.ivTab; return true; };
+    const nav = navDef.map(([label, items]) => ({ label, items: items.map(([l, r]) => { const act = isActive(r); return { label: l, bg: act ? 'var(--side-hover,#1b212b)' : 'transparent', color: act ? 'var(--side-strong,#fff)' : 'var(--side-text,#c4cad4)', dot: act ? ACC : 'transparent', onClick: () => { const [x, tab] = r.split(':'); const o = { screen: x }; if (x === 'resume') o.resumeTab = tab || (s.resumeTab === 'ats' ? 'health' : s.resumeTab); if (x === 'interview') o.ivTab = tab; this.setState(o); } }; }) }));
+
+    const pages = {
+      onboard: ['Get started', 'Profile & resume', 'Three steps: who you are, your master resume, and the job you want.'],
+      dash: ['Career Intelligence', 'Dashboard', 'Where you stand for your target role, and what to do next.'],
+      resume: ['Resume Intelligence', s.resumeTab === 'ats' ? 'ATS Analyzer' : 'Resume Analyzer', s.resumeTab === 'ats' ? 'How a typical applicant tracking system might read your resume for this job.' : 'Health, red flags and evidence in your master resume.'],
+      tailor: ['Resume Intelligence', 'Resume Tailor', 'A version of your resume focused on one job, built only from what you wrote.'],
+      bullets: ['Resume Intelligence', 'Bullet Optimizer', 'Turn one weak bullet into stronger, truthful versions.'],
+      proof: ['Resume Intelligence', 'Skill-Proof Generator', 'For every important skill: where is your proof?'],
+      jobs: ['Job Intelligence', 'Saved Jobs & Priority', 'Which jobs to apply to first, and why.'],
+      decoder: ['Job Intelligence', 'Job Decoder', 'What this posting is really asking for, in plain language.'],
+      safety: ['Job Intelligence', 'Job Safety Analyzer', 'Check a job post or recruiter message for common warning signs.'],
+      gap: ['Skill Intelligence', 'Skill Gap', 'Skills you have, skills you\'re missing, and skills to strengthen for this job.'],
+      roadmap: ['Skill Intelligence', 'Learning Roadmap', 'A 7, 30, 60 and 90-day plan built from your gaps.'],
+      interview: ['Interview Intelligence', s.ivTab === 'consistency' ? 'Consistency Check' : 'Interview Predictor', s.ivTab === 'consistency' ? 'Test whether your answers support what your resume claims.' : 'Likely questions for this job, with practice and feedback.'],
+      tracker: ['Career Intelligence', 'Application Tracker', 'Every application, its status, resume version and notes.'],
+      analytics: ['Career Intelligence', 'Analytics', 'What your applications are telling you so far.'],
+      assistant: ['Career Intelligence', 'AI Career Assistant', 'Ask questions about your resume, jobs, interviews and plan.']
+    };
+    const [crumb, pageTitle, pageDesc] = pages[scr] || ['', '', ''];
+    const jobScreens = ['tailor', 'proof', 'decoder', 'gap', 'roadmap', 'interview', 'bullets'];
+    const needsJob = jobScreens.includes(scr) || (scr === 'resume' && s.resumeTab === 'ats') || scr === 'dash';
+    const perJob = (k, map) => map && map[jid] ? (s.src[k + ':' + jid] || (jid === 'j1' ? s.src[k] : 'live')) : null;
+    const srcKey = { dash: [s.src.analysis], onboard: [a ? s.src.analysis : null], resume: [s.resumeTab === 'ats' ? perJob('ats', s.atsBy) : s.src.analysis], tailor: [perJob('tailor', s.tailorBy)], bullets: [s.bullets ? s.src.bullets : null], proof: [perJob('proof', s.proofBy)], jobs: [s.src.priority], decoder: [perJob('decoder', s.decoderBy)], safety: [s.safety ? s.src.safety : null], gap: [perJob('gap', s.gapBy)], roadmap: [s.roadmap ? s.src.roadmap : null], interview: [s.src.questions], tracker: [s.src.apps], analytics: [s.src.apps], assistant: [null] }[scr] || [null];
+    const sv = srcKey[0];
+    const pageSrc = sv ? (sv === 'live' ? { label: scr === 'tracker' || scr === 'analytics' ? 'Your data' : 'Live AI result', bg: '#e6f5ee', fg: '#0b6247' } : { label: scr === 'tracker' || scr === 'analytics' ? 'Demo applications' : 'Demo data', bg: '#f1f3f5', fg: '#3c4452' }) : null;
+    const jobOpts = s.jobs.map(j => ({ id: j.id, label: `${j.title} · ${j.company}`, sel: j.id === jid }));
+    const jobLabel = `${J.title} at ${J.company}`;
+
+    const on = {}; ['name', 'role', 'level', 'years', 'location', 'skills', 'goals'].forEach(k => on[k] = (e) => { const v = e.target.value; this.setState(st => ({ profile: { ...st.profile, [k]: v } })); });
+    const onJobField = {}; ['title', 'company', 'text'].forEach(k => onJobField[k] = (e) => { const v = e.target.value; this.setState(st => ({ jobs: st.jobs.map(j => j.id === st.activeJobId ? { ...j, [k]: v } : j) })); });
+
+    const steps = s.loading ? s.loading.steps.map((label, i) => { const done = i < s.stepIdx, act = i === s.stepIdx; return { label, glyph: done ? '✓' : (act ? '•' : ''), dotBg: done ? '#12805c' : (act ? ACC : '#dfe2e7'), color: done || act ? '#0f1218' : '#8b93a1' }; }) : [];
+    const obSteps = ['Profile', 'Resume', 'Target job'].map((label, i) => { const n = i + 1, act = s.obStep === n, done = n < s.obStep; return { n: done ? '✓' : n, label, onClick: set({ obStep: n }), bg: act ? '#f1f3f5' : 'transparent', dotBg: act || done ? ACC : '#e9ebef', dotColor: act || done ? '#fff' : '#3c4452' }; });
+
+    // resume
+    const sc = (a && a.scores) || {};
+    const flags = (a && a.redFlags) || [];
+    const fc = { critical: 0, warning: 0, improvement: 0 }; flags.forEach(f => fc[f.severity]++);
+    const colorFor = (v) => v >= 70 ? '#12805c' : v >= 50 ? '#d99a2b' : '#d1453b';
+    const healthBars = [['Resume score', sc.overall], ['ATS readiness', sc.ats], ['Skill strength', sc.skills], ['Content quality', sc.content], ['Achievement strength', sc.achievements], ['Project proof', sc.proof]].map(([label, v]) => ({ label, value: v ?? '—', bar: v || 0, color: colorFor(v), ink: '#0f1218' }));
+    const healthCards = healthBars.concat([{ label: 'Red flags', value: `${fc.critical}·${fc.warning}·${fc.improvement}`, ink: fc.critical ? '#a8322a' : '#0f1218' }]);
+    const flagGroups = [['critical', 'Critical', '#d1453b'], ['warning', 'Warning', '#d99a2b'], ['improvement', 'Improvement', '#12805c']].map(([k, label, dot]) => ({ label, dot, items: flags.filter(f => f.severity === k), count: fc[k] })).filter(g => g.count);
+    const resumeTabs = [['health', 'Resume health'], ['flags', `Red flags · ${flags.length}`], ['ats', 'ATS analyzer']].map(([k, label]) => ({ label, onClick: set({ resumeTab: k }), ...segTab(s.resumeTab === k) }));
+    const atsChecks = ((t && t.checks) || []).map(c => { const p = c.status === 'pass' ? pill.green : c.status === 'risk' ? pill.amber : pill.red; return { ...c, statusLabel: c.status === 'pass' ? 'Pass' : c.status === 'risk' ? 'Risk' : 'Fail', bg: p[0], fg: p[1] }; });
+
+    // readiness
+    const evVals = Object.values(s.evals || {}).map(e => e.score).concat(Object.values(s.claimTests || {}).filter(c => c.ev).map(c => c.ev.score));
+    const ivAvg = evVals.length ? Math.round(evVals.reduce((x, y) => x + y, 0) / evVals.length) : null;
+    const compDef = [['Resume Quality', 20, a ? sc.overall : null, 'resume score'], ['ATS Readiness', 15, t ? t.score : null, 'ATS analysis'], ['Skill Match', 20, t ? t.keywordCoverage : null, 'keyword coverage'], ['Interview Readiness', 20, ivAvg, 'practice answers'], ['Project Proof', 10, a ? sc.proof : null, 'resume analysis'], ['Job Fit', 15, t ? t.jobFit : null, 'ATS analysis']];
+    const measured = compDef.filter(c => c[2] != null), totalW = measured.reduce((x, c) => x + c[1], 0);
+    const readiness = totalW ? Math.round(measured.reduce((x, c) => x + c[2] * c[1], 0) / totalW) : 0;
+    const components = compDef.map(([label, w, v, src]) => ({ label, weightText: `${w}%`, valueText: v == null ? '—' : v, bar: v || 0, note: v == null ? (label === 'Interview Readiness' ? 'Practice a question to measure' : 'Not measured yet') : `+${(v * w / totalW).toFixed(1)} pts · ${src}` }));
+    const missingComps = compDef.filter(c => c[2] == null).map(c => c[0]);
+    const formulaText = `Weighted average of ${measured.length} of 6 components.` + (missingComps.length ? ` ${missingComps.join(', ')} ${missingComps.length > 1 ? 'are' : 'is'} excluded until measured; the other weights are rescaled to 100%.` : '') + ` Uses your resume and ${jobLabel}.`;
+    const modRoute = { 'Bullet Optimizer': 'bullets', 'Skill-Proof': 'proof', 'Interview Predictor': 'interview', 'Learning Roadmap': 'roadmap', 'Resume Tailor': 'tailor', 'Resume Analyzer': 'resume', 'Skill Gap': 'gap' };
+    const actions = ((a && a.actions) || []).map((x, i) => { const p = x.impact === 'High' ? pill.red : x.impact === 'Low' ? pill.gray : pill.amber; return { ...x, n: i + 1, impactLabel: x.impact + ' impact', ibg: p[0], ifg: p[1], onGo: set({ screen: modRoute[x.module] || 'resume', ivTab: 'practice' }) }; });
+    const lv = (a && a.skillLevels) || [], bucket = (k) => lv.filter(x => x.level === k).map(x => x.skill);
+    const miss = (t && t.missing) || [];
+    const skillBuckets = [['Strong', bucket('strong'), '#12805c'], ['Intermediate', bucket('intermediate'), ACC], ['Weak', bucket('weak'), '#d99a2b'], ['Missing (from JD)', miss, '#d1453b']].map(([label, l, color]) => ({ label, count: l.length, list: l.length ? l.join(', ') : 'None', color }));
+    const blockers = flags.filter(f => f.severity === 'critical').map(f => f.title).concat(miss.length ? [`Missing from resume: ${miss.slice(0, 3).join(', ')}`] : []).slice(0, 4);
+    const vShort = (id) => { const v = s.versions.find(x => x.id === id); return v ? v.name.split(' · ')[0] : '—'; };
+    const appRow = (r) => ({ ...r, versionShort: vShort(r.version), sbg: (stCol[r.status] || pill.gray)[0], sfg: (stCol[r.status] || pill.gray)[1] });
+    const recentApps = [...s.apps].sort((x, y) => (y.events[y.events.length - 1].date).localeCompare(x.events[x.events.length - 1].date)).slice(0, 5).map(appRow);
+    const allTasks = s.roadmap ? s.roadmap.phases.flatMap(p => p.tasks) : [];
+    const roadmapPct = allTasks.length ? Math.round(100 * allTasks.filter(x => x.done).length / allTasks.length) : 0;
+
+    // tailor
+    const tb = s.tailorBy[jid];
+    const st0 = W.analytics(s.apps, s.versions);
+    const versionsList = s.versions.map(v => { const g = st0.byVersion.find(x => x.label === v.id); return { name: v.name, usage: g ? `${g.n} apps · ${g.interviews} int.` : 'unused' }; });
+    const tl = { has: !!tb, empty: !tb, original: s.resumeText, text: tb ? tb.text : '', changes: tb ? tb.changes : [], notIncludedText: tb && tb.notIncluded.length ? tb.notIncluded.join(', ') : 'none',
+      onText: (e) => { const v = e.target.value; this.setState(st => ({ tailorBy: { ...st.tailorBy, [jid]: { ...st.tailorBy[jid], text: v } } })); },
+      versionName: s.versionName || `v${s.versions.length} · ${J.company}`, onVersionName: (e) => this.setState({ versionName: e.target.value }),
+      save: () => { const name = s.versionName || `v${s.versions.length} · ${J.company}`; const id = 'v' + Date.now(); this.setState(st => ({ versions: [...st.versions, { id, name, note: `Tailored for ${jobLabel}`, created: this.today(), text: tb.text }], savedMsg: `Saved as "${name}". Pick it when you log an application.`, versionName: '' })); },
+      download: () => { const b = new Blob([tb.text], { type: 'text/plain' }); const u = URL.createObjectURL(b); const el = document.createElement('a'); el.href = u; el.download = `resume-${J.company.toLowerCase().replace(/\W+/g, '-')}.txt`; el.click(); setTimeout(() => URL.revokeObjectURL(u), 1000); },
+      savedMsg: s.savedMsg };
+
+    // bullets
+    const bl = { has: !!s.bullets, variants: s.bullets ? s.bullets.variants.map((v, i) => ({ ...v, copyLabel: s.copied === i ? 'Copied' : 'Copy', onCopy: () => { try { navigator.clipboard.writeText(v.text); } catch (e) {} this.setState({ copied: i }); } })) : [], metricPrompts: s.bullets ? s.bullets.metricPrompts : [] };
+
+    // proof
+    const pitems = s.proofBy[jid] || [];
+    const pcol = { Proven: pill.green, Partial: pill.amber, Unproven: pill.red };
+    const pf = { has: pitems.length > 0, empty: !pitems.length, items: pitems.map(p => ({ ...p, bg: pcol[p.status][0], fg: pcol[p.status][1], hasIdea: !!p.idea })), counts: pitems.length ? ['Proven', 'Partial', 'Unproven'].map(k => ({ label: `${pitems.filter(p => p.status === k).length} ${k.toLowerCase()}`, bg: pcol[k][0], fg: pcol[k][1] })) : [] };
+
+    // jobs / priority
+    const prCol = { 'Apply now': pill.green, 'Tailor, then apply': pill.blue, 'Upskill first': pill.amber, 'Low priority': pill.gray };
+    const effortRank = { Low: 1, Medium: 2, High: 3 };
+    let rows = s.jobs.map(j => { const p = s.priorityBy[j.id], pr = W.priorityOf(p); return { j, p, pr }; });
+    const sk = s.jobSort.key, dir = s.jobSort.dir;
+    const val = (r) => sk === 'title' ? r.j.title : sk === 'effort' ? (r.p ? effortRank[r.p.effort] : 9) : sk === 'score' ? (r.pr ? r.pr.score : -1) : (r.p ? r.p[sk] : -1);
+    rows.sort((x, y) => { const A = val(x), B = val(y); return (A > B ? 1 : A < B ? -1 : 0) * dir; });
+    const jobRows = rows.map(({ j, p, pr }) => ({ title: j.title, company: j.company, location: j.location || '—', reason: p ? p.reason : 'Not scored yet. Use "Score all jobs".', resume: p ? p.resume : '—', skill: p ? p.skill : '—', experience: p ? p.experience : '—', goal: p ? p.goal : '—', effort: p ? p.effort : '—', score: pr ? pr.score : '—', priority: pr ? pr.label : 'Unscored', pbg: (pr ? prCol[pr.label] : pill.gray)[0], pfg: (pr ? prCol[pr.label] : pill.gray)[1], rowBg: j.id === jid ? '#fafbff' : '#fff', activeLabel: j.id === jid ? 'Active target' : 'Set as target', onActive: set({ activeJobId: j.id }) }));
+    const jobCols = [['title', 'Job', 'left'], ['resume', 'Resume', 'right'], ['skill', 'Skill', 'right'], ['experience', 'Exp.', 'right'], ['goal', 'Goal', 'right'], ['effort', 'Effort', 'left'], ['score', 'Score', 'right'], ['score', 'Priority', 'left']].map(([k, label, align], i) => ({ label: label + (sk === k && i !== 7 ? (dir > 0 ? ' ↑' : ' ↓') : ''), align, color: sk === k ? '#0f1218' : '#6b7280', onClick: () => this.setState(st => ({ jobSort: { key: k, dir: st.jobSort.key === k ? -st.jobSort.dir : -1 } })) }));
+    const onJobDraft = {}; ['title', 'company', 'location', 'text'].forEach(k => onJobDraft[k] = (e) => { const v = e.target.value; this.setState(st => ({ jobDraft: { ...st.jobDraft, [k]: v } })); });
+
+    // decoder / safety / gap / roadmap
+    const dd = s.decoderBy[jid];
+    const sfy = s.safety;
+    const sevCol = { High: pill.red, Medium: pill.amber, Low: pill.gray };
+    const lvlCol = { 'High risk indicators': ['#fdecea', '#f6c9c4', '#a8322a'], 'Moderate risk indicators': ['#fcf3e1', '#f3e0b8', '#8a5a12'], 'Low apparent risk': ['#e6f5ee', '#c6e8d7', '#0b6247'] };
+    const lc = sfy ? lvlCol[sfy.level] : lvlCol['Low apparent risk'];
+    const sf = { has: !!sfy, s: sfy || {}, bg: lc[0], border: lc[1], fg: lc[2], signals: sfy ? sfy.signals.map(x => ({ ...x, bg: sevCol[x.severity][0], fg: sevCol[x.severity][1] })) : [] };
+    const gg = s.gapBy[jid];
+    const priCol = { 'Must Have': pill.red, Important: pill.amber, 'Nice to Have': pill.gray };
+    const gmap = (l) => l.map(x => ({ ...x, pbg: priCol[x.priority][0], pfg: priCol[x.priority][1] }));
+    const gp = { has: !!gg, empty: !gg, cols: gg ? [['Skills you have', gg.have, '#12805c'], ['Skills you\'re missing', gg.missing, '#d1453b'], ['Needs strengthening', gg.strengthen, '#d99a2b']].map(([label, items, color]) => ({ label, items: gmap(items), count: items.length, color })) : [] };
+    const rmap = s.roadmap;
+    const ph = rmap ? (rmap.phases.find(p => p.key === s.rmPhase) || rmap.phases[0]) : null;
+    const difCol = { Easy: pill.green, Medium: pill.amber, Hard: pill.red };
+    const rjob = rmap ? s.jobs.find(j => j.id === rmap.jobId) : null;
+    const rm = { has: !!rmap, basis: rjob ? `Built from gaps for ${rjob.title} at ${rjob.company}` : '',
+      tabs: rmap ? rmap.phases.map(p => ({ label: p.label, prog: `${p.tasks.filter(x => x.done).length}/${p.tasks.length}`, onClick: set({ rmPhase: p.key }), ...segTab(p.key === s.rmPhase) })) : [],
+      tasks: ph ? ph.tasks.map((tk, i) => ({ ...tk, hoursText: `~${tk.hours}h`, qText: tk.questions.join('  ·  '), dbg: difCol[tk.difficulty][0], dfg: difCol[tk.difficulty][1], check: tk.done ? '✓' : '', boxBg: tk.done ? '#12805c' : '#fff', boxBorder: tk.done ? '#12805c' : '#c4c9d2', border: tk.done ? '#c6e8d7' : '#e5e7eb', strike: tk.done ? 'line-through' : 'none',
+        toggle: () => this.setState(st => ({ roadmap: { ...st.roadmap, phases: st.roadmap.phases.map(p => p.key !== ph.key ? p : { ...p, tasks: p.tasks.map((x, j) => j === i ? { ...x, done: !x.done } : x) }) } })) })) : [] };
+
+    // interview
+    const qs = s.questions || [];
+    const cats = ['All', 'Technical', 'Resume', 'Project', 'Behavioral', 'HR', 'Role-specific'].filter(c => c === 'All' || qs.some(q => q.category === c));
+    const qFilters = cats.map(c => ({ label: c, onClick: set({ qFilter: c }), bg: s.qFilter === c ? '#0f1218' : '#fff', color: s.qFilter === c ? '#fff' : '#3c4452', border: s.qFilter === c ? '#0f1218' : '#e0e3e8' }));
+    const qList = qs.map((q, i) => ({ ...q, i })).filter(q => s.qFilter === 'All' || q.category === s.qFilter).map(q => ({ ...q, onClick: set({ selQ: q.i }), border: q.i === s.selQ ? ACC : '#e5e7eb', shadow: q.i === s.selQ ? '0 0 0 3px var(--acc-t,#eef1fd)' : 'none', scoreText: s.evals[q.i] ? `${s.evals[q.i].score}` : '' }));
+    const sq = qs[s.selQ], sev = sq && s.evals[s.selQ];
+    const sel = sq ? { ...sq, answer: s.answers[s.selQ] || '', onAnswer: (e) => { const v = e.target.value; this.setState(st => ({ answers: { ...st.answers, [st.selQ]: v } })); }, evaluate: this.evaluateQ, btnOpacity: (s.answers[s.selQ] || '').trim() && !s.loading ? 1 : 0.5, ev: sev ? { ...sev, cbg: riskCol(sev.credibility)[0], cfg: riskCol(sev.credibility)[1], credLabel: 'Credibility risk: ' + sev.credibility } : null } : null;
+    const ivTabs = [['practice', 'Interview practice'], ['consistency', 'Resume consistency']].map(([k, label]) => ({ label, onClick: set({ ivTab: k }), ...segTab(s.ivTab === k) }));
+    const practiceStats = evVals.length ? `${evVals.length} answer${evVals.length > 1 ? 's' : ''} evaluated · average ${ivAvg}` : 'No answers evaluated yet';
+    const cls = (a && a.claims) || [];
+    const claims = cls.map((c, i) => { const tt = s.claimTests[i], ev = tt && tt.ev; return { ...c, onClick: set({ selClaim: i }), border: i === s.selClaim ? ACC : '#e5e7eb', shadow: i === s.selClaim ? '0 0 0 3px var(--acc-t,#eef1fd)' : 'none', priorLabel: 'Prior risk: ' + c.risk, pbg: riskCol(c.risk)[0], pfg: riskCol(c.risk)[1], tested: !!ev, resultLabel: ev ? 'After test: ' + ev.credibility : '', rbg: ev ? riskCol(ev.credibility)[0] : '', rfg: ev ? riskCol(ev.credibility)[1] : '' }; });
+    const c0 = cls[s.selClaim], ct = s.claimTests[s.selClaim];
+    const csel = c0 ? { claim: c0.claim, noQuestion: !ct, question: ct ? ct.question : '', testing: ct ? ct.testing : '', answer: ct ? ct.answer : '', onAnswer: (e) => { const v = e.target.value; this.setState(st => ({ claimTests: { ...st.claimTests, [st.selClaim]: { ...st.claimTests[st.selClaim], answer: v } } })); }, generate: this.genClaimQ, evaluate: this.evalClaim, ev: ct && ct.ev ? { ...ct.ev, cbg: riskCol(ct.ev.credibility)[0], cfg: riskCol(ct.ev.credibility)[1] } : null } : null;
+
+    // tracker
+    const counts = {}; s.apps.forEach(x => counts[x.status] = (counts[x.status] || 0) + 1);
+    const filters = ['All', ...W.STATUSES.filter(x => counts[x])].map(f => ({ label: f, count: f === 'All' ? s.apps.length : counts[f], onClick: set({ appFilter: f }), bg: s.appFilter === f ? '#0f1218' : '#fff', color: s.appFilter === f ? '#fff' : '#3c4452', border: s.appFilter === f ? '#0f1218' : '#e0e3e8' }));
+    const selA = s.apps.find(x => x.id === s.selApp);
+    const updApp = (patch) => this.setState(st => ({ apps: st.apps.map(x => x.id === st.selApp ? { ...x, ...(typeof patch === 'function' ? patch(x) : patch) } : x), src: { ...st.src, apps: st.src.apps === 'demo' ? 'demo' : 'live' } }));
+    const onField = {}; ['version', 'recruiter', 'salary', 'interview', 'url'].forEach(k => onField[k] = (e) => { const v = e.target.value; updApp({ [k]: v }); });
+    const onDraft = {}; ['company', 'role', 'category', 'match', 'url', 'version'].forEach(k => onDraft[k] = (e) => { const v = e.target.value; this.setState(st => ({ appDraft: { ...st.appDraft, [k]: v } })); });
+    const tr = { filters, adding: s.addingApp, toggleAdd: set({ addingApp: !s.addingApp }), draft: s.appDraft, onDraft,
+      versionOptsDraft: s.versions.map(v => ({ id: v.id, name: v.name, sel: v.id === s.appDraft.version })),
+      saveDraft: () => { const d = s.appDraft; if (!d.company.trim() || !d.role.trim()) return this.fail('Company and role are required.'); const id = 'a' + Date.now(), today = this.today(); this.setState(st => ({ apps: [{ id, company: d.company.trim(), role: d.role.trim(), category: d.category.trim() || 'Other', version: d.version, match: W.n(d.match), url: d.url, recruiter: '', salary: '', interview: '', status: 'Applied', applied: today, events: [{ status: 'Applied', date: today }], notes: [] }, ...st.apps], selApp: id, addingApp: false, appDraft: { company: '', role: '', category: '', match: '', url: '', version: 'master' } })); },
+      rows: s.apps.filter(x => s.appFilter === 'All' || x.status === s.appFilter).map(x => ({ ...appRow(x), applied: x.applied || '—', onClick: set({ selApp: x.id }), rowBg: x.id === s.selApp ? '#fafbff' : '#fff' })),
+      sel: selA || null, statusOpts: W.STATUSES.map(v => ({ v, sel: selA && selA.status === v })), versionOpts: s.versions.map(v => ({ id: v.id, name: v.name, sel: selA && selA.version === v.id })),
+      onStatus: (e) => { const v = e.target.value, today = this.today(); updApp(x => ({ status: v, applied: x.applied || (v === 'Applied' ? today : ''), events: [...x.events, { status: v, date: today }] })); },
+      onField, noteDraft: s.noteDraft, onNote: (e) => this.setState({ noteDraft: e.target.value }),
+      addNote: () => { const txt = s.noteDraft.trim(); if (!txt) return; updApp(x => ({ notes: [...x.notes, { date: this.today(), text: txt }] })); this.setState({ noteDraft: '' }); },
+      remove: () => this.setState(st => { const apps = st.apps.filter(x => x.id !== st.selApp); return { apps, selApp: apps[0] ? apps[0].id : null }; }) };
+
+    // analytics
+    const A0 = st0, maxF = Math.max(1, ...A0.funnel.map(f => f.n));
+    const insights = [];
+    if (A0.bestVersion) insights.push(`${A0.bestVersion.name} was used for ${A0.bestVersion.n} applications and resulted in ${A0.bestVersion.interviews} interview${A0.bestVersion.interviews === 1 ? '' : 's'} (${A0.bestVersion.rate}%).`);
+    const bm = [...A0.byMatch].sort((x, y) => y.rate - x.rate)[0];
+    if (bm && bm.n >= 2) insights.push(`Your highest interview rate is currently coming from jobs with ${bm.label} match (${bm.rate}%, ${bm.interviews} of ${bm.n}).`);
+    if (A0.bestCat) insights.push(`${A0.bestCat.label} roles convert best so far: ${A0.bestCat.interviews} interviews from ${A0.bestCat.n} applications.`);
+    if (A0.sent) insights.push(`${A0.responseRate}% of applications got a response. Average match score of applications sent: ${A0.avgMatch}.`);
+    const an = { kpis: [['Applications sent', A0.sent], ['Interviews', A0.interviews], ['Offers', A0.offers], ['Rejections', A0.rejections], ['Response rate', A0.responseRate + '%'], ['Interview rate', A0.interviewRate + '%'], ['Offer rate', A0.offerRate + '%'], ['Avg. match', A0.avgMatch]].map(([label, value]) => ({ label, value })),
+      small: A0.smallSample, smallText: `Based on ${A0.sent} applications. Patterns at this size can change quickly and aren't statistically significant.`,
+      funnel: A0.funnel.map(f => ({ ...f, w: Math.round(100 * f.n / maxF) })), byVersion: A0.byVersion, byMatch: A0.byMatch, byCat: A0.byCat, insights: insights.length ? insights : ['Log a few applications to see insights.'], aiInsights: s.insights && s.insights.length ? s.insights : null };
+
+    // chat
+    const sugg = ['Am I ready for this job?', 'Why is my resume score low?', 'What should I learn this week?', 'Which job should I apply to first?', 'Prepare me for this interview.', 'Which resume version performed best?'];
+    const ch = { empty: !s.chat.length, hasMessages: s.chat.length > 0, suggestions: sugg.map(text => ({ text, onClick: () => this.sendChat(text) })), messages: s.chat.map(m => ({ ...m, justify: m.role === 'user' ? 'flex-end' : 'flex-start', bg: m.role === 'user' ? ACC : '#f3f4f6', fg: m.role === 'user' ? '#fff' : '#0f1218' })), thinking: s.thinking,
+      draft: s.chatDraft, onDraft: (e) => this.setState({ chatDraft: e.target.value }), onKey: (e) => { if (e.key === 'Enter') this.sendChat(); }, send: () => this.sendChat(), clear: set({ chat: [] }),
+      contextItems: ['Target role and goals', 'Resume scores, skills and red flags', 'Experience bullets (no contact info)', 'Saved jobs and priorities', 'Application results by version', 'Roadmap and practice scores'] };
+
+    const words = s.resumeText.trim() ? s.resumeText.trim().split(/\s+/).length : 0;
+    return {
+      isLanding: scr === 'landing', isApp: scr !== 'landing', is: Object.fromEntries(Object.keys(pages).map(k => [k, scr === k])),
+      go, nav, crumb, pageTitle, pageDesc, needsJob, jobOpts, onJob: (e) => this.setState({ activeJobId: e.target.value, savedMsg: '' }), pageSrc, jobLabel,
+      profile: s.profile, on, initials: s.profile.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(), levelOpts: ['Student', 'Entry-level', 'Junior', 'Mid-level', 'Senior'].map(v => ({ v, sel: v === s.profile.level })),
+      resetDemo: () => { const d = W.demo(); delete d.screen; this.setState({ ...d, error: null, insights: null, versionName: '', savedMsg: '' }); },
+      error: s.error, dismissError: set({ error: null }), retry: () => this.lastTask && this.lastTask(),
+      loading: !!s.loading, loadingTitle: s.loading ? s.loading.title : '', steps,
+      obSteps, ob1: s.obStep === 1, ob2: s.obStep === 2, ob3: s.obStep === 3, toOb2: set({ obStep: 2 }), toOb3: set({ obStep: 3 }), goOnboard2: set({ screen: 'onboard', obStep: 2 }),
+      resumeText: s.resumeText, onResumeText: (e) => this.setState({ resumeText: e.target.value }), onFile: this.onFile,
+      resumeStats: `${words} words · ${s.src.analysis === 'live' ? 'last analysis was live' : 'current results are demo data'}`,
+      runAnalysis: this.runAnalysis, activeJob: J, onJobField, runAts: this.runAts, runAtsOb: async () => { if (await this.runAts()) this.setState({ screen: 'dash' }); },
+      hasAnalysis: !!a, a, healthCards, healthBars, flagGroups, flagCountText: `${fc.critical} critical, ${fc.warning} warnings, ${fc.improvement} improvements`,
+      readiness, readinessDeg: Math.round(readiness * 3.6), components, formulaText, actions, noActions: !actions.length,
+      targetJobLabel: t ? `Compared against ${jobLabel}` : `No ATS analysis for ${jobLabel} yet`, matched: (t && t.matched) || [], missing: miss, skillBuckets, strengths: (a && a.strengths) || [], blockers, recentApps, roadmapPct, roadmapPctText: roadmapPct + '% overall',
+      resumeTabs, tabHealth: s.resumeTab === 'health', tabFlags: s.resumeTab === 'flags', tabAts: s.resumeTab === 'ats', hasAts: !!t, t, atsChecks,
+      runTailor: this.runTailor, tl, versionsList,
+      bulletInput: s.bulletInput, onBulletInput: (e) => this.setState({ bulletInput: e.target.value }), runBullets: this.runBullets, bl,
+      runProof: this.runProof, pf,
+      priorityFormula: 'Priority score = 35% resume match + 30% skill match + 15% experience + 20% goal alignment. "Apply now" needs 75+ and non-high learning effort.',
+      toggleAddJob: set({ addingJob: !s.addingJob }), addingJob: !!s.addingJob, jobDraft: s.jobDraft, onJobDraft, runPriority: this.runPriority, jobCols, jobRows,
+      saveJob: () => { const d = s.jobDraft; if (!d.title.trim() || d.text.trim().length < 100) return this.fail('Add a title and the full job description (at least a few lines).'); const id = 'j' + Date.now(); this.setState(st => ({ jobs: [...st.jobs, { id, title: d.title.trim(), company: d.company.trim() || 'Unknown company', location: d.location.trim(), category: 'Other', text: d.text }], jobDraft: { title: '', company: '', location: '', text: '' }, addingJob: false })); },
+      runDecoder: this.runDecoder, dc: { has: !!dd, empty: !dd, d: dd || {} },
+      safetyInput: s.safetyInput, onSafetyInput: (e) => this.setState({ safetyInput: e.target.value }), runSafety: this.runSafety, sf,
+      runGap: this.runGap, gp, runRoadmap: this.runRoadmap, rm,
+      ivTabs, practiceStats, tabPractice: s.ivTab === 'practice', tabConsistency: s.ivTab === 'consistency', runQuestions: this.runQuestions, qFilters, qList, sel, claims, csel,
+      tr, an, runInsights: this.runInsights, ch
+    };
+  }
+}
+</script>
+</body>
+</html>
